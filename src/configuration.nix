@@ -6,6 +6,8 @@
     }; in [
       ./hardware-configuration.nix
       "${repo}/src/jaid.nix"
+      "${repo}/src/en-de.nix"
+      "${repo}/src/common.nix"
     ];
   boot = {
     loader = {
