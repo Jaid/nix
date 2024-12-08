@@ -14,4 +14,7 @@
     enable = true;
     enableOnBoot = true;
   };
+  services.openssh = {
+    enable = true;
+  }
 }
