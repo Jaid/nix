@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  # imports = [
+  #   ./hardware-configuration.nix
+  # ];
   networking.hostName = "nas";
   networking.interfaces.enp2s0.useDHCP = true;
   services.openssh.enable = true;
