@@ -8,8 +8,8 @@
     nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./src/machines/vm/configuration.nix
         hardware
+        ./src/machines/vm/configuration.nix
       ];
     };
   };
