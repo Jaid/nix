@@ -10,7 +10,7 @@
         ./src/machines/vm/configuration.nix
         ./src/machines/vm/hardware-configuration.nix
         ./src/users/jaid.nix
-        ./src/locale/en-de.nix
+        ./src/locales/en-de.nix
         ./src/common.nix
       ];
     };
