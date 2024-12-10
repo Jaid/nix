@@ -5,6 +5,6 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   networking.hostName = "nas";
   time.timeZone = "Europe/Berlin";
-  network.firewall.enable = false;
+  networking.firewall.enable = false;
   system.stateVersion = "24.11";
 }
