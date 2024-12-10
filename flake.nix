@@ -9,6 +9,7 @@
       modules = [
         ./configuration.nix
         ./hardware-configuration.nix
+        ./jaid.nix
       ];
     };
   };
