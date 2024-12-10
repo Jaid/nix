@@ -10,6 +10,8 @@
         ./configuration.nix
         ./hardware-configuration.nix
         ./jaid.nix
+        ./en-de.nix
+        ./common.nix
       ];
     };
   };
