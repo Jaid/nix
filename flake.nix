@@ -7,10 +7,10 @@
     nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./src/configuration.nix
+        ./src/machines/vm/configuration.nix
         ./src/machines/vm/hardware-configuration.nix
         ./src/users/jaid.nix
-        ./src/en-de.nix
+        ./src/locale/en-de.nix
         ./src/common.nix
       ];
     };
