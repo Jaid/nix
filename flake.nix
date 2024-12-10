@@ -7,7 +7,6 @@
     nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        hardware
         ./hardware-configuration.nix
       ];
     };
