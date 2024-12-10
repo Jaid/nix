@@ -4,14 +4,14 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
   };
   outputs = { self, nixpkgs }: {
-    nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configuration.nix
-        ./hardware-configuration.nix
-        ./jaid.nix
-        ./en-de.nix
-        ./common.nix
+        ./src/configuration.nix
+        ./src/machines/vm/hardware-configuration.nix
+        ./src/users/jaid.nix
+        ./src/en-de.nix
+        ./src/common.nix
       ];
     };
   };
