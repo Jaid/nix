@@ -1,14 +1,16 @@
 { pkgs, ... }: {
   environment.systemPackages = [
   ];
+  services.displayManager = {
+    autoLogin = {
+      enable = true;
+      user: "jaid";
+    };
+  };
   services.xserver = {
     enable = true;
     displayManager = {
       gdm.enable = true;
-      autoLogin = {
-        enable = true;
-        user = "jaid";
-      };
     };
     desktopManager.gnome.enable = true;
   };
