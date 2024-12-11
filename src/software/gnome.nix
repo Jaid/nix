@@ -16,6 +16,7 @@
   };
   environment.gnome.excludePackages = [
     pkgs.gnome-photos
+    pkgs.gnome-tour
   ];
   users.users.jaid = {
     extraGroups = [
