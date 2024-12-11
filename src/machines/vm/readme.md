@@ -9,7 +9,7 @@ sudo parted "/dev/sd${deviceLetter:-a}" -- mklabel gpt && sudo parted "/dev/sd${
 ## Installation
 
 ```bash
-nix-collect-garbage -d && nixos-rebuild switch --flake 'github:Jaid/nix/dev#vm' --no-write-lock-file
+nix-collect-garbage -d && nixos-rebuild switch --flake 'github:Jaid/nix/dev#vm' --no-write-lock-file && gdu --non-interactive --summarize /nix/store && lsblk
 ```
 
 ## ISO creation

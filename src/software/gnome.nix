@@ -18,7 +18,13 @@
     gnome-weather
     gnome-characters
     gnome-contacts
+    gnome-help
+    gnome-calendar
+    gnome-camera
+    gnome-user-docs
+    gnome-backgrounds
     gedit
+    geary
   ];
   services.displayManager = {
     autoLogin = {
