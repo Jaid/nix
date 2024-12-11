@@ -9,6 +9,9 @@
     gnomeExtensions.freon lm_sensors
     gnomeExtensions.pano
   ];
+  services.xserver.excludePackages = with pkgs; [
+    xterm
+  ];
   environment.gnome.excludePackages = with pkgs; [
     # gnome-camera - Not the actual name
     eog
@@ -70,6 +73,7 @@
         locations=[<(uint32 2, <('Hannover', 'EDDV', false, [(0.91571608669745586, 0.16900604341702005)], @a(dd) [])>)>]
         [org.gnome.shell]
         enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'tilingnome@rliang.github.com', 'freon@UshakovVasilii_Github.yahoo.com', 'pano@elhan.io']
+        favorite-apps=['org.gnome.Nautilus.desktop', 'code.desktop']
         [org/gnome/GWeather4]
         temperature-unit='centigrade'
         [org/gnome/shell/extensions/pano]
