@@ -1,12 +1,15 @@
 { pkgs, ... }: {
+  imports = [
+    ./xnview.nix
+  ];
   environment.systemPackages = [
     pkgs.vscode
-    pkgs.keeweb
-    pkgs.discord
+    # pkgs.keeweb
+    # pkgs.discord
     # pkgs.ghostty # BLOCKEDBY https://mitchellh.com/writing/ghostty-is-coming - not open-source yet
-    pkgs.chatterino2
+    # pkgs.chatterino2
     pkgs.mpv
-    pkgs.krita
-    pkgs.blender
+    # pkgs.krita
+    # pkgs.blender
   ];
 }

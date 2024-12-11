@@ -35,13 +35,11 @@
     yelp
     simple-scan
     totem
-    clocks
+    gnome-clocks
     baobab
-    connections
     evince
     file-roller
     loupe
-    console
   ];
   services.displayManager = {
     autoLogin = {
