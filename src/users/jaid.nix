@@ -18,5 +18,3 @@
     enable = true;
   };
 }
-
-# nix-collect-garbage -d && nixos-rebuild switch --flake 'github:Jaid/nix/dev#nas' --no-write-lock-file
