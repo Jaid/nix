@@ -10,21 +10,21 @@
     gnomeExtensions.pano
   ];
   environment.gnome.excludePackages = with pkgs; [
-    gnome-photos
-    gnome-tour
-    gnome-maps
+    geary
+    gedit
+    gnome-backgrounds
     gnome-calculator
-    gnome-music
-    gnome-weather
-    gnome-characters
-    gnome-contacts
-    gnome-help
     gnome-calendar
     gnome-camera
+    gnome-characters
+    gnome-contacts
+    gnome-maps
+    gnome-music
+    gnome-photos
+    gnome-tour
     gnome-user-docs
-    gnome-backgrounds
-    gedit
-    geary
+    gnome-weather
+    yelp
   ];
   services.displayManager = {
     autoLogin = {
