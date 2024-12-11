@@ -35,6 +35,13 @@
     yelp
     simple-scan
     totem
+    clocks
+    baobab
+    connections
+    evince
+    file-roller
+    loupe
+    console
   ];
   services.displayManager = {
     autoLogin = {
