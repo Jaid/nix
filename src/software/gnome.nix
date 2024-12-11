@@ -6,7 +6,7 @@
     dconf-editor
     gnome-tweaks
     gnomeExtensions.tilingnome
-    gnomeExtensions.freon
+    gnomeExtensions.freon lm_sensors
     gnomeExtensions.pano
   ];
   environment.gnome.excludePackages = with pkgs; [
@@ -33,6 +33,8 @@
     plymouth
     snapshot
     yelp
+    simple-scan
+    totem
   ];
   services.displayManager = {
     autoLogin = {
@@ -62,9 +64,13 @@
         [org.gnome.shell.weather]
         locations=[<(uint32 2, <('Hannover', 'EDDV', false, [(0.91571608669745586, 0.16900604341702005)], @a(dd) [])>)>]
         [org.gnome.shell]
-        enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'system-monitor@gnome-shell-extensions.gcampax.github.com']
+        enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'tilingnome@rliang.github.com', 'freon@UshakovVasilii_Github.yahoo.com', 'pano@elhan.io']
         [org/gnome/GWeather4]
         temperature-unit='centigrade'
+        [org/gnome/shell/extensions/pano]
+        exclusion-list=@as []
+        history-length=20
+        send-notification-on-copy=false
       '';
     };
   };
