@@ -2,12 +2,23 @@
   imports = [
     ./desktop-apps.nix
   ];
-  environment.systemPackages = [
-    pkgs.dconf-editor
-    pkgs.gnome-tweaks
-    pkgs.gnomeExtensions.tilingnome
-    pkgs.gnomeExtensions.freon
-    pkgs.gnomeExtensions.pano
+  environment.systemPackages = with pkgs; [
+    dconf-editor
+    gnome-tweaks
+    gnomeExtensions.tilingnome
+    gnomeExtensions.freon
+    gnomeExtensions.pano
+  ];
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-photos
+    gnome-tour
+    gnome-maps
+    gnome-calculator
+    gnome-music
+    gnome-weather
+    gnome-characters
+    gnome-contacts
+    gedit
   ];
   services.displayManager = {
     autoLogin = {
@@ -43,10 +54,6 @@
       '';
     };
   };
-  environment.gnome.excludePackages = [
-    pkgs.gnome-photos
-    pkgs.gnome-tour
-  ];
   users.users.jaid = {
     extraGroups = [
       "networkmanager"
