@@ -10,23 +10,29 @@
     gnomeExtensions.pano
   ];
   environment.gnome.excludePackages = with pkgs; [
+    # gnome-camera - Not the actual name
+    eog
+    epiphany
     geary
     gedit
     gnome-backgrounds
     gnome-calculator
     gnome-calendar
-    # gnome-camera - Not the actual name
     gnome-characters
     gnome-contacts
+    gnome-font-viewer
     gnome-maps
     gnome-music
     gnome-photos
+    gnome-text-editor
     gnome-tour
     gnome-user-docs
     gnome-weather
+    libreoffice
+    modemmanager
+    plymouth
+    snapshot
     yelp
-    epiphany
-    eog
   ];
   services.displayManager = {
     autoLogin = {
