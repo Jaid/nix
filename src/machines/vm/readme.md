@@ -11,3 +11,12 @@ sudo parted "/dev/sd${deviceLetter:-a}" -- mklabel gpt && sudo parted "/dev/sd${
 ```bash
 nix-collect-garbage -d && nixos-rebuild switch --flake 'github:Jaid/nix/dev#vm' --no-write-lock-file
 ```
+
+## ISO creation
+
+```bash
+git clone https://github.com/Jaid/nix
+cd nix
+git switch dev
+nix run github:nix-community/nixos-generators -- --flake .#vm --format iso
+```
