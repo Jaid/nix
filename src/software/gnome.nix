@@ -5,7 +5,10 @@
     enable = true;
     displayManager = {
       gdm.enable = true;
-      autoLogin.enable = true;
+      autoLogin = {
+        enable = true;
+        user = "jaid";
+      };
     };
     desktopManager.gnome.enable = true;
   };
