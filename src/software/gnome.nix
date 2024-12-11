@@ -4,7 +4,7 @@
   services.displayManager = {
     autoLogin = {
       enable = true;
-      user: "jaid";
+      user = "jaid";
     };
   };
   services.xserver = {
@@ -17,4 +17,9 @@
   environment.gnome.excludePackages = [
     pkgs.gnome-photos
   ];
+  users.users.jaid = {
+    extraGroups = [
+      "networkmanager"
+    ];
+  }
 }
