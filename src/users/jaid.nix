@@ -1,8 +1,8 @@
 { pkgs, ... }: {
+  environment.systemPackages = [
+    pkgs.powershell
+  ];
   users.users.jaid = {
-    environment.systemPackages = [
-      pkgs.powershell
-    ];
     isNormalUser = true;
     extraGroups = [
       "wheel"
