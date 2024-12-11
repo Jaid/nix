@@ -1,5 +1,8 @@
 { pkgs, ... }: {
   users.users.jaid = {
+    environment.systemPackages = [
+      pkgs.powershell
+    ];
     isNormalUser = true;
     extraGroups = [
       "wheel"
@@ -10,6 +13,9 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID0Up24BhYxyHEWrYc5EJ5PbPn7hVYGpv1fSCwLURvGq jaid@github/73158609"
     ];
     shell = pkgs.powershell;
+  };
+  services.openssh = {
+    enable = true;
   };
 }
 
