@@ -3,7 +3,7 @@
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-  virtualisation.vmware.gues = {
+  virtualisation.vmware.guest = {
     enable = true;
   };
   boot.tmp.cleanOnBoot = true;
