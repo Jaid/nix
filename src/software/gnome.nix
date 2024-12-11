@@ -25,6 +25,8 @@
     gnome-user-docs
     gnome-weather
     yelp
+    epiphany
+    eog
   ];
   services.displayManager = {
     autoLogin = {
