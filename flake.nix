@@ -9,6 +9,7 @@
       modules = [
         ./src/machines/vm/configuration.nix
         ./src/machines/vm/hardware-configuration.nix
+        ./src/software/gnome.nix
         ./src/users/jaid.nix
         ./src/locales/en-de.nix
         ./src/common.nix
