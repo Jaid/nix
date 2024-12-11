@@ -15,7 +15,7 @@
     gnome-backgrounds
     gnome-calculator
     gnome-calendar
-    gnome-camera
+    # gnome-camera - Not the actual name
     gnome-characters
     gnome-contacts
     gnome-maps
