@@ -3,6 +3,11 @@
     ./desktop-apps.nix
   ];
   environment.systemPackages = [
+    pkgs.dconf-editor
+    pkgs.gnome-tweaks
+    pkgs.gnomeExtensions.tilingnome
+    pkgs.gnomeExtensions.freon
+    pkgs.gnomeExtensions.pano
   ];
   services.displayManager = {
     autoLogin = {
