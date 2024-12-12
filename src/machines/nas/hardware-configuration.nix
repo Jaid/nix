@@ -13,6 +13,11 @@
     device = "/dev/disk/by-label/boot";
     options = ["fmask=0077" "dmask=0077"];
   };
+  fileSystems."/mnt/old" = {
+    fsType = "ext4";
+    device = "/dev/nvme1n1p3";
+    options = ["defaults" "ro"];
+  };
   swapDevices = [];
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

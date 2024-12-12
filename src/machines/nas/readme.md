@@ -21,5 +21,5 @@ nixos-install --flake github:Jaid/nix/dev#nas --no-write-lock-file --impure
 
 ## Rebuilding
 ```bash
-nixos-rebuild switch --flake github:Jaid/nix/dev#nas --no-write-lock-file --impure
+nixos-rebuild switch --flake github:Jaid/nix/dev --no-write-lock-file --impure
 ```
