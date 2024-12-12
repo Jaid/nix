@@ -16,5 +16,10 @@ sudo mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
 sudo nixos-generate-config --root /mnt
 ```
 ```bash
-nixos-install --flake github:Jaid/nix/dev#nas
+nixos-install --flake github:Jaid/nix/dev#nas --no-write-lock-file
+```
+
+## Rebuilding
+```bash
+nixos-rebuild switch --flake github:Jaid/nix/dev#nas --no-write-lock-file
 ```
