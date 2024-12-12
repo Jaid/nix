@@ -1,4 +1,11 @@
 { config, lib, pkgs, ... }: {
+  environment.systemPackages = with pkgs; [
+    btop
+    dysk
+    gdu
+    bat
+    btrfs-progs
+  ];
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
