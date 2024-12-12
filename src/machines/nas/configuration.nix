@@ -8,7 +8,7 @@
     eza
     fd
     sd
-    nixd
+    nixd alejandra
   ];
   boot.loader = {
     systemd-boot.enable = true;
