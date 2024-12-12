@@ -5,6 +5,9 @@
     gdu
     bat
     btrfs-progs
+    eza
+    fd
+    sd
   ];
   boot.loader = {
     systemd-boot.enable = true;
