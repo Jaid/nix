@@ -1,5 +1,4 @@
 { config, lib, pkgs, modulesPath, ... }: {
-  imports = [];
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
@@ -23,7 +22,6 @@
     device = "/dev/disk/by-label/storage";
     options = ["defaults" "x-mount.mkdir" "compress=zstd:6" "nossd" "noatime" "nodiratime" "space_cache=v2"];
   };
-  swapDevices = [];
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
