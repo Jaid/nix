@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  home.packages = [pkgs.httpie];
+  home.packages = [];
   programs.git = {
     enable = true;
     userEmail = "joe@example.org";
