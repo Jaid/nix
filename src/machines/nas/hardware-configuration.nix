@@ -14,8 +14,14 @@
     options = ["fmask=0077" "dmask=0077"];
   };
   fileSystems."/mnt/old" = {
+    fsType = "ext4";
     device = "/dev/disk/by-id/nvme-CT4000P3PSSD8_2323E6DF08C8-part3";
     options = ["defaults" "ro"];
+  };
+  fileSystems."/mnt/storage" = {
+    fsType = "btrfs";
+    device = "/dev/disk/by-label/storage";
+    options = ["defaults" "x-mount.mkdir" "compress=zstd:6" "nossd" "noatime" "nodiratime" "space_cache=v2"];
   };
   swapDevices = [];
   networking.useDHCP = lib.mkDefault true;
