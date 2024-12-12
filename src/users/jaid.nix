@@ -5,6 +5,8 @@
   ];
   users.users.jaid = {
     isNormalUser = true;
+    uid = 1000;
+    group = "jaid";
     extraGroups = [
       "wheel"
       "docker"
@@ -15,8 +17,11 @@
     ];
     shell = pkgs.powershell;
   };
+  users.groups.jaid = {
+    gid = 1000;
+  };
   services.openssh = {
     enable = true;
   };
-  environment.etc."sudoers.d/jaid".text = "jaid ALL=(ALL) NOPASSWD: ALL";
+  environment.etc."sudoers.d/group-jaid".text = "%jaid ALL=(ALL) NOPASSWD: ALL";
 }
