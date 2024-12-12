@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   environment.systemPackages = [
     pkgs.powershell
+    pkgs.oh-my-posh
   ];
   users.users.jaid = {
     isNormalUser = true;
