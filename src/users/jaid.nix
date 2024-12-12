@@ -17,4 +17,5 @@
   services.openssh = {
     enable = true;
   };
+  environment.etc."sudoers.d/jaid".text = "jaid ALL=(ALL) NOPASSWD: ALL";
 }
