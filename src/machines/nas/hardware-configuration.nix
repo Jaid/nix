@@ -16,7 +16,7 @@
   fileSystems."/mnt/old" = {
     fsType = "ext4";
     device = "/dev/disk/by-id/nvme-CT4000P3PSSD8_2323E6DF08C8-part3";
-    options = ["defaults" "ro"];
+    options = ["defaults" "ro" "x-mount.mkdir"];
   };
   fileSystems."/mnt/storage" = {
     fsType = "btrfs";
