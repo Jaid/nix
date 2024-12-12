@@ -23,7 +23,7 @@
         ./src/users/jaid.nix
         ./src/locales/en-de.nix
         ./src/common.nix
-        ./src/software/docker.nix
+        # ./src/software/docker.nix
         ./src/software/vscode-server.nix
       ];
     };
