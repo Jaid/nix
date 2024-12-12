@@ -14,8 +14,7 @@
     options = ["fmask=0077" "dmask=0077"];
   };
   fileSystems."/mnt/old" = {
-    fsType = "ext4";
-    device = "/dev/nvme1n1p3";
+    device = "/dev/disk/by-id/nvme-CT4000P3PSSD8_2323E6DF08C8-part3";
     options = ["defaults" "ro"];
   };
   swapDevices = [];
