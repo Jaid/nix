@@ -8,7 +8,7 @@
     eza
     fd
     sd
-    nil
+    nixd
   ];
   boot.loader = {
     systemd-boot.enable = true;
