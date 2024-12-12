@@ -15,5 +15,16 @@
         ./src/common.nix
       ];
     };
+    nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./src/machines/nas/configuration.nix
+        ./src/machines/nas/hardware-configuration.nix
+        ./src/users/jaid.nix
+        ./src/locales/en-de.nix
+        ./src/common.nix
+        ./src/software/docker.nix
+      ];
+    };
   };
 }

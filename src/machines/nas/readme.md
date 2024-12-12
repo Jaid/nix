@@ -15,3 +15,6 @@ sudo mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
 ```bash
 sudo nixos-generate-config --root /mnt
 ```
+```bash
+nixos-install --flake github:Jaid/nix/dev#nas
+```
