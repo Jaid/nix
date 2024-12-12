@@ -1,12 +1,10 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    bat
     curl
+    wget
+    nano
     fastfetch
     git
-    powershell
-    uv
-    nodejs_22
     gdu
   ];
   services.openssh = {
