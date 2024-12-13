@@ -6,6 +6,7 @@
       packages = with pkgs; [
         nano
         gdu
+        eza
       ];
       stateVersion = "24.11";
     };
@@ -18,6 +19,9 @@
         init.defaultBranch = "main";
         core.eol = "lf";
         core.autocrlf = false;
+        push.default = "current";
+        core.editor = pkgs.nano;
+        diff.algorithm = "patience";
       };
       includes = [
         {
@@ -27,6 +31,8 @@
             user.username = "jaid";
             user.email = "6216144+Jaid@users.noreply.github.com";
             user.signingKey = "~/.ssh/id_gitSign.pub";
+            commit.gpgSign = true;
+            commit.template = "~/.gitmessage";
           };
         }
       ];
