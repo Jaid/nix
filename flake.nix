@@ -32,13 +32,7 @@
         # ./src/software/docker.nix
         ./src/software/vscode-server.nix
         home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            # useUserPackages = true;
-            users.jaid = import ./src/homes/jaid.nix;
-          };
-        }
+        ./src/homes/jaid.nix
       ];
     };
   };
