@@ -32,8 +32,8 @@
         ./src/common.nix
         ./src/software/docker.nix
         ./src/software/vscode-server.nix
-        # home-manager.nixosModules.home-manager
-        # ./src/homes/jaid.nix
+        home-manager.nixosModules.home-manager
+        ./src/homes/jaid.nix
       ];
       specialArgs.flake-inputs = inputs;
     };
