@@ -15,12 +15,21 @@
     programs.git = {
       enable = true;
       extraConfig = {
-        user.name = "Jaid";
-        user.username = "jaid";
-        user.email = "6216144+Jaid@users.noreply.github.com";
-        user.signingKey = "~/.ssh/id_gitSign.pub";
-        github.user = "Jaid";
+        init.defaultBranch = "main";
+        core.eol = "lf";
+        core.autocrlf = false;
       };
+      includes = [
+        {
+          condition = "gitdir:~/git";
+          contents = {
+            user.name = "Jaid";
+            user.username = "jaid";
+            user.email = "6216144+Jaid@users.noreply.github.com";
+            user.signingKey = "~/.ssh/id_gitSign.pub";
+          };
+        }
+      ];
     };
     programs.oh-my-posh = {
       enable = true;
