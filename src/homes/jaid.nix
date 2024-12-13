@@ -1,10 +1,22 @@
 { pkgs, ... }: {
   home-managaer.users.jaid = {
-    home.packages = [];
+    home = {
+      username = "jaid";
+      homeDirectory = "/home/jaid";
+      packages = with pkgs; [
+        nano
+        gdu
+      ];
+      file.".env".text = "FOO=bar";
+      stateVersion = "24.11";
+    };
+    programs.home-manager = {
+      enable = true;
+    };
     programs.git = {
       enable = true;
-      userEmail = "joe@example.org";
       userName = "joe";
+      userEmail = "joe@example.org";
     };
     programs.oh-my-posh = {
       enable = true;
@@ -13,7 +25,5 @@
       enableNushellIntegration = false;
       enableZshIntegration = false;
     };
-    file.".env".text = "FOO=bar";
-    home.stateVersion = "24.11";
   };
 }
