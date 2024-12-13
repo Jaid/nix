@@ -7,7 +7,7 @@
         nano
         gdu
       ];
-      file.".env".text = "FOO=baz";
+      file.".env2".text = "FOO=bar";
       stateVersion = "24.11";
     };
     programs.home-manager = {
