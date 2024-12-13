@@ -8,7 +8,7 @@
         gdu
         eza
       ];
-      file."~/.gitmessage".source = ./.resources/.gitmessage;
+      file.".gitmessage".source = ./.resources/.gitmessage;
       stateVersion = "24.11";
     };
     programs.home-manager = {
@@ -21,7 +21,7 @@
         core.eol = "lf";
         core.autocrlf = false;
         push.default = "current";
-        core.editor = pkgs.nano;
+        core.editor = "nano";
         diff.algorithm = "patience";
       };
       includes = [
