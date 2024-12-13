@@ -7,7 +7,6 @@
         nano
         gdu
       ];
-      file.".env".text = "FOO=bar";
       stateVersion = "24.11";
     };
     programs.home-manager = {
@@ -15,8 +14,12 @@
     };
     programs.git = {
       enable = true;
-      userName = "joe";
-      userEmail = "joe@example.org";
+      userName = "jaid";
+      userEmail = "6216144+Jaid@users.noreply.github.com";
+      extraConfig = {
+        signingKey = "~/.ssh/id_gitSign.pub";
+        github.user = "Jaid";
+      }
     };
     programs.oh-my-posh = {
       enable = true;
