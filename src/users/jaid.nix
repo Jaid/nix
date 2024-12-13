@@ -17,9 +17,7 @@
     ];
     shell = pkgs.powershell;
   };
-  users.groups.jaid = {
-    gid = 1000;
-  };
+  users.groups.jaid.gid = 1000;
   services.openssh = {
     enable = true;
   };

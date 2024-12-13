@@ -25,5 +25,5 @@
       enableNushellIntegration = false;
       enableZshIntegration = false;
     };
-  }
+  };
 }
