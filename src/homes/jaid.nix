@@ -7,6 +7,8 @@
         nano
         gdu
         eza
+        bat
+        gifski
       ];
       file.".gitmessage".source = ./.resources/.gitmessage;
       stateVersion = "24.11";

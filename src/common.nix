@@ -2,10 +2,8 @@
   environment.systemPackages = with pkgs; [
     curl
     wget
-    nano
     fastfetch
     git
-    gdu
   ];
   services.openssh = {
     enable = true;
