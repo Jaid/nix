@@ -20,7 +20,7 @@
         ./src/locales/en-de.nix
         ./src/common.nix
       ];
-      specialArgs.flake-inputs = inputs;
+      specialArgs = { inherit inputs; };
     };
     nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -35,14 +35,14 @@
         home-manager.nixosModules.home-manager
         ./src/homes/jaid.nix
       ];
-      specialArgs.flake-inputs = inputs;
+      specialArgs = { inherit inputs; };
     };
     homeConfigurations.jaid = home-manager.lib.homeManagerConfiguration {
       system = "x86_64-linux";
       username = "jaid";
       homeDirectory = "/home/jaid";
       configuration = ./src/homes/jaid.nix;
-      extraSpecialArgs.flake-inputs = inputs;
+      extraSpecialArgs = { inherit inputs; };
     };
   };
 }
