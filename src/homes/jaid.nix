@@ -14,10 +14,11 @@
     };
     programs.git = {
       enable = true;
-      userName = "jaid";
-      userEmail = "6216144+Jaid@users.noreply.github.com";
       extraConfig = {
-        signingKey = "~/.ssh/id_gitSign.pub";
+        user.name = "Jaid";
+        user.username = "jaid";
+        user.email = "6216144+Jaid@users.noreply.github.com";
+        user.signingKey = "~/.ssh/id_gitSign.pub";
         github.user = "Jaid";
       };
     };
