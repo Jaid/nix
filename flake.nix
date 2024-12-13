@@ -31,7 +31,8 @@
         ./src/common.nix
         # ./src/software/docker.nix
         ./src/software/vscode-server.nix
-        home-manager.nixosModules.home-manager {
+        home-manager.nixosModules.home-manager
+        {
           home-manager = {
             useGlobalPkgs = true;
             # useUserPackages = true;
