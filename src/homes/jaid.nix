@@ -19,7 +19,7 @@
       extraConfig = {
         signingKey = "~/.ssh/id_gitSign.pub";
         github.user = "Jaid";
-      }
+      };
     };
     programs.oh-my-posh = {
       enable = true;
