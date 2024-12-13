@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  home-managaer.users.jaid = {
+  home-manager.users.jaid = {
     home = {
       username = "jaid";
       homeDirectory = "/home/jaid";
