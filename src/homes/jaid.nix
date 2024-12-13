@@ -12,7 +12,7 @@
       ];
       file.".gitmessage".source = ./.resources/.gitmessage;
       file."config/oh-my-posh/jaid.omp.yml".text = builtins.fetchurl {
-        url = "https://raw.githubusercontent.com/Jaid/oh-my-posh/main/jaid.omp.yml";
+        url = "https://raw.githubusercontent.com/Jaid/oh-my-posh-config/refs/heads/main/src/jaid.omp.yml";
         sha256 = "02mw9zv7ny0lin4l2v05zmkqbdd7wszdwvc00qaw1hrp53zgxrwk";
       };
       stateVersion = "24.11";
