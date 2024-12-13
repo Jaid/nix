@@ -34,15 +34,9 @@
         ./src/software/vscode-server.nix
         home-manager.nixosModules.home-manager
         ./src/homes/jaid.nix
+        ./src/homes/nas/jaid.nix
       ];
       specialArgs = { inherit inputs; };
     };
-    # homeConfigurations.jaid = home-manager.lib.homeManagerConfiguration {
-    #   system = "x86_64-linux";
-    #   username = "jaid";
-    #   homeDirectory = "/home/jaid";
-    #   configuration = ./src/homes/jaid.nix;
-    #   extraSpecialArgs = { inherit inputs; };
-    # };
   };
 }
