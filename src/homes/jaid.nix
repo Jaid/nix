@@ -8,6 +8,7 @@
         gdu
         eza
       ];
+      file."~/.gitmessage".source = ./.resources/.gitmessage;
       stateVersion = "24.11";
     };
     programs.home-manager = {
