@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, home-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager, ... }: @inputs: {
     nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -20,6 +20,7 @@
         ./src/locales/en-de.nix
         ./src/common.nix
       ];
+      extraSpecialArgs.flake-inputs = inputs;
     };
     nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -34,12 +35,14 @@
         # home-manager.nixosModules.home-manager
         # ./src/homes/jaid.nix
       ];
+      extraSpecialArgs.flake-inputs = inputs;
     };
     homeConfigurations.jaid = home-manager.lib.homeManagerConfiguration {
       system = "x86_64-linux";
       username = "jaid";
       homeDirectory = "/home/jaid";
       configuration = ./src/homes/jaid.nix;
+      extraSpecialArgs.flake-inputs = inputs;
     };
   };
 }
