@@ -33,7 +33,6 @@
         ./src/software/docker.nix
         ./src/software/vscode-server.nix
         home-manager.nixosModules.home-manager
-        ./src/homes/jaid.nix
         ./src/homes/nas/jaid.nix
       ];
       specialArgs = { inherit inputs; };
