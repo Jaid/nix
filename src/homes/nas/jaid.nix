@@ -16,7 +16,6 @@
         libjxl
         ollama
         scrcpy
-        naps2
         zstd
       ];
       stateVersion = "24.11";
