@@ -22,10 +22,17 @@
     enable = true;
   };
   environment.etc."sudoers.d/group-jaid".source = ./resources/nopasswd.txt;
-  systemd.services.getty@tty1.serviceConfig = {
-    ExecStart = lib.mkOverride 0 [
+  # systemd.services."getty@tty1".serviceConfig = {
+  #   ExecStart = lib.mkOverride 0 [
+  #     ""
+  #     "-/usr/bin/agetty --autologin jaid --noclear %I $TERM"
+  #   ];
+  # };
+  systemd.services."getty@tty1" = {
+    restartIfChanged = false;
+    serviceConfig.ExecStart = [
       ""
-      "-/usr/bin/agetty --autologin jaid --noclear %I $TERM"
+      "-${pkgs.util-linux}/bin/agetty --autologin jaid --noclear %I $TERM"
     ];
-  };
+  }
 }
