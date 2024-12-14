@@ -21,10 +21,6 @@
   services.openssh = {
     enable = true;
   };
-  environment.etc."sudoers.d/group-jaid".text = "%jaid ALL=(ALL) NOPASSWD: ALL";
-  environment.etc."systemd/system/getty@tty1.service.d/override.conf".text = ''
-    [Service]
-    ExecStart=
-    ExecStart=-/usr/bin/agetty --autologin jaid --noclear %I $TERM
-  '';
+  environment.etc."sudoers.d/group-jaid".source = ./resources/nopasswd.txt;
+  environment.etc."systemd/system/getty@tty1.service.d/override.conf".source = ./resources/agetty.conf;
 }
