@@ -29,10 +29,11 @@
   #   ];
   # };
   systemd.services."getty@tty1" = {
+    overrideStrategy = "asDropin";
     restartIfChanged = false;
     serviceConfig.ExecStart = [
       ""
-      "-${pkgs.util-linux}/bin/agetty --autologin jaid --noclear %I $TERM"
+      "-${pkgs.util-linux}/sbin/agetty --autologin jaid --noclear %I $TERM"
     ];
   };
 }
