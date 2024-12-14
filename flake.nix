@@ -13,26 +13,28 @@
     nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
+        home-manager.nixosModules.home-manager
+        ./src/common.nix
+        ./src/locales/en-de.nix
+        ./src/users/jaid.nix
         ./src/machines/vm/configuration.nix
         ./src/machines/vm/hardware-configuration.nix
         ./src/software/gnome.nix
-        ./src/users/jaid.nix
-        ./src/locales/en-de.nix
-        ./src/common.nix
+        ./src/software/xnview.nix
       ];
       specialArgs = { inherit inputs; };
     };
     nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
+        home-manager.nixosModules.home-manager
+        ./src/common.nix
+        ./src/locales/en-de.nix
+        ./src/users/jaid.nix
         ./src/machines/nas/configuration.nix
         ./src/machines/nas/hardware-configuration.nix
-        ./src/users/jaid.nix
-        ./src/locales/en-de.nix
-        ./src/common.nix
         ./src/software/docker.nix
         ./src/software/vscode-server.nix
-        home-manager.nixosModules.home-manager
         ./src/homes/nas/jaid.nix
         ./src/test.nix
       ];
