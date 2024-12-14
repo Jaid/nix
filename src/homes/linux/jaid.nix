@@ -7,8 +7,6 @@
         nano
         gdu
         eza
-        bat
-        gifski
       ];
       file.".gitmessage".source = ./.resources/.gitmessage;
       file."config/oh-my-posh/jaid.omp.yml".text = (builtins.fetchurl {
@@ -29,6 +27,8 @@
         push.default = "current";
         core.editor = "nano";
         diff.algorithm = "patience";
+        core.longpaths = true;
+        gpg.format = "ssh";
       };
       includes = [
         {
