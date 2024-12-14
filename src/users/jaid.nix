@@ -21,6 +21,6 @@
   services.openssh = {
     enable = true;
   };
-  environment.etc."sudoers.d/group-jaid".source = ./resources/nopasswd.txt;
+  # environment.etc."sudoers.d/group-jaid".source = ./resources/nopasswd.txt;
   services.getty.autologinUser = "jaid";
 }
