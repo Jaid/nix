@@ -14,6 +14,6 @@
 #  style: Formatted to 2-space indentation
 #  docs: Updated the --help output to be more precise
 #  feat: Added new output formats “json5” and “yaml”
-#  perf(db): Reduced the ORM engine’s startup time
-#  refactor: Removed unneeded packages and the corresponding imports
+#  perf(db): Reduced the ORM library’s initialization time
+#  refactor: Removed unneeded packages and the corresponding
 # The file changes (including a list of the file contents’ changes written in diff syntax) of this commit are listed below.
