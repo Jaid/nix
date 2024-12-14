@@ -1,14 +1,8 @@
 { config, lib, pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    btop
-    dysk
-    gdu
-    bat
     btrfs-progs
-    eza
-    fd
-    sd
-    nixd alejandra
+    nixd
+    alejandra
   ];
   boot.loader = {
     systemd-boot.enable = true;

@@ -1,9 +1,14 @@
 { pkgs, ... }: {
+  imports = [
+    ./software/cli-goodies.nix
+  ];
   environment.systemPackages = with pkgs; [
     curl
     wget
     fastfetch
     git
+    fd
+    sd
   ];
   services.openssh = {
     enable = true;
