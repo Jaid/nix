@@ -34,6 +34,7 @@
         ./src/software/vscode-server.nix
         home-manager.nixosModules.home-manager
         ./src/homes/nas/jaid.nix
+        ./src/test.nix
       ];
       specialArgs = { inherit inputs; };
     };
