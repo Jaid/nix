@@ -10,6 +10,10 @@
     device = "/dev/disk/by-label/boot";
     options = ["fmask=0077" "dmask=0077"];
   };
+  services.xserver.resolutions = lib.mkDefault [{
+    x = 1920;
+    y = 1080;
+  }];
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
