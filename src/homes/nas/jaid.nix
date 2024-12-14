@@ -17,6 +17,7 @@
         ollama
         scrcpy
         zstd
+        imagemagick
       ];
       stateVersion = "24.11";
     };
