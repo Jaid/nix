@@ -19,6 +19,7 @@
         ./src/users/jaid.nix
         ./src/machines/vm/configuration.nix
         ./src/machines/vm/hardware-configuration.nix
+        ./src/homes/vm/jaid.nix
         ./src/software/gnome.nix
         ./src/software/xnview.nix
       ];
