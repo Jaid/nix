@@ -3,7 +3,15 @@
 ## Preparition
 
 ```bash
-sudo parted "/dev/sd${deviceLetter:-a}" -- mklabel gpt && sudo parted "/dev/sd${deviceLetter:-a}" -- mkpart primary fat32 1MiB 513MiB && sudo parted "/dev/sd${deviceLetter:-a}" -- mkpart primary ext4 513MiB 100% && sudo mkfs.vfat -F32 "/dev/sd${deviceLetter:-a}1" && sudo mkfs.ext4 "/dev/sd${deviceLetter:-a}2" && lsblk
+sudo parted /dev/sda -- mklabel gpt && sudo parted /dev/sda -- mkpart ESP fat32 1MiB 512MiB && sudo parted /dev/sda -- set 1 esp on && mkpart root ext4 512MiB 100% && sudo mkfs.vfat -F32 -n boot /dev/sda1 && sudo mkfs.ext4 -L root /dev/sda2
+```
+```bash
+sudo mount /dev/disk/by-label/root /mnt
+sudo mkdir /mnt/boot
+sudo mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
+```
+```bash
+nixos-install --flake github:Jaid/nix/dev#nas --no-write-lock-file --impure
 ```
 
 ## Installation

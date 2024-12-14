@@ -18,6 +18,5 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "nas";
   environment.etc."ssh/sshd_conf.d/allow_stream_local_forwarding.conf".text = "AllowStreamLocalForwarding yes";
-  # environment.etc."sudoers.d/group-jaid".source = ./resources/nopasswd.txt;
   system.stateVersion = "24.11";
 }

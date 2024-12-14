@@ -9,7 +9,7 @@ sudo parted /dev/nvme1n1 -- mklabel gpt && sudo parted /dev/nvme1n1 -- mkpart ES
 ```
 ```bash
 sudo mount /dev/disk/by-label/root /mnt
-mkdir /mnt/boot
+sudo mkdir /mnt/boot
 sudo mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
 ```
 ```bash

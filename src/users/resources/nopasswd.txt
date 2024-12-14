@@ -1,2 +1,0 @@
-jaid ALL=(ALL) NOPASSWD: ALL
-%jaid ALL=(ALL) NOPASSWD: ALL
