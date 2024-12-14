@@ -34,5 +34,5 @@
       ""
       "-${pkgs.util-linux}/bin/agetty --autologin jaid --noclear %I $TERM"
     ];
-  }
+  };
 }
