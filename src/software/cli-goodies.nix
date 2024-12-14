@@ -12,5 +12,6 @@
     bat
     curl
     wget
+    jq
   ];
 }
