@@ -14,7 +14,6 @@
         sha256 = "02mw9zv7ny0lin4l2v05zmkqbdd7wszdwvc00qaw1hrp53zgxrwk";
       });
       file.".config/powershell/profile.ps1".source = ./.resources/profile.ps1;
-      stateVersion = "24.11";
     };
     programs.home-manager = {
       enable = true;
@@ -53,4 +52,6 @@
       enableZshIntegration = false;
     };
   };
+  home.manager.backupFileExtension = "bak";
+  home-manager.users.jaid.home.stateVersion = "24.11";
 }

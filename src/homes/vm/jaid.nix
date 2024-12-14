@@ -8,7 +8,6 @@
 
       ];
       file.".config/monitors.xml".source = ./.resources/monitors.xml;
-      stateVersion = "24.11";
     };
   };
 }
