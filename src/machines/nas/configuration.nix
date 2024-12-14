@@ -17,5 +17,6 @@
   boot.tmp.cleanOnBoot = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "nas";
+  environment.etc."ssh/sshd_conf.d/allow_stream_local_forwarding.conf".text = "AllowStreamLocalForwarding yes";
   system.stateVersion = "24.11";
 }
