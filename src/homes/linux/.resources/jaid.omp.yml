@@ -1,0 +1,125 @@
+version: 2
+palette:
+  foreground: black
+  rootBackground: '#ff9021'
+  rootForegroundDimmed: '#7a450f'
+  shellBackground: '#53ff59'
+  shellForegroundDimmed: '#1b5c1d'
+  errorForegroundDimmed: '#681616'
+  pathBackground: '#3399ff'
+  gitBackground: '#3AD900'
+  errorBackground: '#ff3939'
+_:
+  powerlineSplitter: &powerlineSplitter 
+  iconForegroundTemplates: &iconForegroundTemplates
+    - |-
+      {{ if .Root }}p:rootForegroundDimmed{{ end }}
+    - p:shellForegroundDimmed
+  iconBackgroundTemplates: &iconBackgroundTemplates
+    - |-
+      {{ if .Root }}p:rootBackground{{ end }}
+    - p:shellBackground
+blocks:
+- type: prompt
+  alignment: left
+  segments:
+  - type: os
+    template: ' {{ .Icon }} '
+    style: diamond
+    leading_diamond: 
+    foreground_templates: *iconForegroundTemplates
+    background_templates: *iconBackgroundTemplates
+  - type: shell
+    properties:
+      mapped_shell_names:
+        bash: 
+        cmd: 
+        pwsh: 󰨊
+        zsh: 󰰶
+    template: '{{ .Name }}  '
+    style: diamond
+    foreground_templates: *iconForegroundTemplates
+    background_templates: *iconBackgroundTemplates
+  - type: path
+    properties:
+      folder_icon: '  '
+      folder_separator_icon: '  '
+      style: full
+    template: ' {{ .Path }} '
+    interactive: true
+    style: powerline
+    powerline_symbol: *powerlineSplitter
+    foreground: p:foreground
+    background: p:pathBackground
+  - type: git
+    properties:
+      fetch_stash_count: true
+      fetch_status: true
+    template: ' {{ .HEAD }}{{ if .Working.Changed }}  {{ end }}{{ if gt .StashCount 0 }}  {{ end }} '
+    style: powerline
+    powerline_symbol: *powerlineSplitter
+    foreground: p:foreground
+    background: p:gitBackground
+    background_templates:
+    - '{{ if or (.Working.Changed) (.Staging.Changed) }}#FFC600{{ end }}'
+    - '{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFCC80{{ end }}'
+    - '{{ if gt .Ahead 0 }}#B388FF{{ end }}'
+    - '{{ if gt .Behind 0 }}#B388FF{{ end }}'
+  - type: executiontime
+    properties:
+      style: roundrock
+      threshold: 1
+    template: ' {{ if eq .Code 0 }} {{ end }}{{ .Templates }} {{ .FormattedMs }} '
+    templates:
+    - |-
+      {{ if ne .Code 0 }}<p:errorForegroundDimmed>󱎫</>{{ end }}
+    - |-
+      <p:shellForegroundDimmed>󱎫</>
+    templates_logic: first_match
+    style: powerline
+    powerline_symbol: *powerlineSplitter
+    foreground: p:foreground
+    background_templates:
+    - |-
+      {{ if ne .Code 0 }}p:errorBackground{{ end }}
+    - p:shellBackground
+  - type: status
+    template: '{{ .Templates }} '
+    templates:
+    - |-
+      {{ if eq .Code 0 }}<p:shellForegroundDimmed></>{{ end }}
+    - |-
+      <p:errorForegroundDimmed>󱚡</> {{ .String }}
+    templates_logic: first_match
+    style: powerline
+    powerline_symbol: *powerlineSplitter
+    foreground: p:foreground
+    background_templates:
+    - |-
+      {{ if eq .Code 0 }}p:shellBackground{{ end }}
+    - p:errorBackground
+- type: prompt
+  alignment: left
+  newline: true
+  segments:
+  - type: root
+    template: '󰌋 '
+    style: diamond
+    trailing_diamond: 
+    foreground: p:foreground
+    background: p:rootBackground
+  - type: text
+    template: |-
+      {{ if not .Root }}_{{ end }}
+    style: diamond
+    trailing_diamond: 
+    foreground: p:foreground
+    background: p:shellBackground
+# error_line:
+#   background: transparent
+#   foreground: '#ffffff'
+#   template: "<#eb6f92,#286983>\ue009 </><#286983,transparent>\ue0b4</> "
+# valid_line:
+#   background: transparent
+#   foreground: '#ffffff'
+#   template: "<#e0def4,#286983>\uf42e </><#286983,transparent>\ue0b4</> "
