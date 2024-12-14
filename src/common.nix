@@ -13,6 +13,9 @@
   services.openssh = {
     enable = true;
   };
+  security.sudo = {
+    wheelNeedsPassword = false;
+  };
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   documentation.nixos.enable = false;
