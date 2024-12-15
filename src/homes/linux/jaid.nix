@@ -52,6 +52,6 @@
       enableZshIntegration = false;
     };
   };
-  home.manager.backupFileExtension = "bak";
+  home-manager.backupFileExtension = "bak";
   home-manager.users.jaid.home.stateVersion = "24.11";
 }
