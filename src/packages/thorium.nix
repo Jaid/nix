@@ -1,27 +1,103 @@
-{ pkgs ? import <nixpkgs> {} }:
-let
-  thoriumVersion = "128.0.6613.189";
-  thoriumSrc = {
-    x86_64-linux = "https://github.com/Alex313031/thorium/releases/download/M${thoriumVersion}/Thorium_Browser_${thoriumVersion}_AVX2.AppImage";
-    aarch64-linux = "https://github.com/Alex313031/Thorium-Raspi/releases/download/M${thoriumVersion}/Thorium_Browser_${thoriumVersion}_arm64.AppImage";
+{ pkgs, lib, ... }:
+
+pkgs.stdenv.mkDerivation rec {
+  pname = "thorium-browser";
+  version = "128.0.6613.189";
+
+  src = pkgs.fetchurl {
+    url = "https://github.com/Alex313031/thorium/releases/download/M${version}/thorium-browser_${version}_AVX2.deb";
+    hash = "sha256-oid72E4n9jAQsCUrztlyj56Gd0+pz735y6b5COMA4tg=";
   };
-  makeThorium = system: let
-    pname = "thorium";
-    version = thoriumVersion;
-    src = pkgs.fetchurl {
-      url = thoriumSrc.${system};
-      sha256 = "sha256-RBPSGgwF6A4KXgLdn/YIrdFpZG2+KwMJ8MkTjSPpkhU=";
-    };
-    appimageContents = pkgs.appimageTools.extractType2 { inherit pname version src; };
-  in pkgs.appimageTools.wrapType2 {
-    inherit pname version src;
-    extraInstallCommands = ''
-      install -Dm444 ${appimageContents}/thorium-browser.desktop $out/share/applications/thorium-browser.desktop
-      install -Dm444 ${appimageContents}/thorium.png $out/share/icons/hicolor/512x512/apps/thorium.png
-      source "${pkgs.makeWrapper}/nix-support/setup-hook"
-      wrapProgram $out/bin/thorium --add-flags '--enable-features=UseOzonePlatform --ozone-platform=wayland'
-      ln -s $out/bin/thorium $out/bin/chromium
-    '';
-  };
-in
-  makeThorium "x86_64-linux"
+
+  nativeBuildInputs = with pkgs; [
+    autoPatchelfHook
+    dpkg
+    wrapGAppsHook
+    qt6.wrapQtAppsHook
+  ];
+
+  buildInputs = with pkgs; [
+    stdenv.cc.cc.lib
+    alsa-lib
+    at-spi2-atk
+    at-spi2-core
+    cairo
+    cups
+    curl
+    dbus
+    expat
+    ffmpeg
+    fontconfig
+    freetype
+    glib
+    glibc
+    gtk3
+    gtk4
+    libcanberra
+    liberation_ttf
+    libexif
+    libglvnd
+    libkrb5
+    libnotify
+    libpulseaudio
+    libu2f-host
+    libva
+    libxkbcommon
+    mesa
+    nspr
+    nss
+    qt6.qtbase
+    pango
+    pciutils
+    pipewire
+    speechd
+    udev
+    unrar
+    vaapiVdpau
+    vulkan-loader
+    wayland
+    wget
+    xdg-utils
+    xfce.exo
+    xorg.libxcb
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXcomposite
+    xorg.libXdamage
+    xorg.libXext
+    xorg.libXfixes
+    xorg.libXi
+    xorg.libXrandr
+    xorg.libXrender
+    xorg.libXtst
+    xorg.libXxf86vm
+  ];
+
+  autoPatchelfIgnoreMissingDeps = [
+    "libQt5Widgets.so.5"
+    "libQt5Gui.so.5"
+    "libQt5Core.so.5"
+  ];
+
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out
+    cp -r usr/* $out
+    cp -r etc $out
+    cp -r opt $out
+    ln -sf $out/opt/chromium.org/thorium/thorium-browser $out/bin/thorium-browser
+    substituteInPlace $out/share/applications/thorium-shell.desktop \
+    --replace /usr/bin $out/bin \
+    --replace /opt $out/opt
+    substituteInPlace $out/share/applications/thorium-browser.desktop \
+    --replace /usr/bin $out/bin \
+    --replace StartupWMClass=thorium StartupWMClass=thorium-browser \
+    --replace Icon=thorium-browser Icon=$out/opt/chromium.org/thorium/product_logo_256.png
+    addAutoPatchelfSearchPath $out/chromium.org/thorium
+    addAutoPatchelfSearchPath $out/chromium.org/thorium/lib
+    substituteInPlace $out/opt/chromium.org/thorium/thorium-browser \
+    --replace 'export LD_LIBRARY_PATH' "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${lib.makeLibraryPath buildInputs}:$out/chromium.org/thorium:$out/chromium.org/thorium/lib" \
+    --replace /usr $out
+    runHook postInstall
+  '';
+}
