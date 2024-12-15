@@ -1,10 +1,11 @@
 { pkgs, ... }: {
   imports = [
     ./xnview.nix
+    ./thorium.nix
   ];
   environment.systemPackages = [
     pkgs.vscode
-    # pkgs.keeweb
+    pkgs.keeweb
     # pkgs.discord
     # pkgs.ghostty # BLOCKEDBY https://mitchellh.com/writing/ghostty-is-coming - not open-source yet
     # pkgs.chatterino2
