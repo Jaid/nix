@@ -9,6 +9,7 @@
     git
     fd
     sd
+    bash
   ];
   services.openssh = {
     enable = true;
