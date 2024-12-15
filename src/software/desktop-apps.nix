@@ -1,9 +1,9 @@
 { pkgs, ... }: {
   imports = [
     ./xnview.nix
-    ../packages/thorium.nix
   ];
   environment.systemPackages = [
+    pkgs.callPackage ../packages/thorium.nix {}
     pkgs.vscode
     pkgs.keeweb
     # pkgs.discord
