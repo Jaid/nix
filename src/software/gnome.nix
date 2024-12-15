@@ -13,7 +13,6 @@
     xterm
   ];
   environment.gnome.excludePackages = with pkgs; [
-    # gnome-camera - Not the actual name
     eog
     epiphany
     geary
@@ -55,7 +54,7 @@
     displayManager = {
       gdm.enable = true;
     };
-    desktopManager.gnome = {
+  desktopManager.gnome = {
       enable = true;
       extraGSettingsOverrides = ''
         [org.gnome.desktop.interface]
@@ -74,12 +73,37 @@
         [org.gnome.shell]
         enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'tilingnome@rliang.github.com', 'freon@UshakovVasilii_Github.yahoo.com', 'pano@elhan.io']
         favorite-apps=['org.gnome.Nautilus.desktop', 'code.desktop']
-        [org/gnome/GWeather4]
+        [org.gnome.GWeather4]
         temperature-unit='centigrade'
-        [org/gnome/shell/extensions/pano]
+        [org.gnome.shell.extensions.pano]
         exclusion-list=@as []
         history-length=20
         send-notification-on-copy=false
+        [org.gnome.desktop.wm.keybindings]
+        begin-move=@as []
+        begin-resize=@as []
+        move-to-monitor-down=@as []
+        move-to-monitor-left=@as []
+        move-to-monitor-right=@as []
+        move-to-monitor-up=@as []
+        panel-run-dialog=@as []
+        switch-input-source=@as []
+        switch-input-source-backward=@as []
+        toggle-maximized=@as []
+        [org.gnome.mutter.wayland.keybindings]
+        restore-shortcuts=@as []
+        [org.gnome.settings-daemon.plugins.media-keys]
+        help=@as []
+        home=['<Super>e']
+        logout=@as []
+        magnifier=@as []
+        magnifier-zoom-in=@as []
+        magnifier-zoom-out=@as []
+        screenreader=@as []
+        [org.gnome.shell.keybindings]
+        focus-active-notification=@as []
+        toggle-message-tray=@as []
+        toggle-quick-settings=@as []
       '';
     };
   };
