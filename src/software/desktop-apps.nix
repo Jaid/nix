@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./xnview.nix
-    ./thorium.nix
+    ../packages/thorium.nix
   ];
   environment.systemPackages = [
     pkgs.vscode
