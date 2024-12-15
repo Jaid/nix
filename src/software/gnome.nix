@@ -104,6 +104,8 @@
         focus-active-notification=@as []
         toggle-message-tray=@as []
         toggle-quick-settings=@as []
+        [org.gnome.desktop.a11y.applications]
+        screen-magnifier-enabled=false
       '';
     };
   };
