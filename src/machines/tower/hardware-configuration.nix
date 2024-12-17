@@ -1,5 +1,5 @@
 { config, lib, pkgs, modulesPath, ... }: {
-  boot.initrd.availableKernelModules = ["ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "xhci_pci" "sd_mod" "sr_mod"];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
   fileSystems."/" = {
     fsType = "ext4";
     device = "/dev/disk/by-label/root";
@@ -16,4 +16,5 @@
   };
   networking.useDHCP = true;
   nixpkgs.hostPlatform = "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
