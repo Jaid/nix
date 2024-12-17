@@ -1,5 +1,6 @@
 { config, lib, pkgs, modulesPath, ... }: {
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
+  boot.kernelModules = ["kvm-amd"];
   fileSystems."/" = {
     fsType = "ext4";
     device = "/dev/disk/by-label/root";
