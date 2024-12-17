@@ -37,7 +37,6 @@
         ./src/software/docker.nix
         ./src/software/vscode-server.nix
         ./src/homes/nas/jaid.nix
-        ./src/test.nix
       ];
       specialArgs = { inherit inputs; };
     };
@@ -53,6 +52,7 @@
         ./src/homes/tower/jaid.nix
         ./src/software/gnome.nix
         ./src/software/desktop-apps.nix
+        ./src/test.nix
       ];
       specialArgs = { inherit inputs; };
     };
