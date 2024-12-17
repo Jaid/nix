@@ -41,5 +41,20 @@
       ];
       specialArgs = { inherit inputs; };
     };
+    nixosConfigurations.tower = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        home-manager.nixosModules.home-manager
+        ./src/common.nix
+        ./src/locales/en-de.nix
+        ./src/users/jaid.nix
+        ./src/machines/tower/configuration.nix
+        ./src/machines/tower/hardware-configuration.nix
+        ./src/homes/tower/jaid.nix
+        ./src/software/gnome.nix
+        ./src/software/desktop-apps.nix
+      ];
+      specialArgs = { inherit inputs; };
+    };
   };
 }

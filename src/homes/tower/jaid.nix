@@ -7,7 +7,7 @@
       packages = with pkgs; [
 
       ];
-      # file.".config/monitors.xml".source = ./.resources/monitors.xml;
+      file.".config/monitors.xml".source = ./.resources/monitors.xml;
     };
   };
 }
