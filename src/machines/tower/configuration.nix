@@ -5,6 +5,6 @@
   };
   boot.tmp.cleanOnBoot = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  networking.hostName = "vm";
+  networking.hostName = "tower";
   system.stateVersion = "24.11";
 }
