@@ -1,7 +1,8 @@
-{ pkgs, ... }: {
-  environment.systemPackages = [
-    pkgs.powershell
-    pkgs.oh-my-posh
+{pkgs, ...}: {
+  environment.systemPackages = with pkgs; [
+    powershell
+    fish
+    oh-my-posh
   ];
   users.users.jaid = {
     isNormalUser = true;
@@ -15,11 +16,14 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID0Up24BhYxyHEWrYc5EJ5PbPn7hVYGpv1fSCwLURvGq jaid@github/73158609"
     ];
-    shell = pkgs.powershell;
+    shell = pkgs.fish;
   };
   users.groups.jaid.gid = 1000;
   services.openssh = {
     enable = true;
   };
-  services.getty.autologinUser = "jaid";
+  programs.fish = {
+    enable = true;
+  };
+  #services.getty.autologinUser = "jaid";
 }

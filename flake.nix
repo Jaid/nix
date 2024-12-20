@@ -1,15 +1,17 @@
 {
   description = "Jaid’s NixOS setup";
   inputs = {
-    nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-24.11";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-24.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
+    nur.url = "github:nix-community/NUR";
+    home-manager.url = "github:nix-community/home-manager?ref=release-24.11";
   };
-  outputs = { self, nixpkgs, home-manager, ... } @inputs: {
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: {
     nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -23,7 +25,21 @@
         ./src/software/gnome.nix
         ./src/software/xnview.nix
       ];
-      specialArgs = { inherit inputs; };
+      specialArgs = {inherit inputs;};
+    };
+    nixosConfigurations.qemu = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        home-manager.nixosModules.home-manager
+        ./src/common.nix
+        ./src/locales/en-de.nix
+        ./src/users/jaid.nix
+        ./src/machines/qemu/configuration.nix
+        ./src/machines/qemu/hardware-configuration.nix
+        ./src/homes/qemu/jaid.nix
+        ./src/software/gnome.nix
+      ];
+      specialArgs = {inherit inputs;};
     };
     nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -38,23 +54,23 @@
         ./src/software/vscode-server.nix
         ./src/homes/nas/jaid.nix
       ];
-      specialArgs = { inherit inputs; };
+      specialArgs = {inherit inputs;};
     };
     nixosConfigurations.tower = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         home-manager.nixosModules.home-manager
+        ./src/homes/tower/jaid.nix
         ./src/common.nix
         ./src/locales/en-de.nix
         ./src/users/jaid.nix
         ./src/machines/tower/configuration.nix
         ./src/machines/tower/hardware-configuration.nix
-        ./src/homes/tower/jaid.nix
         ./src/software/gnome.nix
         ./src/software/desktop-apps.nix
         ./src/test.nix
       ];
-      specialArgs = { inherit inputs; };
+      specialArgs = {inherit inputs;};
     };
   };
 }

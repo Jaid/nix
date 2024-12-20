@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     fastfetch
     git
@@ -13,5 +13,7 @@
     curl
     wget
     jq
+    inotify-tools
+    comma
   ];
 }

@@ -26,4 +26,15 @@ $env:POWERSHELL_TELEMETRY_OPTOUT = '1'
 $env:POWERSHELL_UPDATECHECK = 'Off'
 $env:POWERSHELL_UPDATECHECK_OPTOUT = '1'
 
+if (Test-Path $userBinFolder) {
+  $env:PATH = "${userBinFolder}:$env:PATH"
+}
+
+$scriptsBinFolder = "$foreignReposFolder/scripts/bin"
+if (Test-Path $scriptsBinFolder) {
+  $env:PATH = "$env:PATH:${scriptsBinFolder}"
+}
+
+$nodeBinFolder = ""
+
 & oh-my-posh init pwsh --config ~/.config/oh-my-posh/jaid.omp.yml | Invoke-Expression

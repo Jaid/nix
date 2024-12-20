@@ -1,11 +1,11 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   environment.systemPackages = [
     pkgs.docker
   ];
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;
-     # https://gist.github.com/Jaid/3d590adcd183762ad7edffa5eff82c26
+    # https://gist.github.com/Jaid/3d590adcd183762ad7edffa5eff82c26
     daemon.settings = {
       log-driver = "json-file";
       log-opts = {

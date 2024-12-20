@@ -1,0 +1,6 @@
+{
+  "extends": "tsconfig-jaid-node",
+  "typeAcquisition": {
+    "enable": true
+  }
+}

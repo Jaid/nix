@@ -1,0 +1,9 @@
+[user]
+name = Jaid
+username = jaid
+email = 6216144+Jaid@users.noreply.github.com
+signingKey = ~/.ssh/id_gitSign.pub
+[github]
+user = jaid
+[core]
+sshCommand = ssh -i ~/.ssh/id_github
