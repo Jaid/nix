@@ -4,20 +4,20 @@
   ];
   home-manager.users.jaid = {
     home = {
-      packages = with pkgs; [
-        bat
-        gifski
-        yt-dlp
-        gallery-dl
-        android-tools
-        btop
-        ffmpeg-headless
-        streamlink
-        libjxl
-        ollama
-        scrcpy
-        zstd
-        imagemagick
+      packages = [
+        pkgs.bat
+        pkgs.gifski
+        pkgs.yt-dlp
+        pkgs.gallery-dl
+        pkgs.android-tools
+        pkgs.btop
+        pkgs.ffmpeg-headless
+        pkgs.streamlink
+        pkgs.libjxl
+        pkgs.ollama
+        pkgs.scrcpy
+        pkgs.zstd
+        pkgs.imagemagick
       ];
     };
   };

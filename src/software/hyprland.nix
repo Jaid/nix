@@ -1,8 +1,8 @@
-{pkgs}: {
-  environment.systemPackages = with pkgs; [
-    waybar
-    mako
-    hyprland
+{pkgs, ...}: {
+  environment.systemPackages = [
+    pkgs.waybar
+    pkgs.mako
+    pkgs.hyprland
   ];
   programs.hyprland = {
     enable = true;
@@ -10,8 +10,5 @@
   };
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-  };
-  hardware = {
-    opengl.enable = true;
   };
 }

@@ -14,7 +14,7 @@
     powerManagement.enable = false;
     powerManagement.finegrained = false;
     open = false;
-    nvidiaSettings = true;
+    nvidiaSettings = false;
   };
   fileSystems."/" = {
     fsType = "ext4";

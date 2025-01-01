@@ -14,6 +14,7 @@
         sha256 = "02mw9zv7ny0lin4l2v05zmkqbdd7wszdwvc00qaw1hrp53zgxrwk";
       };
       file.".config/powershell/profile.ps1".source = ./.resources/profile.ps1;
+      #file.".config/fish/profile.fish".source = ./.resources/profile.fish;
     };
     editorconfig = {
       enable = true;
