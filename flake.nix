@@ -35,57 +35,6 @@
         };
       });
   in {
-    nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
-        home-manager.nixosModules.home-manager
-        ./src/common.nix
-        ./src/locales/en-de.nix
-        ./src/users/jaid.nix
-        ./src/machines/vm/configuration.nix
-        ./src/machines/vm/hardware-configuration.nix
-        ./src/homes/vm/jaid.nix
-        ./src/software/gnome.nix
-        {
-          environment.systemPackages = [
-            nixpkgs-unstable.legacyPackages.${system}.ghostty
-            nixpkgs-unstable.legacyPackages.${system}.firefox
-          ];
-        }
-      ];
-      specialArgs = {inherit inputs;};
-    };
-    nixosConfigurations.qemu = nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
-        home-manager.nixosModules.home-manager
-        ./src/common.nix
-        ./src/locales/en-de.nix
-        ./src/users/jaid.nix
-        ./src/machines/qemu/configuration.nix
-        ./src/machines/qemu/hardware-configuration.nix
-        ./src/homes/qemu/jaid.nix
-        ./src/software/gnome.nix
-        ./src/software/doas.nix
-        ./src/test.nix
-      ];
-      specialArgs = {inherit inputs;};
-    };
-    nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
-        home-manager.nixosModules.home-manager
-        ./src/common.nix
-        ./src/locales/en-de.nix
-        ./src/users/jaid.nix
-        ./src/machines/nas/configuration.nix
-        ./src/machines/nas/hardware-configuration.nix
-        ./src/software/docker.nix
-        ./src/software/vscode-server.nix
-        ./src/homes/nas/jaid.nix
-      ];
-      specialArgs = {inherit inputs;};
-    };
     nixosConfigurations.tower = nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
