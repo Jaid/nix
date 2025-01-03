@@ -106,7 +106,7 @@
             })
             (pkgsLatest.llama-cpp.overrideAttrs (finalAttributes: previousAttributes: {
               pname = "${previousAttributes.pname}-jaid";
-              meta.description = "${previousAttributes.meta.description} (optimized for AMD Zen 2 and GeForce RTX 40XX)";
+              meta.description = "${previousAttributes.meta.description} (optimized for AMD Zen 2 and Nvidia GeForce RTX 4070)";
               cmakeFlags =
                 previousAttributes.cmakeFlags
                 ++ [
@@ -122,8 +122,10 @@
                   (pkgs.lib.cmakeFeature "GGML_RPC" "ON")
                 ];
               env = rec {
-                CFLAGS = "-march=znver2 -mtune=znver2 -O3";
+                CFLAGS = "-O3";
                 CXXFLAGS = CFLAGS;
+                NIX_CFLAGS_COMPILE = (previousAttributes.env.NIX_CFLAGS_COMPILE or "") + " " + CFLAGS;
+                NIX_CXXFLAGS_COMPILE = (previousAttributes.env.NIX_CXXFLAGS_COMPILE or "") + " " + CXXFLAGS;
               };
             }))
           ];
