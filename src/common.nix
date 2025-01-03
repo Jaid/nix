@@ -1,20 +1,23 @@
-{ pkgs, ... }: {
-  environment.systemPackages = with pkgs; [
-    bat
-    curl
-    docker
-    fastfetch
-    git
-    powershell
-    uv
-    nodejs_22
-    gdu
+{pkgs, ...}: {
+  imports = [
+    ./software/cli-goodies.nix
+    ./nix.nix
   ];
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = true;
-  };
+  environment.systemPackages = [
+    pkgs.curl
+    pkgs.wget
+    pkgs.fastfetch
+    pkgs.git
+    pkgs.fd
+    pkgs.sd
+    pkgs.bash
+  ];
   services.openssh = {
     enable = true;
   };
+  security.sudo = {
+    wheelNeedsPassword = false;
+  };
+  documentation.nixos.enable = false;
+  networking.firewall.enable = false;
 }

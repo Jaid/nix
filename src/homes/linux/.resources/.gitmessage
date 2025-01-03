@@ -1,0 +1,19 @@
+
+
+# The first line of this text file is a commit message for a GitHub repository. Enter the short summary of this commit at the top of the file. The summary should follow the Conventional Commits convention and its grammar should be simple past tense. The valid types for the prefix are: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test.
+# Examples:
+#  feat: Added more debug logging messages
+#  feat(cli): Implemented new CLI option “--config-file <file>”
+#  fix: Removed accidentally committed `debugger` statements
+#  feat: Changed default argument for handleInput from `''` to `null`
+#  fix: Fixed typo in the message for the `ConnectionError` construction
+#  chore: Migrated from package “lodash” to “lodash-es”
+#  ci: Added GitHub Actions workflow for DockerHub deployment
+#  fix: Fixed crash on invalid user input; fixes #52
+#  perf: Improved performance by adding more caching
+#  style: Formatted to 2-space indentation
+#  docs: Updated the --help output to be more precise
+#  feat: Added new output formats “json5” and “yaml”
+#  perf(db): Reduced the ORM library’s initialization time
+#  refactor: Removed unneeded packages and the corresponding
+# The file changes (including a list of the file contents’ changes written in diff syntax) of this commit are listed below.
