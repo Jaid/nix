@@ -10,15 +10,13 @@
     llama-cpp.url = "github:ggerganov/llama.cpp";
   };
   outputs = {
-    self,
     nixpkgs,
     nixpkgs-unstable,
     nixpkgs-latest,
-    flake-utils,
     llama-cpp,
     home-manager,
     ...
-  } @ inputs: let
+  }: let
     system = "x86_64-linux";
     nixpkgsAttributes = {
       inherit system;
@@ -47,47 +45,15 @@
         ./src/machines/tower/hardware-configuration.nix
         ./src/software/gnome.nix
         ./src/software/desktop-apps.nix
-        {
-          environment.systemPackages = [
-            pkgsUnstable.ghostty
-            (pkgsUnstable.ollama.override {
-              acceleration = "cuda";
-            })
-            (pkgsLatest.llama-cpp.overrideAttrs (finalAttributes: previousAttributes: {
-              pname = "${previousAttributes.pname}-jaid";
-              meta.description = "${previousAttributes.meta.description} (optimized for AMD Zen 2 and Nvidia GeForce RTX 4070)";
-              cmakeFlags =
-                previousAttributes.cmakeFlags
-                ++ [
-                  (pkgs.lib.cmakeBool "GGML_NATIVE" true)
-                  (pkgs.lib.cmakeBool "CMAKE_POSITION_INDEPENDENT_CODE" true)
-                  (pkgs.lib.cmakeFeature "CMAKE_CUDA_FLAGS" "-t6")
-                  (pkgs.lib.cmakeBool "GGML_CUDA_F16" true)
-                  (pkgs.lib.cmakeBool "GGML_CUDA_FA_ALL_QUANTS" true)
-                  (pkgs.lib.cmakeBool "GGML_CUDA_NO_PEER_COPY" true)
-                  (pkgs.lib.cmakeBool "GGML_CUDA" true)
-                  (pkgs.lib.cmakeFeature "GGML_SYCL_TARGET" "NVIDIA")
-                  (pkgs.lib.cmakeFeature "CMAKE_CUDA_ARCHITECTURES" "89")
-                  (pkgs.lib.cmakeFeature "GGML_RPC" "ON")
-                ];
-              env = rec {
-                CFLAGS = "-O3";
-                CXXFLAGS = CFLAGS;
-                NIX_CFLAGS_COMPILE = (previousAttributes.env.NIX_CFLAGS_COMPILE or "") + " " + CFLAGS;
-                NIX_CXXFLAGS_COMPILE = (previousAttributes.env.NIX_CXXFLAGS_COMPILE or "") + " " + CXXFLAGS;
-              };
-            }))
-          ];
-        }
-        {
-          networking.enableIPv6 = false;
-          boot.kernelParams = ["ipv6.disable=1"];
-          boot.kernel.sysctl."net.ipv6.conf.all.disable_ipv6" = 1;
-          boot.kernel.sysctl."net.ipv6.conf.default.disable_ipv6" = 1;
-          boot.kernel.sysctl."net.ipv6.conf.eno1.disable_ipv6" = 1;
-        }
+        ./src/packages/llama-cpp.nix
+        ./src/packages/ghostty.nix
+        ./src/no-ipv6.nix
       ];
-      specialArgs = {inherit inputs;};
+      specialArgs = {
+        inherit pkgs;
+        inherit pkgsLatest;
+        inherit pkgsUnstable;
+      };
     };
   };
 }
