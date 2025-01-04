@@ -13,7 +13,7 @@
     efi.canTouchEfiVariables = true;
   };
   environment.systemPackages = [
-    (pkgs.callPackage ../../../nix/packages/thorium.nix)
+    (pkgs.callPackage ../../../nix/packages/thorium.nix {})
     pkgsUnstable.ghostty
     pkgs.parted
     pkgs.nvtopPackages.nvidia
