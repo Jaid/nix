@@ -1,8 +1,7 @@
-{pkgs, ...}: {
+{pkgs, pkgsUnstable, ...}: {
   imports = [
     ../../../nixos/no-ipv6.nix
     ../../../nixos/software/gnome.nix
-    ../../../nix/packages/ghostty.nix
     ../../../nix/packages/llama-cpp.nix
   ];
   boot.loader = {
@@ -11,6 +10,7 @@
   };
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix)
+    pkgsUnstable.ghostty
     pkgs.parted
     pkgs.nvtopPackages.nvidia
     pkgs.grc

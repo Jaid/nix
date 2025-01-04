@@ -2,7 +2,6 @@
   imports = [
     ../../../nixos/no-ipv6.nix
     ../../../nixos/software/gnome.nix
-    ../../../nix/packages/ghostty.nix
   ];
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
