@@ -1,4 +1,16 @@
-{pkgs, inputs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    ../../../nixos/no-ipv6.nix
+    ../../../nixos/software/gnome.nix
+    ../../../nixos/software/desktop-apps.nix
+    ../../../nix/packages/ghostty.nix
+    ../../../nix/packages/thorium.nix
+    ../../../nix/packages/llama-cpp.nix
+  ];
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;

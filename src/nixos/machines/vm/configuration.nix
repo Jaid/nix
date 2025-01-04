@@ -4,6 +4,13 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ../../../nixos/no-ipv6.nix
+    ../../../nixos/software/gnome.nix
+    ../../../nixos/software/desktop-apps.nix
+    ../../../nix/packages/ghostty.nix
+    ../../../nix/packages/thorium.nix
+  ];
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
