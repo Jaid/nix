@@ -13,4 +13,4 @@ jobs:
     - run: nix flake info
     - run: nix flake show
     - run: nix flake check --verbose
-  #  - run: nix eval --expr '(builtins.getFlake (toString ./.)).outputs.nixosConfigurations.tower.config'
+    - run: nix eval --impure --json --expr '(builtins.getFlake (toString ./.)).outputs.nixosConfigurations.tower.config.system.nixos'
