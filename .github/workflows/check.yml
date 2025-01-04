@@ -10,6 +10,7 @@ jobs:
     - uses: cachix/install-nix-action@v30
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    - run: nix config show
     - run: nix flake info
     - run: nix flake show
     - run: nix flake check --verbose

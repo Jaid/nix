@@ -10,6 +10,6 @@ jobs:
     - uses: cachix/install-nix-action@v30
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
-    - run: nix build .#nixosConfigurations.tower.config.system.build.vm --option accept-flake-config true
+    - run: nix build .#nixosConfigurations.tower.config.system.build.vm --no-update-lock-file --option accept-flake-config true
       env:
         NIXPKGS_ALLOW_UNFREE: 1
