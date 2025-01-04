@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
-
+{
+  pkgs,
+  lib,
+  ...
+}:
 pkgs.stdenv.mkDerivation rec {
   pname = "thorium-browser";
   version = "128.0.6613.189";
