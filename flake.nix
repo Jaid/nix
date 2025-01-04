@@ -4,9 +4,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
     nixpkgs-latest.url = "github:NixOS/nixpkgs?ref=master";
-    nur.url = "github:nix-community/NUR";
     home-manager.url = "github:nix-community/home-manager?ref=release-24.11";
-    flake-utils.url = "github:numtide/flake-utils";
     llama-cpp.url = "github:ggerganov/llama.cpp";
   };
   outputs = inputs: let
