@@ -6,7 +6,6 @@
   imports = [
     ../../../nixos/no-ipv6.nix
     ../../../nixos/software/gnome.nix
-    ../../../nix/packages/llama-cpp.nix
   ];
   boot.loader = {
     systemd-boot.enable = true;
@@ -14,6 +13,7 @@
   };
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
+    (pkgsUnstable.callPackage ../../../nix/packages/llama-cpp.nix {})
     pkgsUnstable.ghostty
     pkgs.parted
     pkgs.nvtopPackages.nvidia
