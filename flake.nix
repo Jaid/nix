@@ -15,13 +15,11 @@
       inherit system;
       config.allowUnfree = true;
     };
-    nixpkgsCudaAttributes =
-      nixpkgsAttributes
-      // {
+    nixpkgsCudaAttributes = {
         config.cudaSupport = true;
         config.cudaCapabilities = ["8.9"];
-      };
-    pkgs = import nixpkgsAttributes;
+      } // nixpkgsAttributes;
+    pkgs = import inputs.nixpkgs nixpkgsAttributes;
     pkgsStable = import inputs.nixpkgs nixpkgsCudaAttributes;
     pkgsUnstable = import inputs.nixpkgs-unstable nixpkgsCudaAttributes;
     pkgsLatest = import inputs.nixpkgs-latest nixpkgsCudaAttributes;
