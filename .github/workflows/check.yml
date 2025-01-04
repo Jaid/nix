@@ -10,5 +10,7 @@ jobs:
     - uses: cachix/install-nix-action@v30
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
-    - run: nix flake show --verbose --verbose
-    - run: nix eval --impure --expr '(builtins.getFlake (toString ./.)).outputs.nixosConfigurations.tower.config.system.build.toplevel'
+    - run: nix flake info
+    - run: nix flake show
+    - run: nix flake check --verbose
+  #  - run: nix eval --expr '(builtins.getFlake (toString ./.)).outputs.nixosConfigurations.tower.config'
