@@ -10,6 +10,8 @@ jobs:
     - uses: cachix/install-nix-action@v30
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    - run: Install dependencies
+      shell: nix build github:NixOS/nixpkgs/nixos-unstable#yq github:NixOS/nixpkgs/nixos-unstable#bat
     - run: nix config show
     - shell: nix shell github:NixOS/nixpkgs/nixos-unstable#yq github:NixOS/nixpkgs/nixos-unstable#bat --command bash {0}
       run: nix flake info --json | yq --yaml-output --yaml-output-grammar-version 1.2 | bat --language yaml --paging never --decorations never --force-colorization
