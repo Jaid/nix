@@ -24,7 +24,11 @@
       config.cudaSupport = true;
       config.cudaCapabilities = ["8.9"];
     };
-    pkgs = import nixpkgs nixpkgsAttributes;
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
+    pkgsStable = import nixpkgs nixpkgsAttributes;
     pkgsUnstable = import nixpkgs-unstable nixpkgsAttributes;
     pkgsLatest = import nixpkgs-latest (nixpkgsAttributes
       // {
@@ -45,14 +49,15 @@
         ./src/machines/tower/hardware-configuration.nix
         ./src/software/gnome.nix
         ./src/software/desktop-apps.nix
-        ./src/packages/llama-cpp.nix
+        #./src/packages/llama-cpp.nix
         ./src/packages/ghostty.nix
         ./src/no-ipv6.nix
       ];
       specialArgs = {
         inherit pkgs;
-        inherit pkgsLatest;
+        inherit pkgsStable;
         inherit pkgsUnstable;
+        inherit pkgsLatest;
       };
     };
   };
