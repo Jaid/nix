@@ -9,49 +9,35 @@
     flake-utils.url = "github:numtide/flake-utils";
     llama-cpp.url = "github:ggerganov/llama.cpp";
   };
-  outputs = {
-    nixpkgs,
-    nixpkgs-unstable,
-    nixpkgs-latest,
-    llama-cpp,
-    home-manager,
-    ...
-  }: let
+  outputs = inputs: let
     system = "x86_64-linux";
     nixpkgsAttributes = {
       inherit system;
       config.allowUnfree = true;
+    };
+    nixpkgsCudaAttributes = nixpkgsAttributes // {
       config.cudaSupport = true;
       config.cudaCapabilities = ["8.9"];
     };
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
-    pkgsStable = import nixpkgs nixpkgsAttributes;
-    pkgsUnstable = import nixpkgs-unstable nixpkgsAttributes;
-    pkgsLatest = import nixpkgs-latest (nixpkgsAttributes
-      // {
-        config.packageOverrides = pkgs: {
-          llama-cpp = llama-cpp.packages.${system}.cuda;
-        };
-      });
+    pkgs = import nixpkgsAttributes;
+    pkgsStable = import inputs.nixpkgs nixpkgsCudaAttributes;
+    pkgsUnstable = import inputs.nixpkgs-unstable nixpkgsCudaAttributes;
+    pkgsLatest = import inputs.nixpkgs-latest nixpkgsCudaAttributes;
   in {
-    nixosConfigurations.tower = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.tower = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
-        home-manager.nixosModules.home-manager
-        ./src/homes/tower/jaid.nix
-        ./src/common.nix
-        ./src/locales/en-de.nix
-        ./src/users/jaid.nix
+        inputs.home-manager.nixosModules.home-manager
+        ./src/home-manager/homes/tower/jaid.nix
+        ./src/nixos/common.nix
+        ./src/nixos/locales/en-de.nix
+        ./src/nixos/users/jaid.nix
         ./src/machines/tower/configuration.nix
         ./src/machines/tower/hardware-configuration.nix
-        ./src/software/gnome.nix
-        ./src/software/desktop-apps.nix
-        #./src/packages/llama-cpp.nix
-        ./src/packages/ghostty.nix
-        ./src/no-ipv6.nix
+        ./src/nixos/software/gnome.nix
+        ./src/nixos/software/desktop-apps.nix
+        ./src/nix/packages/ghostty.nix
+        ./src/nixos/no-ipv6.nix
       ];
       specialArgs = {
         inherit pkgs;
