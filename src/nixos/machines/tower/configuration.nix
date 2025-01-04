@@ -1,14 +1,8 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../../../nixos/no-ipv6.nix
     ../../../nixos/software/gnome.nix
-    ../../../nixos/software/desktop-apps.nix
     ../../../nix/packages/ghostty.nix
-    ../../../nix/packages/thorium.nix
     ../../../nix/packages/llama-cpp.nix
   ];
   boot.loader = {
@@ -16,6 +10,7 @@
     efi.canTouchEfiVariables = true;
   };
   environment.systemPackages = [
+    (pkgs.callPackage ../../../nix/packages/thorium.nix)
     pkgs.parted
     pkgs.nvtopPackages.nvidia
     pkgs.grc
@@ -32,7 +27,6 @@
     pkgs.shellcheck
     pkgs.shfmt
     pkgs.btop
-    pkgs.wl-clipboard
     pkgs.thunderbird
     pkgs.powershell
     pkgs.pngquant
@@ -49,7 +43,6 @@
     pkgs.libwebp
     pkgs.libjxl
   ];
-  boot.tmp.cleanOnBoot = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "tower";
   virtualisation.libvirtd.enable = true;
@@ -58,13 +51,4 @@
     NIXOS_OZONE_WL = "1";
   };
   home-manager.backupFileExtension = "bak";
-  home-manager.users.jaid.home = {
-    sessionPath = [
-      "/home/jaid/x"
-      "/home/jaid/git/.foreign/scripts/bin"
-      "/home/jaid/git/node_modules/.bin"
-      "/home/jaid/git/node-scripts/temp/.shim"
-      "/home/jaid/git/node-scripts/temp/.wrapper"
-    ];
-  };
 }
