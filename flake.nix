@@ -17,6 +17,9 @@
       {
         config.cudaSupport = true;
         config.cudaCapabilities = ["8.9"];
+        config.packageOverrides = pkgs: {
+          llama-cpp = inputs.llama-cpp.packages.${system}.cuda;
+        };
       }
       // nixpkgsAttributes;
     pkgs = import inputs.nixpkgs nixpkgsAttributes;
