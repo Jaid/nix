@@ -11,4 +11,4 @@ jobs:
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
     - run: nix flake show --verbose --verbose
-    - run: nix eval --impure --expr '(builtins.getFlake (toString ./.)).outputs'
+    - run: nix eval --impure --expr '(builtins.getFlake (toString ./.)).outputs.nixosConfigurations.tower.config.system.build.toplevel'
