@@ -6,6 +6,7 @@
     pkgs.gnomeExtensions.user-themes
     pkgs.gnomeExtensions.just-perfection
     pkgs.nautilus
+    pkgs.wl-clipboard
   ];
   services.xserver.excludePackages = [
     pkgs.xterm

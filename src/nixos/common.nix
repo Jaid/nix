@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   imports = [
     ./software/cli-goodies.nix
-    ./nix.nix
   ];
   environment.systemPackages = [
     pkgs.curl

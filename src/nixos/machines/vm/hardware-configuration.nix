@@ -1,12 +1,6 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
-}: {
-  imports = [ "${modulesPath}/profiles/qemu-guest.nix" ];
-  boot.initrd.availableKernelModules = ["ata_piix" "floppy" "sd_mod" "sr_mod"];
+{lib, ...}: {
+  imports = [];
+  boot.initrd.availableKernelModules = ["ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "xhci_pci" "sd_mod" "sr_mod"];
   fileSystems."/" = {
     fsType = "ext4";
     device = "/dev/disk/by-label/root";

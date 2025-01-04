@@ -1,12 +1,18 @@
-{pkgs, pkgsUnstable, ...}: {
+{
+  pkgs,
+  pkgsUnstable,
+  ...
+}: {
   environment.systemPackages = [
     pkgs.kitty
     #waybar
-    /*(hyprland.override {
+    /*
+      (hyprland.override {
       enableXWayland = false;
       legacyRenderer = false;
       withSystemd = true;
-    })*/
+    })
+    */
     #mako
     pkgs.firefox
     pkgs.ungoogled-chromium
@@ -17,10 +23,12 @@
     pkgs.inter
     pkgs.jetbrains-mono
   ];
-  /*programs.hyprland = {
+  /*
+    programs.hyprland = {
     enable = true;
     xwayland.enable = false;
-  };*/
+  };
+  */
   fonts.fontconfig = {
     hinting.style = "full";
     antialias = true;

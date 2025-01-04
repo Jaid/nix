@@ -9,51 +9,58 @@
     flake-utils.url = "github:numtide/flake-utils";
     llama-cpp.url = "github:ggerganov/llama.cpp";
   };
-  outputs = {
-    nixpkgs,
-    nixpkgs-unstable,
-    nixpkgs-latest,
-    llama-cpp,
-    home-manager,
-    ...
-  }: let
+  outputs = inputs: let
     system = "x86_64-linux";
     nixpkgsAttributes = {
       inherit system;
       config.allowUnfree = true;
-      config.cudaSupport = true;
-      config.cudaCapabilities = ["8.9"];
     };
-    pkgs = import nixpkgs nixpkgsAttributes;
-    pkgsUnstable = import nixpkgs-unstable nixpkgsAttributes;
-    pkgsLatest = import nixpkgs-latest (nixpkgsAttributes
-      // {
-        config.packageOverrides = pkgs: {
-          llama-cpp = llama-cpp.packages.${system}.cuda;
-        };
-      });
+    nixpkgsCudaAttributes =
+      {
+        config.cudaSupport = true;
+        config.cudaCapabilities = ["8.9"];
+      }
+      // nixpkgsAttributes;
+    pkgs = import inputs.nixpkgs nixpkgsAttributes;
+    pkgsStable = import inputs.nixpkgs nixpkgsCudaAttributes;
+    pkgsUnstable = import inputs.nixpkgs-unstable nixpkgsCudaAttributes;
+    pkgsLatest = import inputs.nixpkgs-latest nixpkgsCudaAttributes;
+    linuxModules = [
+      inputs.home-manager.nixosModules.home-manager
+      ./src/home-manager/homes/linux/jaid.nix
+      ./src/nixos/common.nix
+      ./src/nixos/locales/en-de.nix
+      ./src/nixos/users/jaid.nix
+      ./src/nix/config.nix
+    ];
+    specialArgs = {
+      inherit pkgs;
+      inherit pkgsStable;
+      inherit pkgsUnstable;
+      inherit pkgsLatest;
+    };
   in {
-    nixosConfigurations.tower = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.tower = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
-      modules = [
-        home-manager.nixosModules.home-manager
-        ./src/homes/tower/jaid.nix
-        ./src/common.nix
-        ./src/locales/en-de.nix
-        ./src/users/jaid.nix
-        ./src/machines/tower/configuration.nix
-        ./src/machines/tower/hardware-configuration.nix
-        ./src/software/gnome.nix
-        ./src/software/desktop-apps.nix
-        ./src/packages/llama-cpp.nix
-        ./src/packages/ghostty.nix
-        ./src/no-ipv6.nix
-      ];
-      specialArgs = {
-        inherit pkgs;
-        inherit pkgsLatest;
-        inherit pkgsUnstable;
-      };
+      inherit specialArgs;
+      modules =
+        linuxModules
+        ++ [
+          ./src/home-manager/homes/tower/jaid.nix
+          ./src/nixos/machines/tower/configuration.nix
+          ./src/nixos/machines/tower/hardware-configuration.nix
+        ];
+    };
+    nixosConfigurations.vm = inputs.nixpkgs.lib.nixosSystem {
+      inherit system;
+      inherit specialArgs;
+      modules =
+        linuxModules
+        ++ [
+          ./src/home-manager/homes/vm/jaid.nix
+          ./src/nixos/machines/vm/configuration.nix
+          ./src/nixos/machines/vm/hardware-configuration.nix
+        ];
     };
   };
 }

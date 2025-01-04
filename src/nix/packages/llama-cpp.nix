@@ -1,5 +1,8 @@
-{ pkgs, pkgsLatest, ... }:
 {
+  pkgs,
+  pkgsLatest,
+  ...
+}: {
   environment.systemPackages = [
     (pkgsLatest.llama-cpp.overrideAttrs (finalAttributes: previousAttributes: {
       pname = "${previousAttributes.pname}-jaid";
