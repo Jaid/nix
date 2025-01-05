@@ -1,8 +1,4 @@
-{
-  pkgs,
-  pkgsUnstable,
-  ...
-}: {
+{pkgs, ...} @ inputs: {
   imports = [
     ../../../nixos/no-ipv6.nix
     ../../../nixos/software/gnome.nix
@@ -13,8 +9,10 @@
   };
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
-    (pkgsUnstable.callPackage ../../../nix/packages/llama-cpp.nix {})
-    pkgsUnstable.ghostty
+    (pkgs.callPackage ../../../nix/packages/llama-cpp.nix {
+      pkgs = inputs.pkgsLatestPersonal;
+    })
+    inputs.pkgsLatestPersonal.ghostty
     pkgs.parted
     pkgs.nvtopPackages.nvidia
     pkgs.grc

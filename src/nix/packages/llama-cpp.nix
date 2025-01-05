@@ -2,7 +2,6 @@
 {pkgs, ...}:
 pkgs.llama-cpp.overrideAttrs (finalAttributes: previousAttributes: {
   pname = "${previousAttributes.pname}-jaid";
-  meta.description = "${previousAttributes.meta.description} (optimized for AMD Zen 2 and Nvidia GeForce RTX 4070)";
   cmakeFlags =
     previousAttributes.cmakeFlags
     ++ [
@@ -18,6 +17,7 @@ pkgs.llama-cpp.overrideAttrs (finalAttributes: previousAttributes: {
       (pkgs.lib.cmakeFeature "GGML_RPC" "ON")
     ];
   env = rec {
+    # CFLAGS = "-march=znver2 -mtune=znver2 -O3"; # Not working
     CFLAGS = "-O3";
     CXXFLAGS = CFLAGS;
     NIX_CFLAGS_COMPILE = (previousAttributes.env.NIX_CFLAGS_COMPILE or "") + " " + CFLAGS;

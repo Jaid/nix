@@ -9,23 +9,34 @@
   };
   outputs = inputs: let
     system = "x86_64-linux";
+    cudaComputeCapability = "8.9";
+    cpuArch = "znver2";
     nixpkgsAttributes = {
       inherit system;
       config.allowUnfree = true;
     };
-    nixpkgsCudaAttributes =
-      {
-        config.cudaSupport = true;
-        config.cudaCapabilities = ["8.9"];
-        config.packageOverrides = pkgs: {
+    nixpkgsPersonalAttributes = {
+      inherit system;
+      config = {
+        hostPlatform.gcc.arch = cpuArch;
+        allowUnfree = true;
+        cudaSupport = true;
+        cudnnSupport = true;
+        cudaForwardCompat = false;
+        cudaEnableForwardCompat = false;
+        cudaCapabilities = [cudaComputeCapability];
+        rocmSupport = false;
+        packageOverrides = pkgs: {
           llama-cpp = inputs.llama-cpp.packages.${system}.cuda;
         };
-      }
-      // nixpkgsAttributes;
+      };
+    };
     pkgs = import inputs.nixpkgs nixpkgsAttributes;
-    pkgsStable = import inputs.nixpkgs nixpkgsCudaAttributes;
-    pkgsUnstable = import inputs.nixpkgs-unstable nixpkgsCudaAttributes;
-    pkgsLatest = import inputs.nixpkgs-latest nixpkgsCudaAttributes;
+    pkgsUnstable = import inputs.nixpkgs-unstable nixpkgsAttributes;
+    pkgsLatest = import inputs.nixpkgs-latest nixpkgsAttributes;
+    pkgsPersonal = import inputs.nixpkgs nixpkgsPersonalAttributes;
+    pkgsUnstablePersonal = import inputs.nixpkgs-unstable nixpkgsPersonalAttributes;
+    pkgsLatestPersonal = import inputs.nixpkgs-latest nixpkgsPersonalAttributes;
     linuxModules = [
       inputs.home-manager.nixosModules.home-manager
       ./src/home-manager/homes/linux/jaid.nix
@@ -36,9 +47,11 @@
     ];
     specialArgs = {
       inherit pkgs;
-      inherit pkgsStable;
       inherit pkgsUnstable;
       inherit pkgsLatest;
+      inherit pkgsPersonal;
+      inherit pkgsUnstablePersonal;
+      inherit pkgsLatestPersonal;
     };
   in {
     nixosConfigurations.tower = inputs.nixpkgs.lib.nixosSystem {
