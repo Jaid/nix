@@ -65,16 +65,5 @@
           ./src/nixos/machines/tower/hardware-configuration.nix
         ];
     };
-    nixosConfigurations.vm = inputs.nixpkgs.lib.nixosSystem {
-      inherit system;
-      inherit specialArgs;
-      modules =
-        linuxModules
-        ++ [
-          ./src/home-manager/homes/vm/jaid.nix
-          ./src/nixos/machines/vm/configuration.nix
-          ./src/nixos/machines/vm/hardware-configuration.nix
-        ];
-    };
   };
 }

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   imports = [
     ../linux/jaid.nix
   ];
@@ -25,9 +25,9 @@
         sshCommand = ssh -i /home/jaid/.ssh/id_github
       '';
       */
-      #file."git/tsconfig.json".source = ./.resources/tsconfig.json;
-      #file."git/.yarnrc.yml".source = ./.resources/.yarnrc.yml;
-      #file."git/.browserslistrc".source = ./.resources/.browserslistrc;
+      file."git/tsconfig.json".source = ./.resources/tsconfig.json;
+      file."git/.yarnrc.yml".source = ./.resources/.yarnrc.yml;
+      file."git/.browserslistrc".source = ./.resources/.browserslistrc;
     };
   };
 }
