@@ -47,6 +47,7 @@
       ./src/nixos/modules/enable_ipv6.nix
       ./src/nixos/modules/xnview.nix
       ./src/nixos/modules/qemu.nix
+      ./src/nixos/modules/gnome-wayland
     ];
     specialArgs = {
       inherit pkgs;

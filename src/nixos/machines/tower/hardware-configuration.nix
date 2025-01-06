@@ -6,16 +6,7 @@
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
   boot.kernelModules = ["kvm-amd"];
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.graphics = {
-    enable = true;
-  };
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = false;
-  };
+  gnome-wayland.nvidia = true;
   fileSystems."/" = {
     fsType = "ext4";
     device = "/dev/disk/by-label/root";
