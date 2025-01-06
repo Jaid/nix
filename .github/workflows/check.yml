@@ -12,7 +12,7 @@ jobs:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
     - run: nix config show
     - shell: nix shell --quiet github:NixOS/nixpkgs/nixos-unstable#yq github:NixOS/nixpkgs/nixos-unstable#bat --command bash {0}
-      run: nix flake info --json | yq --yaml-output --yaml-output-grammar-version 1.2 | bat --language yaml --pager '' --plain --force-colorization
+      run: nix flake metadata --json | yq --yaml-output --yaml-output-grammar-version 1.2 | bat --language yaml --pager '' --plain --force-colorization
     - run: nix flake show
     - run: nix flake check --verbose
     - run: nix eval --impure --json --expr '(builtins.getFlake (toString ./.)).outputs.nixosConfigurations.tower.config.system.nixos'

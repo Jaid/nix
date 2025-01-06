@@ -64,7 +64,7 @@
           ./src/nixos/machines/tower/configuration.nix
           ./src/nixos/machines/tower/hardware-configuration.nix
           {
-            config.disableIpv6 = true;
+            config.disableIpv6 = false;
           }
         ];
     };
