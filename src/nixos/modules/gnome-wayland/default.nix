@@ -66,8 +66,16 @@
         input.pkgsLatest.nerd-fonts.jetbrains-mono
         input.pkgsLatest.nerd-fonts.symbols-only
         input.pkgsPersonal.shantell-sans
-        pkgs.inter-nerdfont
+        input.pkgsPersonal.geologica
         pkgs.inter
+        pkgs.roboto-flex
+        pkgs.iosevka
+        pkgs.quicksand
+        pkgs.pretendard
+        pkgs.noto-fonts
+        pkgs.rubik
+        pkgs.lexend
+        pkgs.montserrat
       ];
       fontconfig = {
         hinting.style = "full";

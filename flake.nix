@@ -29,6 +29,7 @@
         packageOverrides = pkgs: {
           llama-cpp = inputs.llama-cpp.packages.${system}.cuda;
           shantell-sans = (pkgs.callPackage ./src/nix/packages/shantell-sans.nix {});
+          geologica = (pkgs.callPackage ./src/nix/packages/geologica.nix {});
         };
       };
     };
