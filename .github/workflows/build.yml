@@ -13,7 +13,7 @@ jobs:
     - shell: nix shell --quiet github:NixOS/nixpkgs/nixos-unstable#gdu --command bash -o errexit -o pipefail -o nounset -o xtrace {0}
       run: |-
         gdu --non-interactive --si --summarize /nix/store
-        gdu --non-interactive --si /nix/store | head -n 10
+        gdu --non-interactive --si /nix/store
     - run: nix build .#nixosConfigurations.tower.config.system.build.vm --option accept-flake-config true
       env:
         NIXPKGS_ALLOW_UNFREE: 1
