@@ -44,6 +44,7 @@
     pkgs.libwebp
     pkgs.libjxl
   ];
+  xnview.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "tower";
   virtualisation.libvirtd.enable = true;

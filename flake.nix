@@ -45,6 +45,7 @@
       ./src/nixos/users/jaid.nix
       ./src/nix/config.nix
       ./src/nixos/modules/enable_ipv6.nix
+      ./src/nixos/modules/xnview.nix
     ];
     specialArgs = {
       inherit pkgs;
