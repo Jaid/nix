@@ -52,8 +52,7 @@
     };
     services.xserver.videoDrivers = lib.mkIf input.config.gnome-wayland.nvidia ["nvidia"];
     hardware.nvidia = lib.mkIf input.config.gnome-wayland.nvidia {
-      enable = true;
-      modesetting = true;
+      modesetting.enable = true;
       open = true;
       nvidiaSettings = false;
     };
@@ -62,14 +61,14 @@
     users.users.jaid.extraGroups = ["networkmanager" "video"];
     fonts = {
       packages = [
-        pkgs.nerdfonts
-        {
+        (pkgs.callPackage pkgs.nerdfonts {
           fonts = [
             "15kkgx6i4f7zn6fdaw2dqqw3hcpl3pi4cy4g5jx67af8qlhqarrb"
             "01j0rkgrix7mdp9fx0y8zzk1kh40yfcp932p0r5y666aq4mq5y3c"
             "088vi947kavk1pkvbl68kv7nz84yvfkj725n2zn7ypq354kkm92n"
           ];
-        }
+        })
+        pkgs.nerdfonts
         pkgs.inter-nerdfont
         pkgs.inter
         pkgs.source-sans-pro

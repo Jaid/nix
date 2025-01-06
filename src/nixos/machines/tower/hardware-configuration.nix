@@ -5,7 +5,6 @@
 }: {
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
   boot.kernelModules = ["kvm-amd"];
-  services.xserver.videoDrivers = ["nvidia"];
   gnome-wayland.nvidia = true;
   fileSystems."/" = {
     fsType = "ext4";
