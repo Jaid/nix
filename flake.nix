@@ -44,7 +44,7 @@
       ./src/nixos/locales/en-de.nix
       ./src/nixos/users/jaid.nix
       ./src/nix/config.nix
-      ./src/nixos/modules/disableIpv6.nix
+      ./src/nixos/modules/disable_ipv6.nix
     ];
     specialArgs = {
       inherit pkgs;
@@ -64,7 +64,7 @@
           ./src/nixos/machines/tower/configuration.nix
           ./src/nixos/machines/tower/hardware-configuration.nix
           {
-            config.my-modules.ipv6.enable = false;
+            config.disableIpv6 = true;
           }
         ];
     };
