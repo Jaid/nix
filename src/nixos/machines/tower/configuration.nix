@@ -1,6 +1,5 @@
 {pkgs, ...} @ inputs: {
   imports = [
-    ../../../nixos/no-ipv6.nix
     ../../../nixos/software/gnome.nix
   ];
   boot.loader = {

@@ -44,6 +44,7 @@
       ./src/nixos/locales/en-de.nix
       ./src/nixos/users/jaid.nix
       ./src/nix/config.nix
+      ./src/nixos/modules/disableIpv6.nix
     ];
     specialArgs = {
       inherit pkgs;
@@ -57,12 +58,14 @@
     nixosConfigurations.tower = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       inherit specialArgs;
-      modules =
-        linuxModules
+      modules = linuxModules
         ++ [
           ./src/home-manager/homes/tower/jaid.nix
           ./src/nixos/machines/tower/configuration.nix
           ./src/nixos/machines/tower/hardware-configuration.nix
+          {
+            config.my-modules.ipv6.enable = false;
+          }
         ];
     };
   };
