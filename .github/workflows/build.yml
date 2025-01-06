@@ -10,14 +10,14 @@ jobs:
     - uses: cachix/install-nix-action@v30
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
-    - shell: nix shell --quiet github:NixOS/nixpkgs/nixos-unstable#gdu --command bash {0}
+    - shell: nix shell --quiet github:NixOS/nixpkgs/nixos-unstable#gdu --command bash -o errexit -o pipefail -o nounset -o xtrace {0}
       run: |-
-        gdu --summarize --si /nix/store
+        gdu --non-interactive --si --summarize /nix/store
         gdu --non-interactive --si /nix/store | head -n 10
     - run: nix build .#nixosConfigurations.tower.config.system.build.vm --option accept-flake-config true
       env:
         NIXPKGS_ALLOW_UNFREE: 1
-    - shell: nix shell --quiet github:NixOS/nixpkgs/nixos-unstable#gdu --command bash {0}
+    - shell: nix shell --quiet github:NixOS/nixpkgs/nixos-unstable#gdu --command bash -o errexit -o pipefail -o nounset -o xtrace {0}
       run: |-
-        gdu --summarize --si /nix/store
+        gdu --non-interactive --si --summarize /nix/store
         gdu --non-interactive --si /nix/store | head -n 10
