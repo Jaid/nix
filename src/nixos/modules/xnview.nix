@@ -6,7 +6,7 @@
   };
   config = pkgs.lib.mkIf (input.config.xnview.enable) {
     environment.systemPackages = [
-      (pkgs.callPackage ../../../nix/packages/xnview.nix {})
+      (pkgs.callPackage ../../nix/packages/xnview.nix {})
     ];
   };
 }

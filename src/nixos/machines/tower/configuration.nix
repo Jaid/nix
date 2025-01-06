@@ -41,9 +41,9 @@
     pkgs.libwebp
     pkgs.libjxl
   ];
-  config.ipv6.enable = false;
-  config.xnview.enable = true;
-  config.qemu.enable = true;
+  ipv6.enable = false;
+  xnview.enable = true;
+  qemu.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "tower";
   environment.sessionVariables = {
