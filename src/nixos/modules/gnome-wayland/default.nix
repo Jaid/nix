@@ -65,6 +65,7 @@
         input.pkgsLatest.nerd-fonts.ubuntu-mono
         input.pkgsLatest.nerd-fonts.jetbrains-mono
         input.pkgsLatest.nerd-fonts.symbols-only
+        input.pkgsPersonal.shantell-sans
         pkgs.inter-nerdfont
         pkgs.inter
       ];

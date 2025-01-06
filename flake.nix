@@ -28,7 +28,7 @@
         rocmSupport = false;
         packageOverrides = pkgs: {
           llama-cpp = inputs.llama-cpp.packages.${system}.cuda;
-          shantell-sans = (import ./src/nix/packages/shantell-sans.nix { inherit pkgs; });
+          shantell-sans = (pkgs.callPackage ./src/nix/packages/shantell-sans.nix {});
         };
       };
     };
@@ -62,14 +62,12 @@
     nixosConfigurations.tower = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       inherit specialArgs;
-      modules = commonModules
+      modules =
+        commonModules
         ++ [
           ./src/home-manager/homes/tower/jaid.nix
           ./src/nixos/machines/tower/configuration.nix
           ./src/nixos/machines/tower/hardware-configuration.nix
-          {
-            environment.systemPackages = [ pkgsLatestPersonal.shantell-sans ];
-          }
         ];
     };
   };
