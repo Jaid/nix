@@ -1,0 +1,2 @@
+#!/usr/bin/env -S bash -o errexit -o pipefail -o nounset
+sudo nixos-rebuild --option auto-optimise-store true --option extra-experimental-features flakes --option extra-experimental-features nix-command --option accept-flake-config true switch --flake "github:Jaid/nix#$(hostname)"

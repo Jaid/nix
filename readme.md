@@ -25,15 +25,15 @@ sudo nixos-install --flake github:Jaid/nix#tower --no-write-lock-file --impure
 
 ### Rebuilding the running NixOS system
 
-```bash -o errexit -o pipefail -o nounset
-#!/usr/bin/env bash
+```bash 
+#!/usr/bin/env -S bash -o errexit -o pipefail -o nounset
 sudo nixos-rebuild --option auto-optimise-store true --option extra-experimental-features flakes --option extra-experimental-features nix-command --option accept-flake-config true switch --flake "github:Jaid/nix#$(hostname)"
 ```
 
 ### Test system in a QEMU VM
 
 ```bash
-#!/usr/bin/env bash -o errexit -o pipefail -o nounset
+#!/usr/bin/env -S bash -o errexit -o pipefail -o nounset
 target=tower
 tempFolder=$(mktemp --directory)
 nix build "Jaid/nix#nixosConfigurations.$target.config.system.build.vm" --option auto-optimise-store true --option accept-flake-config true --out-link "$tempFolder/link"
@@ -49,8 +49,8 @@ nix flake metadata github:Jaid/nix --json | yq --yaml-output --yaml-output-gramm
 
 ### Check flake
 
-```bash -o errexit -o pipefail -o nounset
-#!/usr/bin/env bash
+```bash 
+#!/usr/bin/env -S bash -o errexit -o pipefail -o nounset
 nix flake check github:Jaid/nix --verbose --show-trace
 ```
 
