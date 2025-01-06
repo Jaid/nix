@@ -28,6 +28,7 @@
         rocmSupport = false;
         packageOverrides = pkgs: {
           llama-cpp = inputs.llama-cpp.packages.${system}.cuda;
+          shantell-sans = (import ./src/nix/packages/shantell-sans.nix { inherit pkgs; });
         };
       };
     };
@@ -66,6 +67,9 @@
           ./src/home-manager/homes/tower/jaid.nix
           ./src/nixos/machines/tower/configuration.nix
           ./src/nixos/machines/tower/hardware-configuration.nix
+          {
+            environment.systemPackages = [ pkgsLatestPersonal.shantell-sans ];
+          }
         ];
     };
   };

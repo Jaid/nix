@@ -56,22 +56,17 @@
       open = true;
       nvidiaSettings = false;
     };
-    boot.kernelParams = lib.mkIf input.config.gnome-wayland.nvidia ["nvidia-drm.modeset=1"];
     services.gnome.core-utilities.enable = false;
     users.users.jaid.extraGroups = ["networkmanager" "video"];
     fonts = {
       packages = [
-        (pkgs.callPackage pkgs.nerdfonts {
-          fonts = [
-            "15kkgx6i4f7zn6fdaw2dqqw3hcpl3pi4cy4g5jx67af8qlhqarrb"
-            "01j0rkgrix7mdp9fx0y8zzk1kh40yfcp932p0r5y666aq4mq5y3c"
-            "088vi947kavk1pkvbl68kv7nz84yvfkj725n2zn7ypq354kkm92n"
-          ];
-        })
-        pkgs.nerdfonts
+        input.pkgsLatest.nerd-fonts.fira-mono
+        input.pkgsLatest.nerd-fonts.ubuntu
+        input.pkgsLatest.nerd-fonts.ubuntu-mono
+        input.pkgsLatest.nerd-fonts.jetbrains-mono
+        input.pkgsLatest.nerd-fonts.symbols-only
         pkgs.inter-nerdfont
         pkgs.inter
-        pkgs.source-sans-pro
       ];
       fontconfig = {
         hinting.style = "full";
