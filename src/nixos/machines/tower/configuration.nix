@@ -1,7 +1,4 @@
 {pkgs, ...} @ inputs: {
-  imports = [
-    ../../../nixos/software/gnome.nix
-  ];
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
@@ -47,8 +44,5 @@
   gnome-wayland.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "tower";
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
   home-manager.backupFileExtension = "bak";
 }
