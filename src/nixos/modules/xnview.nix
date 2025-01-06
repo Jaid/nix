@@ -4,7 +4,7 @@
     default = false;
     description = "Enable XNView MP";
   };
-  config = pkgs.lib.mkIf (!input.config.xnview.enable) {
+  config = pkgs.lib.mkIf (input.config.xnview.enable) {
     environment.systemPackages = [
       (pkgs.callPackage ../../../nix/packages/xnview.nix {})
     ];

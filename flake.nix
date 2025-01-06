@@ -37,7 +37,7 @@
     pkgsPersonal = import inputs.nixpkgs nixpkgsPersonalAttributes;
     pkgsUnstablePersonal = import inputs.nixpkgs-unstable nixpkgsPersonalAttributes;
     pkgsLatestPersonal = import inputs.nixpkgs-latest nixpkgsPersonalAttributes;
-    linuxModules = [
+    commonModules = [
       inputs.home-manager.nixosModules.home-manager
       ./src/home-manager/homes/linux/jaid.nix
       ./src/nixos/common.nix
@@ -46,6 +46,7 @@
       ./src/nix/config.nix
       ./src/nixos/modules/enable_ipv6.nix
       ./src/nixos/modules/xnview.nix
+      ./src/nixos/modules/qemu.nix
     ];
     specialArgs = {
       inherit pkgs;
@@ -59,14 +60,11 @@
     nixosConfigurations.tower = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       inherit specialArgs;
-      modules = linuxModules
+      modules = commonModules
         ++ [
           ./src/home-manager/homes/tower/jaid.nix
           ./src/nixos/machines/tower/configuration.nix
           ./src/nixos/machines/tower/hardware-configuration.nix
-          {
-            config.ipv6.enable = false;
-          }
         ];
     };
   };

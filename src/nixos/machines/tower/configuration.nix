@@ -17,8 +17,6 @@
     pkgs.grc
     pkgs.nixd
     pkgs.alejandra
-    pkgs.libvirt
-    pkgs.qemu
     pkgs.nodejs_latest
     pkgs.yarn-berry
     pkgs.parted
@@ -29,7 +27,6 @@
     pkgs.shfmt
     pkgs.btop
     pkgs.thunderbird
-    pkgs.powershell
     pkgs.pngquant
     pkgs.streamlink
     pkgs.deno
@@ -44,11 +41,11 @@
     pkgs.libwebp
     pkgs.libjxl
   ];
-  xnview.enable = true;
+  config.ipv6.enable = false;
+  config.xnview.enable = true;
+  config.qemu.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "tower";
-  virtualisation.libvirtd.enable = true;
-  users.users.jaid.extraGroups = ["libvirt"];
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
   };
