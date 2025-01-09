@@ -3,17 +3,17 @@
   lib,
   ...
 } @ input: {
-  options.gnome-wayland.enable = pkgs.lib.mkOption {
+  options.jaidCustomModules.gnome-wayland.enable = pkgs.lib.mkOption {
     type = pkgs.lib.types.bool;
     default = false;
     description = "Enable Gnome/Wayland desktop";
   };
-  options.gnome-wayland.nvidia = pkgs.lib.mkOption {
+  options.jaidCustomModules.gnome-wayland.nvidia = pkgs.lib.mkOption {
     type = pkgs.lib.types.bool;
     default = false;
     description = "Enable Nvidia support for Gnome/Wayland desktop";
   };
-  config = pkgs.lib.mkIf (input.config.gnome-wayland.enable) {
+  config = pkgs.lib.mkIf (input.config.jaidCustomModules.gnome-wayland.enable) {
     environment.systemPackages = [
       pkgs.dconf-editor
       pkgs.gnome-tweaks
@@ -50,8 +50,8 @@
       XDG_SESSION_TYPE = "wayland";
       NIXOS_OZONE_WL = "1";
     };
-    services.xserver.videoDrivers = lib.mkIf input.config.gnome-wayland.nvidia ["nvidia"];
-    hardware.nvidia = lib.mkIf input.config.gnome-wayland.nvidia {
+    services.xserver.videoDrivers = lib.mkIf input.config.jaidCustomModules.gnome-wayland.nvidia ["nvidia"];
+    hardware.nvidia = lib.mkIf input.config.jaidCustomModules.gnome-wayland.nvidia {
       modesetting.enable = true;
       open = true;
       nvidiaSettings = false;

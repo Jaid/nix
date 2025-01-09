@@ -38,10 +38,12 @@
     pkgs.libwebp
     pkgs.libjxl
   ];
-  ipv6.enable = false;
-  xnview.enable = true;
-  qemu.enable = true;
-  gnome-wayland.enable = true;
+  jaidCustomModules = {
+    ipv6.enable = false;
+    xnview.enable = true;
+    qemu.enable = true;
+    gnome-wayland.enable = true;
+  };
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "tower";
   home-manager.backupFileExtension = "bak";

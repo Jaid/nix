@@ -1,10 +1,10 @@
 {pkgs, ...} @ input: {
-  options.ipv6.enable = pkgs.lib.mkOption {
+  options.jaidCustomModules.ipv6.enable = pkgs.lib.mkOption {
     type = pkgs.lib.types.bool;
     default = true;
     description = "Enable IPv6; disabling it can be useful for machines that are in a network without IPv6 support";
   };
-  config = pkgs.lib.mkIf (!input.config.ipv6.enable) {
+  config = pkgs.lib.mkIf (!input.config.jaidCustomModules.ipv6.enable) {
     networking.enableIPv6 = false;
     boot.kernelParams = ["ipv6.disable=1"];
     boot.kernel.sysctl = {

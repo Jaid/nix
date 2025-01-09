@@ -5,7 +5,9 @@
 }: {
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
   boot.kernelModules = ["kvm-amd"];
-  gnome-wayland.nvidia = true;
+  jaidCustomModules = {
+    gnome-wayland.nvidia = true;
+  };
   fileSystems."/" = {
     fsType = "ext4";
     device = "/dev/disk/by-label/root";
