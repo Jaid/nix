@@ -14,7 +14,7 @@
     pkgs.grc
     pkgs.nixd
     pkgs.alejandra
-    pkgs.nodejs_latest
+    pkgs.node_23
     pkgs.yarn-berry
     pkgs.parted
     pkgs.mpv-unwrapped
