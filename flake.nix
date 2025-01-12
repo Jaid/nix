@@ -50,6 +50,7 @@
       ./src/nixos/modules/xnview.nix
       ./src/nixos/modules/qemu.nix
       ./src/nixos/modules/gnome-wayland
+      ./src/nixos/modules/eza.nix
     ];
     specialArgs = {
       inherit pkgs;

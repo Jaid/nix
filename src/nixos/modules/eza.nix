@@ -8,11 +8,8 @@
     environment.systemPackages = [
       pkgs.eza
     ];
-    programs.fish = {
-      enable = true;
-      shellAliases = pkgs.lib.mkIf (input.config.programs.fish.enable) {
-        l = "eza --all --group-directories-first --long --icons";
-      };
+    programs.fish.shellAliases = pkgs.lib.mkIf (input.config.programs.fish.enable) {
+      l = "eza --all --group-directories-first --long --icons";
     };
   };
 }
