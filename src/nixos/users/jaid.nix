@@ -19,6 +19,7 @@
     shell = pkgs.fish;
   };
   users.groups.jaid.gid = 1000;
+  nix.trustedUsers = ["jaid"];
   services.openssh = {
     enable = true;
   };

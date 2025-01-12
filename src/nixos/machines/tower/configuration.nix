@@ -5,9 +5,9 @@
   };
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
-    (pkgs.callPackage ../../../nix/packages/llama-cpp.nix {
-      pkgs = inputs.pkgsLatestPersonal;
-    })
+   # (pkgs.callPackage ../../../nix/packages/llama-cpp.nix {
+   #   pkgs = inputs.pkgsLatestPersonal;
+    #})
     inputs.pkgsLatestPersonal.ghostty
     pkgs.parted
     pkgs.nvtopPackages.nvidia

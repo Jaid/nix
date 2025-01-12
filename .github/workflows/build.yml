@@ -1,0 +1,21 @@
+name: Build
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v30
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    - shell: nix shell --quiet github:NixOS/nixpkgs/nixos-unstable#gdu --command bash -o errexit -o pipefail -o nounset -o xtrace {0}
+      run: |-
+        gdu --non-interactive --si --summarize /nix/store
+        gdu --non-interactive --si /nix/store
+    - run: nix build .#nixosConfigurations.tower.config.system.build.vm --option accept-flake-config true
+      env:
+        NIXPKGS_ALLOW_UNFREE: 1
+    - shell: nix shell --quiet github:NixOS/nixpkgs/nixos-unstable#gdu --command bash -o errexit -o pipefail -o nounset -o xtrace {0}
+      run: |-
+        gdu --non-interactive --si --summarize /nix/store
+        gdu --non-interactive --si /nix/store
