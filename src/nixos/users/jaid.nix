@@ -24,6 +24,9 @@
   };
   programs.fish = {
     enable = true;
+    shellAliases = pkgs.lib.mkIf (input.config.programs.fish.enable) {
+      l = "eza --all --group-directories-first --long --icons";
+    };
   };
   #services.getty.autologinUser = "jaid";
 }
