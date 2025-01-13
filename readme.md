@@ -68,3 +68,13 @@ nix shell --quiet github:NixOS/nixpkgs/nixos-unstable#gdu --command gdu --non-in
 #!/usr/bin/env -S nix shell --quiet github:NixOS/nixpkgs/nixos-unstable#dconf github:NixOS/nixpkgs/nixos-unstable#bat --command bash -o errexit -o pipefail -o nounset
 dconf dump / | bat --paging never --language ini --decorations never
 ```
+
+## Links
+
+### Docs
+
+- [nix.dev](https://nix.dev/reference) ([source](https://github.com/NixOS/nix.dev/tree/master/source))
+- [Nix manual](https://nix.dev/manual/nix/rolling)
+- [NixOS manual](https://nixos.org/manual/nixos/stable)
+- [nixpkgs manual](https://nixos.org/manual/nixpkgs/stable)
+- [Home-Manager manual](https://nix-community.github.io/home-manager)
