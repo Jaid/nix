@@ -1,11 +1,11 @@
-{pkgs,lib, ...} @ input: {
+{lib, ...} @ input: {
   options.jaidCustomModules.performance.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
     description = "Enable various performance optimizations";
   };
   options.jaidCustomModules.performance.cpuVendor = lib.mkOption {
-    type = lib.types.nullOr lib.types.enum ["amd" "intel"];
+    type = lib.types.nullOr (lib.types.enum ["amd" "intel"]);
     default = null;
     description = "CPU vendor";
   };
