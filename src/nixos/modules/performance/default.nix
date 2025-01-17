@@ -4,9 +4,9 @@
     default = true;
     description = "Enable various performance optimizations";
   };
-  options.jaidCustomModules.performance.cpu = pkgs.lib.mkOption {
-    type = pkgs.lib.types.enum ["amd" "intel" ""];
-    default = "";
+  options.jaidCustomModules.performance.cpuVendor = pkgs.lib.mkOption {
+    type = pkgs.lib.types.enum ["amd" "intel"];
+    default = null;
     description = "CPU vendor";
   };
   options.jaidCustomModules.performance.unhinged = pkgs.lib.mkOption {
@@ -19,7 +19,7 @@
     boot.kernelParams = pkgs.lib.mkMerge [
       ["quiet"]
       (pkgs.lib.mkIf input.config.jaidCustomModules.performance.unhinged ["mitigations=off"])
-      (pkgs.lib.mkIf (input.config.jaidCustomModules.performance.cpu == "amd") ["amd_pstate=active"])
+      (pkgs.lib.mkIf (input.config.jaidCustomModules.performance.cpuVendor == "amd") ["amd_pstate=active"])
     ];
     boot.kernel.sysctl = {
       "vm.swappiness" = 1;
