@@ -74,6 +74,7 @@
           {
             hardware.sane.enable = true;
             jaidCustomModules.performance.unhinged = true;
+            jaidCustomModules.performance.cpuVendor = "amd";
           }
         ];
     };

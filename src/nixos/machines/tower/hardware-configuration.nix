@@ -1,3 +1,14 @@
+# Hardware:
+# - GIGABYTE B550 AORUS Elite
+# - AMD Ryzen 9 3900X
+# - Nvidia GeForce RTX 4070 (12 gb)
+# - 2× G.Skill Trident Z Neo DIMM (16 gb, DDR4-3600, CL 16-19-19-39)
+# - Acer XF240Hbmjdpr (1920×1080, 144 hz, 8 bit, 24″)
+# - Wacom Cintiq Pro 13 (1920×1080, 60 hz, 8 bit, 13″)
+# - InnoCN 32C1U (3840×2160, 60 hz, 10 bit HDR, 31.5″)
+# - Crucial CT4000P3PSSD8 (4 tb, NVMe 1.4)
+# - Corsair Gaming K63 (DE layout)
+# - Roccat Burst Pro Air
 {
   config,
   lib,
