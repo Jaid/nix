@@ -7,8 +7,11 @@
 # - Wacom Cintiq Pro 13 (1920×1080, 60 hz, 8 bit, 13″)
 # - InnoCN 32C1U (3840×2160, 60 hz, 10 bit HDR, 31.5″)
 # - Crucial CT4000P3PSSD8 (4 tb, NVMe 1.4)
+# Peripherals:
 # - Corsair Gaming K63 (DE layout)
 # - Roccat Burst Pro Air
+# Environment:
+# - Arch Linux
 {
   config,
   lib,
@@ -22,6 +25,7 @@
     performance.cpuVendor = "amd";
   };
   hardware.sane.enable = true;
+  services.avahi.enable = true;
   users.users.jaid.extraGroups = ["lp" "scanner"];
   fileSystems."/" = {
     fsType = "ext4";
