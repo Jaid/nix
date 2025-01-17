@@ -1,25 +1,25 @@
-{pkgs, ...} @ input: {
-  options.jaidCustomModules.performance.enable = pkgs.lib.mkOption {
-    type = pkgs.lib.types.bool;
+{pkgs,lib, ...} @ input: {
+  options.jaidCustomModules.performance.enable = lib.mkOption {
+    type = lib.types.bool;
     default = true;
     description = "Enable various performance optimizations";
   };
-  options.jaidCustomModules.performance.cpuVendor = pkgs.lib.mkOption {
-    type = pkgs.lib.types.enum ["amd" "intel"];
+  options.jaidCustomModules.performance.cpuVendor = lib.mkOption {
+    type = lib.types.nullOr lib.types.enum ["amd" "intel"];
     default = null;
     description = "CPU vendor";
   };
-  options.jaidCustomModules.performance.unhinged = pkgs.lib.mkOption {
-    type = pkgs.lib.types.bool;
+  options.jaidCustomModules.performance.unhinged = lib.mkOption {
+    type = lib.types.bool;
     default = false;
     description = "Enables additional performance optimizations, potentially sacrificing stability, security or hardware lifetime";
   };
-  config = pkgs.lib.mkIf (input.config.jaidCustomModules.performance.enable) {
+  config = lib.mkIf (input.config.jaidCustomModules.performance.enable) {
     powerManagement.cpuFreqGovernor = "performance";
-    boot.kernelParams = pkgs.lib.mkMerge [
+    boot.kernelParams = lib.mkMerge [
       ["quiet"]
-      (pkgs.lib.mkIf input.config.jaidCustomModules.performance.unhinged ["mitigations=off"])
-      (pkgs.lib.mkIf (input.config.jaidCustomModules.performance.cpuVendor == "amd") ["amd_pstate=active"])
+      (lib.mkIf input.config.jaidCustomModules.performance.unhinged ["mitigations=off"])
+      (lib.mkIf (input.config.jaidCustomModules.performance.cpuVendor == "amd") ["amd_pstate=active"])
     ];
     boot.kernel.sysctl = {
       "vm.swappiness" = 1;
