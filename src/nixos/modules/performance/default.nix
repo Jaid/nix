@@ -12,8 +12,8 @@
   config = pkgs.lib.mkIf (input.config.jaidCustomModules.performance.enable) {
     powerManagement.cpuFreqGovernor = "performance";
     boot.kernelParams = pkgs.lib.mkIf input.config.jaidCustomModules.performance.unhinged ["mitigations=off" "quiet"];
-    vm.swappiness = 1;
     boot.kernel.sysctl = {
+      "vm.swappiness" = 1;
       "net.core.default_qdisc" = "fq";
       "net.ipv4.tcp_congestion_control" = "bbr";
       "kernel.sched_autogroup_enabled" = 0;
