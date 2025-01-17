@@ -22,6 +22,7 @@
     performance.cpuVendor = "amd";
   };
   hardware.sane.enable = true;
+  users.users.jaid.extraGroups = ["lp" "scanner"];
   fileSystems."/" = {
     fsType = "ext4";
     device = "/dev/disk/by-label/root";
