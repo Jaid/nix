@@ -51,6 +51,7 @@
       ./src/nixos/modules/qemu.nix
       ./src/nixos/modules/gnome-wayland
       ./src/nixos/modules/eza.nix
+      ./src/nixos/modules/performance
     ];
     specialArgs = {
       inherit pkgs;
@@ -72,6 +73,7 @@
           ./src/nixos/machines/tower/hardware-configuration.nix
           {
             hardware.sane.enable = true;
+            jaidCustomModules.performance.unhinged = true;
           }
         ];
     };
