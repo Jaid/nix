@@ -18,7 +18,10 @@
   boot.kernelModules = ["kvm-amd"];
   jaidCustomModules = {
     gnome-wayland.nvidia = true;
+    performance.unhinged = true;
+    performance.cpuVendor = "amd";
   };
+  hardware.sane.enable = true;
   fileSystems."/" = {
     fsType = "ext4";
     device = "/dev/disk/by-label/root";

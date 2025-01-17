@@ -71,11 +71,6 @@
           ./src/home-manager/homes/tower/jaid.nix
           ./src/nixos/machines/tower/configuration.nix
           ./src/nixos/machines/tower/hardware-configuration.nix
-          {
-            hardware.sane.enable = true;
-            jaidCustomModules.performance.unhinged = true;
-            jaidCustomModules.performance.cpuVendor = "amd";
-          }
         ];
     };
   };
