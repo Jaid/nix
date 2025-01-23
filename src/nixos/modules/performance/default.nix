@@ -17,7 +17,7 @@
   config = lib.mkIf (input.config.jaidCustomModules.performance.enable) {
     powerManagement.cpuFreqGovernor = "performance";
     boot.kernelParams = lib.mkMerge [
-      ["quiet"]
+      []
       (lib.mkIf input.config.jaidCustomModules.performance.unhinged ["mitigations=off"])
       (lib.mkIf (input.config.jaidCustomModules.performance.cpuVendor == "amd") ["amd_pstate=active"])
     ];
