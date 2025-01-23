@@ -5,9 +5,9 @@
   };
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
-   # (pkgs.callPackage ../../../nix/packages/llama-cpp.nix {
-   #   pkgs = inputs.pkgsLatestPersonal;
-    #})
+    (pkgs.callPackage ../../../nix/packages/llama-cpp.nix {
+      pkgs = inputs.pkgsLatestPersonal;
+    })
     inputs.pkgsLatestPersonal.ghostty
     pkgs.parted
     pkgs.nvtopPackages.nvidia
@@ -45,7 +45,7 @@
     gnome-wayland.enable = true;
     eza.enable = true;
   };
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
   networking.hostName = "tower";
   home-manager.backupFileExtension = "bak";
 }
