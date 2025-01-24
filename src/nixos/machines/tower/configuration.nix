@@ -37,6 +37,7 @@
     pkgs.optipng
     pkgs.libwebp
     pkgs.libjxl
+    pkgs.atuin
   ];
   jaidCustomModules = {
     ipv6.enable = false;
