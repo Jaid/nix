@@ -14,8 +14,8 @@
     pkgs.grc
     pkgs.nixd
     pkgs.alejandra
-    inputs.pksUnstable.nodejs_latest
-    inputs.pksUnstable.bun
+    inputs.pkgsUnstable.nodejs_latest
+    inputs.pkgsUnstable.bun
     pkgs.yarn-berry
     pkgs.parted
     pkgs.mpv-unwrapped
