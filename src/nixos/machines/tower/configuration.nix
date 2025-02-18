@@ -14,7 +14,8 @@
     pkgs.grc
     pkgs.nixd
     pkgs.alejandra
-    pkgs.nodejs_22
+    inputs.pksUnstable.nodejs_latest
+    inputs.pksUnstable.bun
     pkgs.yarn-berry
     pkgs.parted
     pkgs.mpv-unwrapped
@@ -46,7 +47,7 @@
     gnome-wayland.enable = true;
     eza.enable = true;
   };
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_6_13;
   networking.hostName = "tower";
   home-manager.backupFileExtension = "bak";
 }
