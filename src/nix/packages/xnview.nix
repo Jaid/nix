@@ -1,8 +1,8 @@
 # Based on: https://github.com/thomX75/nixos-modules/blob/main/XnViewMP/xnviewmp.nix
 {
   pkgs,
-  version ? "1.8.3",
-  sha256 ? "dGibPkzugkxP9x437eMc5hM+tQ4zBABoiM9UrqSSPWI=",
+  version ? "1.8.6",
+  sha256 ? "MJdVKU+Q4sB7B2W84of7aW/wK7g1oQN4E9Ss2v7mnrg=",
   ...
 }: let
   icon =
