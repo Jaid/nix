@@ -6,7 +6,7 @@
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
     (pkgs.callPackage ../../../nix/packages/llama-cpp.nix {
-      pkgs = inputs.pkgsLatestPersonal;
+      pkgs = inputs.pkgsUnstablePersonal;
     })
     inputs.pkgsLatestPersonal.ghostty
     pkgs.parted
