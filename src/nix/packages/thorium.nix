@@ -1,3 +1,4 @@
+# Check for updates at https://github.com/Alex313031/thorium/releases
 # Based on https://github.com/ethanthoma/nixos-config/blob/cdc15f5ffeb95bcf31345f641a4a0703ac6005f6/host/common/thorium.nix
 {
   pkgs,
@@ -6,10 +7,10 @@
 }:
 pkgs.stdenv.mkDerivation rec {
   pname = "thorium-browser";
-  version = "128.0.6613.189";
+  version = "130.0.6723.174";
   src = pkgs.fetchurl {
     url = "https://github.com/Alex313031/thorium/releases/download/M${version}/thorium-browser_${version}_AVX2.deb";
-    hash = "sha256-oid72E4n9jAQsCUrztlyj56Gd0+pz735y6b5COMA4tg=";
+    hash = "sha256-TeDwx7Bqy0NSaNBMuzCf4O+rgWjB/tmIvDgJQnGVSGY=";
   };
   nativeBuildInputs = [
     pkgs.autoPatchelfHook
