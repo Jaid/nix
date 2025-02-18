@@ -20,7 +20,8 @@
     pkgs.parted
     pkgs.mpv-unwrapped
     pkgs.krita
-    pkgs.vscode
+    inputs.pkgsUnstable.brave
+    inputs.pkgsUnstable.vscode
     pkgs.shellcheck
     pkgs.shfmt
     pkgs.btop
