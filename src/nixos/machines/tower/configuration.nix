@@ -19,6 +19,7 @@
     inputs.pkgsUnstable.vscode
     inputs.pkgsUnstable.yt-dlp
     inputs.pkgsUnstable.zstd
+    inputs.pkgsUnstable.ffmpeg-full
     pkgs.alejandra
     pkgs.atuin
     pkgs.btop
