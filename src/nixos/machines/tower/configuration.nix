@@ -5,41 +5,38 @@
   };
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
-   # (pkgs.callPackage ../../../nix/packages/llama-cpp.nix {
-    #  pkgs = inputs.pkgsUnstablePersonal;
-    #})
+    # (pkgs.callPackage ../../../nix/packages/llama-cpp.nix {
+    #   pkgs = inputs.pkgsUnstablePersonal;
+    # })
     inputs.pkgsLatestPersonal.ghostty
-    pkgs.parted
-    pkgs.nvtopPackages.nvidia
-    pkgs.grc
-    pkgs.nixd
-    pkgs.alejandra
-    inputs.pkgsUnstable.nodejs_latest
-    inputs.pkgsUnstable.bun
-    pkgs.yarn-berry
-    pkgs.parted
-    pkgs.mpv-unwrapped
-    pkgs.krita
     inputs.pkgsUnstable.brave
+    inputs.pkgsUnstable.bun
+    inputs.pkgsUnstable.krita
+    inputs.pkgsUnstable.mpv-unwrapped
+    inputs.pkgsUnstable.nodejs_latest
+    inputs.pkgsUnstable.streamlink
+    inputs.pkgsUnstable.thunderbird
     inputs.pkgsUnstable.vscode
+    inputs.pkgsUnstable.yt-dlp
+    inputs.pkgsUnstable.zstd
+    pkgs.alejandra
+    pkgs.atuin
+    pkgs.btop
+    pkgs.gifski
+    pkgs.gmic
+    pkgs.grc
+    pkgs.libjxl
+    pkgs.libwebp
+    pkgs.nixd
+    pkgs.nvtopPackages.nvidia
+    pkgs.optipng
+    pkgs.parted
+    pkgs.pngquant
+    pkgs.scrcpy
     pkgs.shellcheck
     pkgs.shfmt
-    pkgs.btop
-    pkgs.thunderbird
-    pkgs.pngquant
-    pkgs.streamlink
-    pkgs.deno
-    pkgs.gmic
-    pkgs.scrcpy
-    pkgs.yt-dlp
-    pkgs.zstd
-    pkgs.gifski
-    pkgs.gnirehtet
     pkgs.upx
-    pkgs.optipng
-    pkgs.libwebp
-    pkgs.libjxl
-    pkgs.atuin
+    pkgs.yarn-berry
   ];
   jaidCustomModules = {
     ipv6.enable = false;
