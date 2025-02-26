@@ -20,6 +20,7 @@
       pkgs.gnomeExtensions.pano
       pkgs.gnomeExtensions.user-themes
       pkgs.gnomeExtensions.just-perfection
+      pkgs.gnomeExtensions.gtile
       pkgs.nautilus
       pkgs.wl-clipboard
     ];

@@ -20,7 +20,8 @@
     inputs.pkgsUnstable.yt-dlp
     inputs.pkgsUnstable.zstd
     inputs.pkgsUnstable.ffmpeg-full
-    pkgs.steam
+    inputs.pkgsUnstable.steam
+    inputs.pkgsUnstable.steam-run
     pkgs.alejandra
     pkgs.atuin
     pkgs.btop
@@ -46,6 +47,7 @@
     gnome-wayland.enable = true;
     eza.enable = true;
   };
+  programs.steam.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_6_12;
   networking.hostName = "tower";
   home-manager.backupFileExtension = "bak";
