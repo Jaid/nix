@@ -20,6 +20,7 @@
     inputs.pkgsUnstable.yt-dlp
     inputs.pkgsUnstable.zstd
     inputs.pkgsUnstable.ffmpeg-full
+    pkgs.steam
     pkgs.alejandra
     pkgs.atuin
     pkgs.btop
@@ -36,7 +37,6 @@
     pkgs.scrcpy
     pkgs.shellcheck
     pkgs.shfmt
-    pkgs.upx
     pkgs.yarn-berry
   ];
   jaidCustomModules = {
