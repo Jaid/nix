@@ -20,8 +20,6 @@
     inputs.pkgsUnstable.yt-dlp
     inputs.pkgsUnstable.zstd
     inputs.pkgsUnstable.ffmpeg-full
-    inputs.pkgsUnstable.steam
-    inputs.pkgsUnstable.steam-run
     pkgs.alejandra
     pkgs.atuin
     pkgs.btop
