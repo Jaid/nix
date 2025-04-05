@@ -46,7 +46,7 @@
     eza.enable = true;
   };
   programs.steam.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_6_13;
   networking.hostName = "tower";
   home-manager.backupFileExtension = "bak";
 }
