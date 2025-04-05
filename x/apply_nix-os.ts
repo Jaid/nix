@@ -21,4 +21,4 @@ await execa({
   stdin: "ignore",
   stdout: "inherit",
   stderr: "inherit",
-})`sudo nixos-rebuild switch --flake github:Jaid/nix ${optionsArgs}`
+})`sudo nixos-rebuild switch --flake . ${optionsArgs}`
