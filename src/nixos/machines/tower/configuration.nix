@@ -38,6 +38,7 @@
     pkgs.shfmt
     pkgs.yarn-berry
     pkgs.docker
+    pkgs.docker-compose
   ];
   jaidCustomModules = {
     ipv6.enable = false;
