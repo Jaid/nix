@@ -54,7 +54,7 @@
     services.xserver.videoDrivers = lib.mkIf input.config.jaidCustomModules.gnome-wayland.nvidia ["nvidia"];
     hardware.nvidia = lib.mkIf input.config.jaidCustomModules.gnome-wayland.nvidia {
       modesetting.enable = true;
-      open = true;
+      open = false;
       nvidiaSettings = false;
     };
     services.gnome.core-utilities.enable = false;
