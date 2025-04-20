@@ -59,7 +59,8 @@ pkgs.stdenv.mkDerivation rec {
     pkgs.vulkan-loader
     pkgs.wayland
     pkgs.wget
-    pkgs.xdg-utils
+    pkgs.xdg-util
+    pkgs.steam
     pkgs.xfce.exo
     pkgs.xorg.libxcb
     pkgs.xorg.libX11
