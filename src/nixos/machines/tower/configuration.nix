@@ -39,7 +39,6 @@
     pkgs.yarn-berry
     pkgs.docker
     pkgs.docker-compose
-    pkgs.steam
   ];
   jaidCustomModules = {
     ipv6.enable = false;
