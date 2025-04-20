@@ -56,6 +56,7 @@
       modesetting.enable = true;
       open = false;
       nvidiaSettings = false;
+      package = input.pkgsLatest.nvidiaPackages.stable;
     };
     services.gnome.core-utilities.enable = false;
     users.users.jaid.extraGroups = ["networkmanager" "video"];
