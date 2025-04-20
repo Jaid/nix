@@ -48,7 +48,7 @@
     gnome-wayland.enable = true;
     eza.enable = true;
   };
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "tower";
   home-manager.backupFileExtension = "bak";
 }
