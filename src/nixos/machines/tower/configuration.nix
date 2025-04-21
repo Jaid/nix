@@ -41,7 +41,6 @@
     pkgs.docker-compose
   ];
   jaidCustomModules = {
-    ipv6.enable = false;
     xnview.enable = true;
     qemu.enable = true;
     gnome-wayland.enable = true;

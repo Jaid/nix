@@ -46,7 +46,6 @@
       ./src/nixos/locales/en-de.nix
       ./src/nixos/users/jaid.nix
       ./src/nix/config.nix
-      ./src/nixos/modules/enable_ipv6.nix
       ./src/nixos/modules/xnview.nix
       ./src/nixos/modules/qemu.nix
       ./src/nixos/modules/gnome-wayland

@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    ../../../nixos/no-ipv6.nix
     ../../../nixos/software/gnome.nix
   ];
   environment.systemPackages = [
