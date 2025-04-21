@@ -49,4 +49,7 @@
   boot.kernelPackages = pkgs.linuxPackages_6_12;
   networking.hostName = "tower";
   home-manager.backupFileExtension = "bak";
+  services.power-profiles-daemon.enable = false;
+  services.dleyna-server.enable = false;
+  services.dleyna-renderer.enable = false;
 }
