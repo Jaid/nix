@@ -55,5 +55,4 @@
   services.gnome.tracker.enable = false;
   services.gnome.tracker-miners.enable = false;
   services.gnome.gnome-online-accounts.enable = false;
-  services.gnome.gnome-online-miners.enable = false;
 }
