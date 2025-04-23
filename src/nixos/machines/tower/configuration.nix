@@ -46,13 +46,13 @@
     gnome-wayland.enable = true;
     eza.enable = true;
   };
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
-  networking.hostName = "tower";
-  home-manager.backupFileExtension = "bak";
   services.power-profiles-daemon.enable = false;
   services.dleyna-server.enable = false;
   services.dleyna-renderer.enable = false;
   services.gnome.tracker.enable = false;
   services.gnome.tracker-miners.enable = false;
   services.gnome.gnome-online-accounts.enable = false;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  networking.hostName = "tower";
+  home-manager.backupFileExtension = "bak";
 }
