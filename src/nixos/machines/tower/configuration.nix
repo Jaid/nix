@@ -52,4 +52,8 @@
   services.power-profiles-daemon.enable = false;
   services.dleyna-server.enable = false;
   services.dleyna-renderer.enable = false;
+  services.gnome.tracker.enable = false;
+  services.gnome.tracker-miners.enable = false;
+  services.gnome.gnome-online-accounts.enable = false;
+  services.gnome.gnome-online-miners.enable = false;
 }
