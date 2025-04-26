@@ -39,7 +39,7 @@
   fileSystems."/mnt/windows" = {
     fsType = "ntfs";
     device = "/dev/disk/by-label/windows";
-    options = ["defaults" "ro" "x-mount.mkdir"];
+    options = ["defaults" "nofail" "ro" "x-mount.mkdir"];
   };
   fileSystems."/mnt/storage" = {
     device = "//10.0.0.22/storage";
@@ -71,6 +71,7 @@
   };
   hardware.bluetooth.enable = false;
   networking.useDHCP = lib.mkDefault true;
+  networking.interfaces.eno1.wakeOnLan.enable = true;
   nixpkgs.hostPlatform = "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
