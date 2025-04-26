@@ -34,12 +34,19 @@
   fileSystems."/boot" = {
     fsType = "vfat";
     device = "/dev/disk/by-label/boot";
-    options = ["fmask=0077" "dmask=0077"];
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
   };
   fileSystems."/mnt/windows" = {
     fsType = "ntfs";
     device = "/dev/disk/by-label/windows";
-    options = ["defaults" "nofail" "ro" "x-mount.mkdir"];
+    options = [
+      "defaults"
+      "nofail"
+      "x-mount.mkdir"
+    ];
   };
   fileSystems."/mnt/storage" = {
     device = "//10.0.0.22/storage";
