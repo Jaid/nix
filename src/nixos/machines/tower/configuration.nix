@@ -3,6 +3,7 @@
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
+  programs.steam.enable = true;
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
     # (pkgs.callPackage ../../../nix/packages/llama-cpp.nix {
