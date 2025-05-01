@@ -5,7 +5,7 @@
   };
   programs.steam.enable = true;
   programs.steam.package = inputs.pkgsUnstable.steam.override {
-     extraPkgs = [ pkgs.bumblebee pkgs.glxinfo ];
+     extraPkgs = pkgs: [ pkgs.bumblebee pkgs.glxinfo ];
   };
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
