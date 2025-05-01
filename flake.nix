@@ -15,6 +15,7 @@
       inherit system;
       config = {
         allowUnfree = true;
+        nvidia.acceptLicense = true;
       };
     };
     nixpkgsPersonalAttributes = {
@@ -22,6 +23,7 @@
       config = {
         hostPlatform.gcc.arch = cpuArch;
         allowUnfree = true;
+        nvidia.acceptLicense = true;
         cudaSupport = true;
         cudnnSupport = true;
         cudaForwardCompat = false;
