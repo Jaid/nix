@@ -13,7 +13,9 @@
     cpuArch = "znver2";
     nixpkgsAttributes = {
       inherit system;
-      config.allowUnfree = true;
+      config = {
+        allowUnfree = true;
+      };
     };
     nixpkgsPersonalAttributes = {
       inherit system;
