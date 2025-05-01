@@ -21,7 +21,7 @@
     inputs.pkgsUnstable.yt-dlp
     inputs.pkgsUnstable.zstd
     inputs.pkgsUnstable.ffmpeg-full
-    inputs.pkgsUnstable.kdenlive
+    inputs.pkgsUnstable.kdePackages.kdenlive
     pkgs.alejandra
     pkgs.atuin
     pkgs.btop
