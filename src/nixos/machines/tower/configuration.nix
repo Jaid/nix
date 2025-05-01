@@ -4,6 +4,10 @@
     efi.canTouchEfiVariables = true;
   };
   programs.steam.enable = true;
+  programs.steam.package = inputs.pkgsUnstable.steam.override {
+     withPrimus = true;
+     extraPkgs = [ pkgs.bumblebee pkgs.glxinfo ];
+  };
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
     # (pkgs.callPackage ../../../nix/packages/llama-cpp.nix {
