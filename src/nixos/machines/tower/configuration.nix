@@ -4,7 +4,7 @@
     efi.canTouchEfiVariables = true;
   };
   programs.steam.enable = true;
-  programs.steam.package = inputs.pkgsUnstable.steam.override {
+  programs.steam.package = pkgs.steam.override {
      withPrimus = true;
      extraPkgs = [ pkgs.bumblebee pkgs.glxinfo ];
   };
