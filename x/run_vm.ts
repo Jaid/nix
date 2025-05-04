@@ -1,7 +1,7 @@
 import {$} from 'execa'
 import * as path from 'node:path'
 import {temporaryDirectoryTask} from 'tempy'
-const hostname = 'tower'
+const hostname = 'tower-vm'
 await temporaryDirectoryTask(async tempFolder => {
   const tempDiskFile = path.join(tempFolder, 'disk.qcow2')
   const tempLinkFolder = path.join(tempFolder, 'link')

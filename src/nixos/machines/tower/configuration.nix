@@ -55,6 +55,5 @@
   services.gnome.tracker-miners.enable = false;
   services.gnome.gnome-online-accounts.enable = false;
   boot.kernelPackages = pkgs.linuxPackages_6_12;
-  networking.hostName = "tower";
   home-manager.backupFileExtension = "bak";
 }

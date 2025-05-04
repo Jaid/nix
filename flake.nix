@@ -12,6 +12,7 @@
       system ? "x86_64-linux",
       cudaComputeCapability ? "8.9",
       cpuArch ? "znver2",
+      isVm ? false,
       modules ? [],
     }: let
       nixpkgsAttributes = {
@@ -54,12 +55,15 @@
         inherit pkgsLatestPersonal;
       };
     in
-      inputs.nixpkgs.lib.nixosSystem {
+      builtins.trace "Building ${id} (${system}, ${cpuArch}, ${cudaComputeCapability})" inputs.nixpkgs.lib.nixosSystem {
         inherit system;
         inherit specialArgs;
         modules =
           modules
           ++ [
+            {
+              networking.hostName = id;
+            }
             inputs.home-manager.nixosModules.home-manager
             ./src/home-manager/homes/linux/jaid.nix
             ./src/home-manager/homes/${id}/jaid.nix
@@ -73,12 +77,23 @@
             ./src/nixos/modules/eza.nix
             ./src/nixos/modules/performance
             ./src/nixos/machines/${id}/configuration.nix
+          ]
+          ++ (if isVm then [
+
+          ] else [
             ./src/nixos/machines/${id}/hardware-configuration.nix
-          ];
+          ]);
       };
   in {
     nixosConfigurations.tower = makeMachine {
       id = "tower";
+    };
+    nixosConfiguration.tower-vm = makeMachine {
+      id = "tower-vm";
+      isVm = true;
+    };
+    nixosConfigurations.nas = makeMachine {
+      id = "nas";
     };
   };
 }

@@ -2,7 +2,7 @@
   config,
   lib,
   ...
-}: {
+} @ inputs :{
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
   boot.kernelModules = ["kvm-amd"];
   jaidCustomModules = {
@@ -65,6 +65,5 @@
   hardware.bluetooth.enable = false;
   networking.useDHCP = lib.mkDefault true;
   networking.interfaces.eno1.wakeOnLan.enable = true;
-  nixpkgs.hostPlatform = "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

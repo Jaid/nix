@@ -9,6 +9,5 @@
     efi.canTouchEfiVariables = true;
   };
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  networking.hostName = "nas";
   environment.etc."ssh/sshd_conf.d/allow_stream_local_forwarding.conf".text = "AllowStreamLocalForwarding yes";
 }
