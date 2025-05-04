@@ -30,8 +30,8 @@
         cudaCapabilities = [cudaComputeCapability];
         rocmSupport = false;
         packageOverrides = pkgs: {
-          shantell-sans = (pkgs.callPackage ./src/nix/packages/shantell-sans.nix {});
-          geologica = (pkgs.callPackage ./src/nix/packages/geologica.nix {});
+          shantell-sans = pkgs.callPackage ./src/nix/packages/shantell-sans.nix {};
+          geologica = pkgs.callPackage ./src/nix/packages/geologica.nix {};
         };
       };
     };
@@ -41,19 +41,6 @@
     pkgsPersonal = import inputs.nixpkgs nixpkgsPersonalAttributes;
     pkgsUnstablePersonal = import inputs.nixpkgs-unstable nixpkgsPersonalAttributes;
     pkgsLatestPersonal = import inputs.nixpkgs-latest nixpkgsPersonalAttributes;
-    commonModules = [
-      inputs.home-manager.nixosModules.home-manager
-      ./src/home-manager/homes/linux/jaid.nix
-      ./src/nixos/common.nix
-      ./src/nixos/locales/en-de.nix
-      ./src/nixos/users/jaid.nix
-      ./src/nix/config.nix
-      ./src/nixos/modules/xnview.nix
-      ./src/nixos/modules/qemu.nix
-      ./src/nixos/modules/gnome-wayland
-      ./src/nixos/modules/eza.nix
-      ./src/nixos/modules/performance
-    ];
     specialArgs = {
       inherit pkgs;
       inherit pkgsUnstable;
@@ -62,17 +49,35 @@
       inherit pkgsUnstablePersonal;
       inherit pkgsLatestPersonal;
     };
+    makeMachine = {
+      id,
+      modules ? [],
+    }:
+      inputs.nixpkgs.lib.nixosSystem {
+        inherit system;
+        inherit specialArgs;
+        modules =
+         modules
+          ++ [
+            inputs.home-manager.nixosModules.home-manager
+            ./src/home-manager/homes/linux/jaid.nix
+            ./src/home-manager/homes/${id}/jaid.nix
+            ./src/nixos/common.nix
+            ./src/nixos/locales/en-de.nix
+            ./src/nixos/users/jaid.nix
+            ./src/nix/config.nix
+            ./src/nixos/modules/xnview.nix
+            ./src/nixos/modules/qemu.nix
+            ./src/nixos/modules/gnome-wayland
+            ./src/nixos/modules/eza.nix
+            ./src/nixos/modules/performance
+            ./src/nixos/machines/${id}/configuration.nix
+            ./src/nixos/machines/${id}/hardware-configuration.nix
+          ];
+      };
   in {
-    nixosConfigurations.tower = inputs.nixpkgs.lib.nixosSystem {
-      inherit system;
-      inherit specialArgs;
-      modules =
-        commonModules
-        ++ [
-          ./src/home-manager/homes/tower/jaid.nix
-          ./src/nixos/machines/tower/configuration.nix
-          ./src/nixos/machines/tower/hardware-configuration.nix
-        ];
+    nixosConfigurations.tower = makeMachine {
+      id = "tower";
     };
   };
 }
