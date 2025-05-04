@@ -51,8 +51,8 @@
   services.power-profiles-daemon.enable = false;
   services.dleyna-server.enable = false;
   services.dleyna-renderer.enable = false;
-  services.gnome.tracker.enable = false;
-  services.gnome.tracker-miners.enable = false;
+  services.gnome.tinysparql.enable = false;
+  services.gnome.localsearch.enable = false;
   services.gnome.gnome-online-accounts.enable = false;
   boot.kernelPackages = pkgs.linuxPackages_6_12;
   home-manager.backupFileExtension = "bak";
