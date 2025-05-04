@@ -5,7 +5,6 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
     nixpkgs-latest.url = "github:NixOS/nixpkgs?ref=master";
     home-manager.url = "github:nix-community/home-manager?ref=release-24.11";
-    llama-cpp.url = "github:ggerganov/llama.cpp";
   };
   outputs = inputs: let
     system = "x86_64-linux";
@@ -31,7 +30,6 @@
         cudaCapabilities = [cudaComputeCapability];
         rocmSupport = false;
         packageOverrides = pkgs: {
-          llama-cpp = inputs.llama-cpp.packages.${system}.cuda;
           shantell-sans = (pkgs.callPackage ./src/nix/packages/shantell-sans.nix {});
           geologica = (pkgs.callPackage ./src/nix/packages/geologica.nix {});
         };

@@ -9,9 +9,6 @@
   };
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
-    # (pkgs.callPackage ../../../nix/packages/llama-cpp.nix {
-    #   pkgs = inputs.pkgsUnstablePersonal;
-    # })
     inputs.pkgsLatestPersonal.ghostty
     inputs.pkgsUnstable.brave
     inputs.pkgsUnstable.bun
