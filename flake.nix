@@ -63,6 +63,7 @@
           ++ [
             {
               networking.hostName = id;
+              environment.sessionVariables.HOSTNAME = id;
             }
             inputs.home-manager.nixosModules.home-manager
             ./src/home-manager/homes/linux/jaid.nix

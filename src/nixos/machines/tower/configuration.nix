@@ -5,7 +5,7 @@
   };
   programs.steam.enable = true;
   programs.steam.package = inputs.pkgsUnstable.steam.override {
-     extraPkgs = pkgs: [ pkgs.bumblebee pkgs.glxinfo ];
+    extraPkgs = pkgs: [pkgs.bumblebee pkgs.glxinfo];
   };
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
@@ -39,9 +39,11 @@
     pkgs.shellcheck
     pkgs.shfmt
     pkgs.yarn-berry
-    pkgs.docker
+    #pkgs.docker
     pkgs.docker-compose
   ];
+  virtualisation.docker.enable = true;
+  users.users.jaid.extraGroups = ["docker"];
   jaidCustomModules = {
     xnview.enable = true;
     qemu.enable = true;
