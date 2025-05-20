@@ -86,15 +86,17 @@
           ]);
       };
   in {
-    nixosConfigurations.tower = makeMachine {
-      id = "tower";
-    };
-    nixosConfiguration.tower-vm = makeMachine {
-      id = "tower-vm";
-      isVm = true;
-    };
-    nixosConfigurations.nas = makeMachine {
-      id = "nas";
+    nixosConfigurations = {
+      tower = makeMachine {
+        id = "tower";
+      };
+      tower-vm = makeMachine {
+        id = "tower-vm";
+        isVm = true;
+      };
+      nas = makeMachine {
+        id = "nas";
+      };
     };
   };
 }
