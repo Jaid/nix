@@ -66,7 +66,6 @@
     ];
   };
   hardware.bluetooth.enable = false;
-  networking.useDHCP = lib.mkDefault true;
   networking.interfaces.eno1.wakeOnLan.enable = true;
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = true;
 }
