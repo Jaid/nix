@@ -1,5 +1,5 @@
 {
   imports = [
-    ../linux/jaid.nix
+    ../tower/jaid.nix
   ];
 }
