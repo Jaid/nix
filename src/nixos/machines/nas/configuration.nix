@@ -1,8 +1,8 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    btrfs-progs
-    nixd
-    alejandra
+  environment.systemPackages = [
+    pkgs.btrfs-progs
+    pkgs.nixd
+    pkgs.alejandra
   ];
   boot.loader = {
     systemd-boot.enable = true;
