@@ -3,7 +3,11 @@
   lib,
   ...
 } @ inputs: {
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "usbhid"
+  ];
   boot.kernelModules = ["kvm-amd"];
   boot.kernelParams = [
     "boot.shell_on_fail"
