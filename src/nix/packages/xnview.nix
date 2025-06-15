@@ -2,7 +2,7 @@
 {
   pkgs,
   version ? "1.8.6",
-  sha256 ? "MJdVKU+Q4sB7B2W84of7aW/wK7g1oQN4E9Ss2v7mnrg=",
+  sha256 ? "85lTDgsJguAZF0eqZrbHLu0OCEOFlNKK6x0S8gmDJZg=",
   ...
 }: let
   icon =
