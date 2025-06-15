@@ -5,19 +5,19 @@
   };
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
-    inputs.pkgsLatestPersonal.ghostty
-    inputs.pkgsUnstable.brave
-    inputs.pkgsUnstable.bun
-    inputs.pkgsUnstable.krita
-    inputs.pkgsUnstable.mpv-unwrapped
-    inputs.pkgsUnstable.nodejs_latest
-    inputs.pkgsUnstable.streamlink
-    inputs.pkgsUnstable.thunderbird
-    inputs.pkgsUnstable.vscode
-    inputs.pkgsUnstable.yt-dlp
-    inputs.pkgsUnstable.zstd
-    inputs.pkgsUnstable.ffmpeg-full
-    inputs.pkgsUnstable.kdePackages.kdenlive
+    pkgs.ghostty
+    pkgs.brave
+    pkgs.bun
+    pkgs.krita
+    pkgs.mpv-unwrapped
+    pkgs.nodejs_latest
+    pkgs.streamlink
+    pkgs.thunderbird
+    pkgs.vscode
+    pkgs.yt-dlp
+    pkgs.zstd
+    pkgs.ffmpeg-full
+    pkgs.kdePackages.kdenlive
     pkgs.alejandra
     pkgs.atuin
     pkgs.btop
