@@ -18,7 +18,8 @@
     '';
 in
   pkgs.appimageTools.wrapType2 {
-    name = "xnviewmp-${version}";
+    pname = "xnviewmp";
+    inherit version;
     src = pkgs.fetchurl {
       url = "https://download.xnview.com/XnView_MP.glibc2.17-x86_64.AppImage";
       inherit sha256;
@@ -33,7 +34,7 @@ in
       Type=Application
       Name=XnView MP
       Icon=xnviewmp
-      Exec=xnviewmp-${version} %F
+      Exec=xnviewmp %F
       Categories=Graphics;
       EOF
       mkdir -p $out/share/icons/hicolor/512x512/apps
