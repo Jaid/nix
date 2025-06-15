@@ -52,6 +52,6 @@
   services.gnome.tinysparql.enable = false;
   services.gnome.localsearch.enable = false;
   services.gnome.gnome-online-accounts.enable = false;
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   home-manager.backupFileExtension = "bak";
 }
