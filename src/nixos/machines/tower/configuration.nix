@@ -47,11 +47,10 @@
     eza.enable = true;
   };
   services.power-profiles-daemon.enable = false;
-  services.dleyna-server.enable = false;
-  services.dleyna-renderer.enable = false;
+  services.dleyna.enable = false;
   services.gnome.tinysparql.enable = false;
   services.gnome.localsearch.enable = false;
   services.gnome.gnome-online-accounts.enable = false;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_14;
   home-manager.backupFileExtension = "bak";
 }

@@ -56,9 +56,9 @@
       modesetting.enable = true;
       open = false;
       nvidiaSettings = false;
-      package = input.config.boot.kernelPackages.nvidiaPackages.stable;
+     # package = input.config.boot.kernelPackages.nvidiaPackages.stable;
     };
-    services.gnome.core-utilities.enable = false;
+    services.gnome.core-apps.enable = false;
     users.users.jaid.extraGroups = ["networkmanager" "video"];
     fonts = {
       packages = [
