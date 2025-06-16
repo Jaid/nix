@@ -38,24 +38,18 @@
     #pkgs.docker
     pkgs.docker-compose
   ];
-  services.sunshine = {
-    enable = true;
-    capSysAdmin = true;
-  };
   virtualisation.docker.enable = true;
   users.users.jaid.extraGroups = ["docker"];
   services.gnome.gnome-remote-desktop.enable = true;
   jaidCustomModules = {
     xnview.enable = true;
     qemu.enable = true;
-    gnome-wayland.enable = true;
+    gnome-wayland = {
+      enable = true;
+      sunshine = true;
+    };
     eza.enable = true;
   };
-  services.power-profiles-daemon.enable = false;
-  services.dleyna.enable = false;
-  services.gnome.tinysparql.enable = false;
-  services.gnome.localsearch.enable = false;
-  services.gnome.gnome-online-accounts.enable = false;
   boot.kernelPackages = pkgs.linuxPackages_6_14;
   home-manager.backupFileExtension = "bak";
 }

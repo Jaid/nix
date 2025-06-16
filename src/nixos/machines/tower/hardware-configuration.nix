@@ -19,7 +19,6 @@
   };
   hardware.sane.enable = true;
   services.avahi.enable = true;
-  users.users.jaid.extraGroups = ["lp" "scanner"];
   fileSystems."/" = {
     fsType = "ext4";
     device = "/dev/disk/by-label/root";
@@ -72,10 +71,4 @@
   hardware.bluetooth.enable = false;
   networking.interfaces.eno1.wakeOnLan.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
-  services.udev.extraHwdb = ''
-  evdev:uniq:0F034032AF3AA0E05B96B4A3F5001BC3:*
-    KEYBOARD_KEY_c00ea=reserved
-    KEYBOARD_KEY_7001d=y
-    KEYBOARD_KEY_7001c=z
-  '';
 }

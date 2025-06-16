@@ -13,6 +13,11 @@
     default = false;
     description = "Enable Nvidia support for Gnome/Wayland desktop";
   };
+  options.jaidCustomModules.gnome-wayland.sunshine = pkgs.lib.mkOption {
+    type = pkgs.lib.types.bool;
+    default = true;
+    description = "Enable Sunshine remote desktop server";
+  };
   config = pkgs.lib.mkIf (input.config.jaidCustomModules.gnome-wayland.enable) {
     environment.systemPackages = [
       pkgs.dconf-editor
@@ -59,7 +64,16 @@
      # package = input.config.boot.kernelPackages.nvidiaPackages.stable;
     };
     services.gnome.core-apps.enable = false;
+    services.gnome.tinysparql.enable = false;
+    services.gnome.localsearch.enable = false;
+    services.gnome.gnome-online-accounts.enable = false;
+    services.power-profiles-daemon.enable = false;
+    services.dleyna.enable = false;
     users.users.jaid.extraGroups = ["networkmanager" "video"];
+    services.sunshine = lib.mkIf input.config.jaidCustomModules.gnome-wayland.sunshine {
+      enable = true;
+      capSysAdmin = true;
+    };
     fonts = {
       packages = [
         input.pkgsLatest.nerd-fonts.fira-mono
