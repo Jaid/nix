@@ -3,15 +3,9 @@
   lib,
   ...
 } @ inputs: {
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "usbhid"
-  ];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usbhid"];
   boot.kernelModules = ["kvm-amd"];
-  boot.kernelParams = [
-    "boot.shell_on_fail"
-  ];
+  boot.kernelParams = ["boot.shell_on_fail"];
   jaidCustomModules = {
     gnome-wayland.nvidia = true;
     performance.unhinged = true;
@@ -71,4 +65,5 @@
   hardware.bluetooth.enable = false;
   networking.interfaces.eno1.wakeOnLan.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
+  system.stateVersion = "24.11";
 }

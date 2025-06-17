@@ -73,14 +73,15 @@
     services.sunshine = lib.mkIf input.config.jaidCustomModules.gnome-wayland.sunshine {
       enable = true;
       capSysAdmin = true;
+      package = input.pkgsPersonal.sunshine;
     };
     fonts = {
       packages = [
-        input.pkgsLatest.nerd-fonts.fira-mono
-        input.pkgsLatest.nerd-fonts.ubuntu
-        input.pkgsLatest.nerd-fonts.ubuntu-mono
-        input.pkgsLatest.nerd-fonts.jetbrains-mono
-        input.pkgsLatest.nerd-fonts.symbols-only
+        pkgs.nerd-fonts.fira-mono
+        pkgs.nerd-fonts.ubuntu
+        pkgs.nerd-fonts.ubuntu-mono
+        pkgs.nerd-fonts.jetbrains-mono
+        pkgs.nerd-fonts.symbols-only
         input.pkgsPersonal.shantell-sans
         input.pkgsPersonal.geologica
         pkgs.inter

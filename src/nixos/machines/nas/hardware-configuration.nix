@@ -5,10 +5,9 @@
   modulesPath,
   ...
 }: {
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = [];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usbhid"];
   boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  boot.kernelParams = ["boot.shell_on_fail"];
   fileSystems."/" = {
     fsType = "ext4";
     device = "/dev/disk/by-label/root";
@@ -28,7 +27,7 @@
     device = "/dev/disk/by-label/storage";
     options = ["defaults" "x-mount.mkdir" "compress=zstd:6" "nossd" "noatime" "nodiratime" "space_cache=v2"];
   };
-  networking.useDHCP = lib.mkDefault true;
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  networking.interfaces.eno1.wakeOnLan.enable = true;
+  hardware.cpu.intel.updateMicrocode = true;
+  system.stateVersion = "24.11";
 }
