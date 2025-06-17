@@ -1,10 +1,4 @@
 {
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
-}: {
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usbhid"];
   boot.kernelModules = ["kvm-intel"];
   boot.kernelParams = ["boot.shell_on_fail"];
