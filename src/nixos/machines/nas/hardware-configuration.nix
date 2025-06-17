@@ -21,6 +21,7 @@
     device = "/dev/disk/by-label/storage";
     options = ["defaults" "x-mount.mkdir" "compress=zstd:6" "nossd" "noatime" "nodiratime" "space_cache=v2"];
   };
+  hardware.bluetooth.enable = false;
   networking.interfaces.eno1.wakeOnLan.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
   system.stateVersion = "24.11";
