@@ -38,6 +38,7 @@
     #pkgs.docker
     pkgs.docker-compose
   ];
+  services.teamviewer.enable = true;
   virtualisation.docker.enable = true;
   users.users.jaid.extraGroups = ["docker"];
   services.gnome.gnome-remote-desktop.enable = true;
