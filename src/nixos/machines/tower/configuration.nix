@@ -37,6 +37,7 @@
     pkgs.yarn-berry
     #pkgs.docker
     pkgs.docker-compose
+    pkgs.darktable
   ];
   services.teamviewer.enable = true;
   virtualisation.docker.enable = true;
