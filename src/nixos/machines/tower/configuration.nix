@@ -39,6 +39,7 @@
     pkgs.docker-compose
     pkgs.darktable
   ];
+  services.steam.enable = true;
   services.teamviewer.enable = true;
   virtualisation.docker.enable = true;
   users.users.jaid.extraGroups = ["docker"];
