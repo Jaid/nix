@@ -38,6 +38,7 @@
     #pkgs.docker
     pkgs.docker-compose
     pkgs.darktable
+    pkgs.discord
   ];
   programs.steam.enable = true;
   services.teamviewer.enable = true;
