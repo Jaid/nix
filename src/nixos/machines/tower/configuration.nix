@@ -39,6 +39,7 @@
     pkgs.docker-compose
     pkgs.darktable
     pkgs.discord
+    pkgs.obs-studio
   ];
   programs.steam.enable = true;
   services.teamviewer.enable = true;
