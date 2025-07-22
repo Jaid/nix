@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+  imports = [
+    ../../software/docker.nix
+  ];
   environment.systemPackages = [
     pkgs.btrfs-progs
     pkgs.nixd
