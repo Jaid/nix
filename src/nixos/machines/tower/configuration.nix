@@ -42,12 +42,8 @@
     pkgs.obs-studio
   ];
   programs.steam.enable = true;
-  services.teamviewer.enable = true;
   virtualisation.docker.enable = true;
   users.users.jaid.extraGroups = ["docker"];
-  services.gnome.gnome-remote-desktop.enable = true;
-  services.xrdp.enable = true;
-  services.xrdp.defaultWindowManager = "${pkgs.gnome-session}/bin/gnome-session";
   jaidCustomModules = {
     xnview.enable = true;
     qemu.enable = true;
