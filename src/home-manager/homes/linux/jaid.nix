@@ -11,7 +11,7 @@
       file.".gitmessage".source = ./.resources/.gitmessage;
       file.".config/oh-my-posh/jaid.omp.yml".source = builtins.fetchurl {
         url = "https://raw.githubusercontent.com/Jaid/oh-my-posh-config/refs/heads/main/src/jaid.omp.yml";
-        sha256 = "02mw9zv7ny0lin4l2v05zmkqbdd7wszdwvc00qaw1hrp53zgxrwk";
+        sha256 = "1dyy5naispj1hycpcsmbdzl3y92vi3da1bqig9c5ii36jy1wkgzx";
       };
       file.".config/powershell/profile.ps1".source = ./.resources/profile.ps1;
       #file.".config/fish/profile.fish".source = ./.resources/profile.fish;
