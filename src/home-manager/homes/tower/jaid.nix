@@ -30,4 +30,5 @@
       file."git/.browserslistrc".source = ./.resources/.browserslistrc;
     };
   };
+  home-manager.users.jaid.home.stateVersion = "24.11";
 }

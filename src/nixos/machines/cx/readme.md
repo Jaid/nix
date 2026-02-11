@@ -12,10 +12,18 @@
 ## Installation
 
 ```bash
+loadkeys de
+```
+
+```bash
+lsblk -o NAME,MOUNTPOINT
+```
+
+```bash
 device=${device:-/dev/sda}
 bootDevicePartition=${bootDevicePartition:-${device}1}
 rootDevicePartition=${rootDevicePartition:-${device}2}
-sudo parted $device -- mklabel gpt
+sudo parted --script $device -- mklabel gpt
 sudo parted $device -- mkpart ESP fat32 1MiB 512MiB
 sudo parted $device -- set 1 esp on
 sudo parted $device -- mkpart root ext4 512MiB 100%
