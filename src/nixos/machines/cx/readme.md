@@ -1,0 +1,29 @@
+# Machine: cx
+
+## Hardware
+
+• Hetzner Cloud CX 23 (cx23)
+• 2 vCPU (shared)
+• 4 gb RAM
+• 40 gb local storage
+• Location: Nuremberg, Germany (nbg1)
+• ISO: nixos-minimal-25.05.803396.8f1b52b04f2c-x86_64-linux.iso
+
+## Installation
+
+```bash
+device=${device:-/dev/sda}
+bootDevicePartition=${bootDevicePartition:-${device}1}
+rootDevicePartition=${rootDevicePartition:-${device}2}
+sudo parted $device -- mklabel gpt
+sudo parted $device -- mkpart ESP fat32 1MiB 512MiB
+sudo parted $device -- set 1 esp on
+sudo parted $device -- mkpart root ext4 512MiB 100%
+sudo mkfs.vfat -F32 -n boot $bootDevicePartition
+sudo mkfs.ext4 -L root $rootDevicePartition
+sudo mount /dev/disk/by-label/root /mnt
+sudo mkdir /mnt/boot
+sudo mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
+sudo nixos-generate-config --root /mnt
+sudo nixos-install --flake github:Jaid/nix#cx --no-write-lock-file --impure
+```

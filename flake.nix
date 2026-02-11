@@ -101,6 +101,9 @@
           inputs.vscode-server.nixosModules.default
         ];
       };
+      cx = makeMachine {
+        id = "cx";
+      };
     };
   };
 }
