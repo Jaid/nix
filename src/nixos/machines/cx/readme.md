@@ -26,12 +26,10 @@ lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
 ```
 
 ```bash
-device=${device:-/dev/sda}
-rootDevicePartition=${rootDevicePartition:-${device}1}
-sudo wipefs -a $device
-sudo parted --script $device -- mklabel msdos
-sudo parted $device -- mkpart primary ext4 1MiB 100%
-sudo mkfs.ext4 -L root $rootDevicePartition
+sudo wipefs --all /dev/sda
+sudo parted --script /dev/sda -- mklabel msdos
+sudo parted /dev/sda -- mkpart primary ext4 1MiB 100%
+sudo mkfs.ext4 -L root /dev/sda1
 sudo mount /dev/disk/by-label/root /mnt
 sudo nixos-generate-config --root /mnt
 sudo nixos-install --flake github:Jaid/nix#cx --no-write-lock-file --impure
