@@ -5,6 +5,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
     nixpkgs-latest.url = "github:NixOS/nixpkgs?ref=master";
     home-manager.url = "github:nix-community/home-manager?ref=release-25.05";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
   outputs = inputs: let
     makeMachine = {
@@ -96,6 +97,9 @@
       };
       nas = makeMachine {
         id = "nas";
+        modules = [
+          inputs.vscode-server.nixosModules.default
+        ];
       };
     };
   };

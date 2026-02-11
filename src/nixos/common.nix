@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, pkgsUnstable, ...}: {
   imports = [
     ./software/cli-goodies.nix
   ];
@@ -10,6 +10,7 @@
     pkgs.fd
     pkgs.sd
     pkgs.bash
+    pkgsUnstable.bun
   ];
   services.openssh = {
     enable = true;
