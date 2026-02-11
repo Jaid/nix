@@ -5,11 +5,6 @@
     fsType = "ext4";
     device = "/dev/disk/by-label/root";
   };
-  fileSystems."/boot" = {
-    fsType = "vfat";
-    device = "/dev/disk/by-label/boot";
-    options = ["fmask=0077" "dmask=0077"];
-  };
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";
