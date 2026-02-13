@@ -48,7 +48,6 @@
       pkgsUnstablePersonal = import inputs.nixpkgs-unstable nixpkgsPersonalAttributes;
       pkgsLatestPersonal = import inputs.nixpkgs-latest nixpkgsPersonalAttributes;
       specialArgs = {
-        inherit pkgs;
         inherit pkgsUnstable;
         inherit pkgsLatest;
         inherit pkgsPersonal;
@@ -60,6 +59,13 @@
         inherit system;
         inherit specialArgs;
         modules =
+          [
+            inputs.nixpkgs.nixosModules.readOnlyPkgs
+            {
+              nixpkgs.pkgs = pkgs;
+            }
+          ]
+          ++
           modules
           ++ [
             {

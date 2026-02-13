@@ -1,0 +1,16 @@
+write_files:
+  - path: /root/run-infect-install.bash
+    owner: root:root
+    permissions: "0755"
+    content: |-
+      #!/usr/bin/env bash
+      set -euo pipefail
+      export DEBIAN_FRONTEND=noninteractive
+      curl -fsSL https://raw.githubusercontent.com/Jaid/nix/main/src/nixos/machines/cx/infect-install.bash -o /root/infect-install.bash
+      chmod +x /root/infect-install.bash
+      SKIP_CONFIRM=1 DISK=/dev/sda FLAKE=github:Jaid/nix#cx /root/infect-install.bash
+runcmd:
+  - bash
+  - --login
+  - -c
+  - /root/run-infect-install.bash 2>&1 | tee /var/log/infect-install.log && reboot
