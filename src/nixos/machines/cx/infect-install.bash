@@ -5,6 +5,7 @@ DISK="${DISK:-/dev/sda}"
 FLAKE="${FLAKE:-github:Jaid/nix#cx}"
 ROOT_LABEL="${ROOT_LABEL:-root}"
 SWAPFILE="${SWAPFILE:-/swapfile-nixos-infect}"
+REPARTITION="${REPARTITION:-0}"
 
 log() {
   printf "\n==> %s\n" "$*"
@@ -19,7 +20,7 @@ if [[ "${EUID}" -ne 0 ]]; then
   die "Run as root"
 fi
 
-if [[ ! -b "${DISK}" ]]; then
+if [[ "${REPARTITION}" == "1" && ! -b "${DISK}" ]]; then
   die "Disk ${DISK} does not exist"
 fi
 
@@ -53,7 +54,11 @@ command -v nix >/dev/null 2>&1 || die "nix command not found after installation"
 export NIX_CONFIG="experimental-features = nix-command flakes"
 
 if [[ -z "${SKIP_CONFIRM:-}" ]]; then
-  echo "This will WIPE ${DISK} and install ${FLAKE}."
+  if [[ "${REPARTITION}" == "1" ]]; then
+    echo "This will WIPE ${DISK} and install ${FLAKE}."
+  else
+    echo "This will install ${FLAKE} in-place onto the current root filesystem."
+  fi
   read -r -p "Type 'yes' to continue: " reply
   [[ "${reply}" == "yes" ]] || die "Aborted"
 fi
@@ -75,22 +80,33 @@ if [[ ! -f "${SWAPFILE}" ]]; then
   swapon "${SWAPFILE}"
 fi
 
-log "Partitioning ${DISK} (msdos + single ext4 root partition)"
-wipefs --all "${DISK}"
-parted --script "${DISK}" -- mklabel msdos
-parted --script "${DISK}" -- mkpart primary ext4 1MiB 100%
+if [[ "${REPARTITION}" == "1" ]]; then
+  log "Partitioning ${DISK} (msdos + single ext4 root partition)"
+  wipefs --all "${DISK}"
+  parted --script "${DISK}" -- mklabel msdos
+  parted --script "${DISK}" -- mkpart primary ext4 1MiB 100%
 
-ROOT_PART="${DISK}1"
-if [[ "${DISK}" =~ (nvme|mmcblk) ]]; then
-  ROOT_PART="${DISK}p1"
+  ROOT_PART="${DISK}1"
+  if [[ "${DISK}" =~ (nvme|mmcblk) ]]; then
+    ROOT_PART="${DISK}p1"
+  fi
+
+  log "Formatting ${ROOT_PART}"
+  mkfs.ext4 -F -L "${ROOT_LABEL}" "${ROOT_PART}"
+else
+  ROOT_PART="$(findmnt -n -o SOURCE /)"
+  [[ -n "${ROOT_PART}" ]] || die "Could not detect active root filesystem"
+  [[ -b "${ROOT_PART}" ]] || die "Active root source is not a block device: ${ROOT_PART}"
+  log "Using in-place install on active root partition ${ROOT_PART}"
 fi
-
-log "Formatting ${ROOT_PART}"
-mkfs.ext4 -F -L "${ROOT_LABEL}" "${ROOT_PART}"
 
 log "Mounting target filesystem"
 umount -R /mnt 2>/dev/null || true
-mount "/dev/disk/by-label/${ROOT_LABEL}" /mnt
+if [[ "${REPARTITION}" == "1" ]]; then
+  mount "/dev/disk/by-label/${ROOT_LABEL}" /mnt
+else
+  mount "${ROOT_PART}" /mnt
+fi
 
 log "Generating baseline hardware configuration"
 nix --extra-experimental-features "nix-command flakes" shell nixpkgs#nixos-install-tools -c \
@@ -98,6 +114,6 @@ nix --extra-experimental-features "nix-command flakes" shell nixpkgs#nixos-insta
 
 log "Installing NixOS from ${FLAKE}"
 nix --extra-experimental-features "nix-command flakes" shell nixpkgs#nixos-install-tools -c \
-  nixos-install --root /mnt --flake "${FLAKE}" --no-write-lock-file --impure
+  nixos-install --root /mnt --flake "${FLAKE}" --no-write-lock-file --impure --no-root-password
 
 log "Done. Reboot when ready."

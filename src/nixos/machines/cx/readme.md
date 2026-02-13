@@ -39,6 +39,9 @@ sudo nixos-install --flake github:Jaid/nix#cx --no-write-lock-file --impure
 
 Run this after first start to convert the system from Ubuntu 24.04 to NixOS.
 
+For unattended provisioning in Hetzner, use `src/nixos/machines/cx/cloud-init.yml` as user-data.
+If something fails during automated setup, inspect `/var/log/infect-install.log` and `/var/log/cloud-init-output.log`.
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Jaid/nix/main/src/nixos/machines/cx/infect-install.bash -o /root/infect-install.bash
 chmod +x /root/infect-install.bash
@@ -47,15 +50,15 @@ SKIP_CONFIRM=1 /root/infect-install.bash
 
 Defaults:
 
-• `DISK=/dev/sda`
+• `REPARTITION=0` (default, in-place install on current root partition)
 • `FLAKE=github:Jaid/nix#cx`
 • BIOS/MBR only (script aborts on UEFI)
 
 Examples:
 
 ```bash
-# install to another disk
-DISK=/dev/vda SKIP_CONFIRM=1 /root/infect-install.bash
+# destructive reinstall with repartitioning
+REPARTITION=1 DISK=/dev/sda SKIP_CONFIRM=1 /root/infect-install.bash
 ```
 
 ```bash
