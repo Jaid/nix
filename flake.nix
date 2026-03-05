@@ -57,7 +57,6 @@
       };
     in
       builtins.trace "Building ${id} (${system}, ${cpuArch}, ${cudaComputeCapability})" inputs.nixpkgs.lib.nixosSystem {
-        inherit system;
         inherit specialArgs;
         modules =
           [
