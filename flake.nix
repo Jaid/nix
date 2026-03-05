@@ -13,6 +13,7 @@
       system ? "x86_64-linux",
       cudaComputeCapability ? "8.9",
       cpuArch ? "znver2",
+      gpuVendor ? "nvidia",
       isVm ? false,
       modules ? [],
     }: let
@@ -29,12 +30,12 @@
           hostPlatform.gcc.arch = cpuArch;
           allowUnfree = true;
           nvidia.acceptLicense = true;
-          cudaSupport = true;
-          cudnnSupport = true;
+          cudaSupport = (gpuVendor == "nvidia");
+          cudnnSupport = (gpuVendor == "nvidia");
           cudaForwardCompat = false;
           cudaEnableForwardCompat = false;
           cudaCapabilities = [cudaComputeCapability];
-          rocmSupport = false;
+          rocmSupport = (gpuVendor == "amd");
           packageOverrides = pkgs: {
             shantell-sans = pkgs.callPackage ./src/nix/packages/shantell-sans.nix {};
             geologica = pkgs.callPackage ./src/nix/packages/geologica.nix {};
@@ -109,6 +110,14 @@
       };
       cx = makeMachine {
         id = "cx";
+        modules = [
+          inputs.vscode-server.nixosModules.default
+        ];
+      };
+      hive = makeMachine {
+        id = "hive";
+        cpuArch = "znver2";
+        gpuVendor = "amd";
         modules = [
           inputs.vscode-server.nixosModules.default
         ];

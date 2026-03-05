@@ -1,2 +1,1 @@
-HOSTNAME=${HOSTNAME:-$(hostname)}
-nix eval .#nixosConfigurations.tower.config
+nix eval .#nixosConfigurations.${HOSTNAME:-$(hostname)}.config

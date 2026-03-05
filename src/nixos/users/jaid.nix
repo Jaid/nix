@@ -10,7 +10,6 @@
     group = "jaid";
     extraGroups = [
       "wheel"
-      "docker"
     ];
     initialHashedPassword = "$6$WXuW6lzzPV.3nqm0$W83EcYho0QWn1gcx7rFfNGCned09fSXB57hvxDp5W8qSnYl8H59mSsTvHFOGLv/l/J7awpq4ZkGuvi2LygyuD0";
     openssh.authorizedKeys.keys = [
@@ -20,9 +19,6 @@
   };
   users.groups.jaid.gid = 1000;
   nix.settings.trusted-users = ["jaid"];
-  services.openssh = {
-    enable = true;
-  };
   programs.fish = {
     enable = true;
   };

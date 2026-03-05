@@ -21,4 +21,5 @@
       };
     };
   };
+  users.users.jaid.extraGroups = ["docker"];
 }

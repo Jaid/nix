@@ -3,13 +3,8 @@
     ./software/cli-goodies.nix
   ];
   environment.systemPackages = [
-    pkgs.curl
-    pkgs.wget
-    pkgs.fastfetch
-    pkgs.git
-    pkgs.fd
-    pkgs.sd
     pkgs.bash
+    pkgs.sd
     pkgsLatest.bun
   ];
   services.openssh = {
@@ -19,5 +14,4 @@
     wheelNeedsPassword = false;
   };
   documentation.nixos.enable = false;
-  networking.firewall.enable = false;
 }

@@ -1,24 +1,20 @@
-{
-  pkgs,
-  lib,
-  ...
-} @ input: {
-  options.jaidCustomModules.gnome-wayland.enable = pkgs.lib.mkOption {
-    type = pkgs.lib.types.bool;
+{pkgs, lib, ...} @ input: {
+  options.jaidCustomModules.gnome-wayland.enable = lib.mkOption {
+    type = lib.types.bool;
     default = false;
     description = "Enable Gnome/Wayland desktop";
   };
-  options.jaidCustomModules.gnome-wayland.nvidia = pkgs.lib.mkOption {
-    type = pkgs.lib.types.bool;
+  options.jaidCustomModules.gnome-wayland.nvidia = lib.mkOption {
+    type = lib.types.bool;
     default = false;
     description = "Enable Nvidia support for Gnome/Wayland desktop";
   };
-  options.jaidCustomModules.gnome-wayland.sunshine = pkgs.lib.mkOption {
-    type = pkgs.lib.types.bool;
+  options.jaidCustomModules.gnome-wayland.sunshine = lib.mkOption {
+    type = lib.types.bool;
     default = true;
     description = "Enable Sunshine remote desktop server";
   };
-  config = pkgs.lib.mkIf (input.config.jaidCustomModules.gnome-wayland.enable) {
+  config = lib.mkIf (input.config.jaidCustomModules.gnome-wayland.enable) {
     environment.systemPackages = [
       pkgs.dconf-editor
       pkgs.gnome-tweaks

@@ -16,4 +16,5 @@
   programs.nix-ld.enable = true;
   environment.etc."ssh/sshd_conf.d/allow_stream_local_forwarding.conf".text = "AllowStreamLocalForwarding yes";
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  networking.firewall.enable = false;
 }

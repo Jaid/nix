@@ -7,7 +7,6 @@
     (pkgs.callPackage ../../../nix/packages/thorium.nix {})
     pkgs.ghostty
     pkgs.brave
-    pkgs.bun
     pkgs.krita
     pkgs.mpv-unwrapped
     pkgs.nodejs_latest
@@ -54,5 +53,5 @@
     eza.enable = true;
   };
   boot.kernelPackages = pkgs.linuxPackages_6_14;
-  home-manager.backupFileExtension = "bak";
+  networking.firewall.enable = false;
 }

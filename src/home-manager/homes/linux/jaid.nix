@@ -5,8 +5,6 @@
       homeDirectory = "/home/jaid";
       packages = with pkgs; [
         nano
-        gdu
-        eza
       ];
       file.".gitmessage".source = ./.resources/.gitmessage;
       file.".config/oh-my-posh/jaid.omp.yml".source = builtins.fetchurl {
