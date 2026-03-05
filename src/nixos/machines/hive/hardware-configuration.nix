@@ -15,6 +15,16 @@
     device = "/dev/disk/by-label/boot";
     options = ["fmask=0077" "dmask=0077"];
   };
+  fileSystems."/mnt/data" = {
+    fsType = "btrfs";
+    device = "/dev/disk/by-label/data";
+    options = ["defaults" "x-mount.mkdir" "compress=zstd:6" "ssd" "noatime" "nodiratime" "space_cache=v2" "discard=async"];
+  };
+  swapDevices = [
+    {
+      device = "/dev/disk/by-label/swap";
+    }
+  ];
   hardware.bluetooth.enable = false;
   networking.interfaces.eno1.wakeOnLan.enable = true;
   hardware.cpu.amd.updateMicrocode = true;

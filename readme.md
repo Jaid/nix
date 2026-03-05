@@ -18,7 +18,7 @@ sudo mount /dev/disk/by-label/root /mnt
 sudo mkdir /mnt/boot
 sudo mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
 sudo nixos-generate-config --root /mnt
-sudo nixos-install --flake github:Jaid/nix#tower --no-write-lock-file --impure
+sudo nixos-install --flake github:Jaid/nix#(hostname) --no-write-lock-file --impure
 ```
 
 ## Useful scripts
