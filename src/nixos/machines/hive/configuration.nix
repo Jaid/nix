@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, pkgsLatest, ...}: {
   imports = [
     ../../software/docker.nix
     ../../software/vscode-server.nix
@@ -6,9 +6,10 @@
   environment.systemPackages = [
     pkgs.nixd
     pkgs.alejandra
-    pkgs.nvtopPackages.amd
-    pkgs.rocmPackages.rocm-smi
-    pkgs.rocmPackages.rocminfo
+    pkgsLatest.nvtopPackages.amd
+    pkgsLatest.rocmPackages.rocm-smi
+    pkgsLatest.rocmPackages.rocminfo
+    pkgsLatest.amdgpu_top
   ];
   boot.loader = {
     systemd-boot.enable = true;
@@ -25,9 +26,9 @@
   networking.firewall.enable = false;
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [
-      rocmPackages.clr
-      rocmPackages.clr.icd
+    extraPackages = [
+      pkgsLatest.rocmPackages.clr
+      pkgsLatest.rocmPackages.clr.icd
     ];
   };
   users.users.jaid = {

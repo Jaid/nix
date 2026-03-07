@@ -1,6 +1,6 @@
-{pkgs, ...}: {
+{pkgs, pkgsLatest, ...}: {
   environment.systemPackages = [
-    pkgs.docker
+    pkgsLatest.docker
   ];
   virtualisation.docker = {
     enable = true;

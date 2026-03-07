@@ -4,7 +4,7 @@
   ];
   environment.systemPackages = [
     pkgs.bash
-    pkgs.git
+    pkgsLatest.git
   ];
   services.openssh = {
     enable = true;
