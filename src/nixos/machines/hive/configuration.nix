@@ -9,12 +9,6 @@
     pkgs.nvtopPackages.amd
     pkgs.rocmPackages.rocm-smi
     pkgs.rocmPackages.rocminfo
-    pkgs.tmux
-    pkgs.pciutils
-    pkgs.usbutils
-    pkgs.lm_sensors
-    pkgs.parted
-    pkgs.python312
   ];
   boot.loader = {
     systemd-boot.enable = true;

@@ -1,18 +1,21 @@
-{pkgs, ...}: {
+{pkgs, pkgsLatest, ...}: {
   environment.systemPackages = [
-    pkgs.fastfetch
-    pkgs.git
-    pkgs.gh
-    pkgs.fd
-    pkgs.sd
-    pkgs.eza
-    pkgs.dysk
-    pkgs.btop
-    pkgs.gdu
     pkgs.bat
+    pkgs.btop
     pkgs.curl
-    pkgs.wget
-    pkgs.jq
+    pkgs.dysk
+    pkgs.eza
+    pkgs.fastfetch
+    pkgs.fd
+    pkgs.gdu
+    pkgs.gh
     pkgs.inotify-tools
+    pkgs.jaq
+    pkgs.nodejs_latest
+    pkgs.sd
+    pkgs.tmux
+    pkgs.uv
+    pkgs.wget
+    pkgsLatest.bun
   ];
 }

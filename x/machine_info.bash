@@ -1,1 +1,1 @@
-fastfetch --format json | jq 'map(select(.error == null and (.result != null and .result != [])))' --compact-output
+fastfetch --format json | jaq 'map(select(.error == null and (.result != null and .result != [])))' --compact-output
