@@ -49,7 +49,7 @@ end
 if type --query oh-my-posh > /dev/null
   if test -f ~/.config/oh-my-posh/jaid.omp.yml
     oh-my-posh init fish --config ~/.config/oh-my-posh/jaid.omp.yml | source
-  elif test -n "$reposFolder" && test -f "$reposFolder/oh-my-posh-config/src/jaid.omp.yml"
+  else if test -n "$reposFolder" && test -f "$reposFolder/oh-my-posh-config/src/jaid.omp.yml"
     oh-my-posh init fish --config "$reposFolder/oh-my-posh-config/src/jaid.omp.yml" | source
   end
 end
