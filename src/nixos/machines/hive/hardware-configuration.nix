@@ -18,7 +18,7 @@
   fileSystems."/mnt/data" = {
     fsType = "btrfs";
     device = "/dev/disk/by-label/data";
-    options = ["defaults" "x-mount.mkdir" "compress=zstd:6" "ssd" "noatime" "nodiratime" "space_cache=v2" "discard=async"];
+    options = ["defaults" "nofail" "x-mount.mkdir" "compress=zstd:6" "ssd" "noatime" "nodiratime" "space_cache=v2" "discard=async"];
   };
   swapDevices = [
     {
