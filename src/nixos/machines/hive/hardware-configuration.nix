@@ -26,7 +26,7 @@
     }
   ];
   hardware.bluetooth.enable = false;
-  # networking.interfaces.eno1.wakeOnLan.enable = true;
+  networking.interfaces.enp104s0.wakeOnLan.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
   system.stateVersion = "25.11";
