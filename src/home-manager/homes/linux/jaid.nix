@@ -1,8 +1,15 @@
 {pkgs, ...}: {
-  home-manager.users.jaid = {
+  home-manager.users.jaid = {config, lib, ...}: let
+    homeDirectory = "/home/jaid";
+    gitHomeDirectory = if lib.hasPrefix "/" config.gitHome.folder then config.gitHome.folder else "${homeDirectory}/${config.gitHome.folder}";
+  in {
+    imports = [
+      ../../modules/gitHome.nix
+    ];
+    gitHome.initialRepos = ["Jaid/nix" "Jaid/oh-my-posh-config"];
     home = {
       username = "jaid";
-      homeDirectory = "/home/jaid";
+      inherit homeDirectory;
       packages = with pkgs; [
         nano
       ];
@@ -47,7 +54,7 @@
       };
       includes = [
         {
-          condition = "gitdir:/home/jaid/git/";
+          condition = "gitdir:${gitHomeDirectory}/";
           contents = {
             user.name = "Jaid";
             user.username = "jaid";

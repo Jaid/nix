@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ../linux/jaid.nix
+    ../server/jaid.nix
   ];
   home-manager.users.jaid = {
     home = {
