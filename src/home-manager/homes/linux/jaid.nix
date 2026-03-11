@@ -63,7 +63,7 @@
             commit.gpgSign = true;
             commit.template = "/home/jaid/.gitmessage";
             github.user = "jaid";
-            core.sshCommand = "ssh -i /home/jaid/.ssh/id_github";
+            core.sshCommand = "${pkgs.openssh}/bin/ssh -i /home/jaid/.ssh/id_github";
           };
         }
       ];

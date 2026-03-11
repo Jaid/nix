@@ -1,7 +1,7 @@
-{config, lib, ...}: let
+{config, lib, pkgs, ...}: let
   gitDirectory = if lib.hasPrefix "/" config.gitHome.folder then config.gitHome.folder else "${config.home.homeDirectory}/${config.gitHome.folder}";
   gitCommand = "${config.programs.git.package}/bin/git";
-  sshCommand = "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new";
+  sshCommand = "${pkgs.openssh}/bin/ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new";
   getRepositoryName = repository: builtins.elemAt (lib.splitString "/" repository) 1;
   repositoryNames = map getRepositoryName config.gitHome.initialRepos;
   cloneRepository = repository: let
