@@ -20,6 +20,11 @@
     device = "/dev/disk/by-label/data";
     options = ["defaults" "nofail" "x-mount.mkdir" "compress=zstd:6" "ssd" "noatime" "nodiratime" "space_cache=v2" "discard=async"];
   };
+  fileSystems."/mnt/storage" = {
+    fsType = "nfs";
+    device = "10.0.0.22:/mnt/storage";
+    options = ["defaults" "nofail" "x-mount.mkdir" "x-systemd.automount" "x-systemd.idle-timeout=3600" "rw"];
+  };
   swapDevices = [
     {
       device = "/dev/disk/by-label/swap";
