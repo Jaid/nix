@@ -3,7 +3,7 @@
   boot.kernelModules = ["kvm-amd"];
   boot.kernelParams = ["boot.shell_on_fail" "amd_iommu=on"];
   jaidCustomModules = {
-    performance.unhinged = true;
+  # performance.unhinged = true;
     performance.cpuVendor = "amd";
   };
   fileSystems."/" = {
