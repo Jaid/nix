@@ -8,7 +8,7 @@
     home.activation.createDockerFolder = lib.hm.dag.entryAfter ["writeBoundary"] ''
       $DRY_RUN_CMD mkdir --parents ${lib.escapeShellArg "${homeDirectory}/docker"}
     '';
-    file.".config/fish/functions/fish_greeting.fish".text = "";
+    home.file.".config/fish/functions/fish_greeting.fish".text = "";
     home.file.".config/fastfetch/config.jsonc".text = builtins.toJSON {
       "$schema" = "https://raw.githubusercontent.com/fastfetch-cli/fastfetch/master/doc/json_schema.json";
       modules = [
