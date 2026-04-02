@@ -19,6 +19,7 @@ in {
   environment.etc."ssh/sshd_conf.d/allow_stream_local_forwarding.conf".text = "AllowStreamLocalForwarding yes";
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.firewall.enable = false;
+  virtualisation.docker.logDriver.syslog.port = 1514;
   services.nfs.server = lib.mkIf hasStorageMount {
     enable = true;
     exports = "/mnt/storage 10.0.0.0/24(rw)";
