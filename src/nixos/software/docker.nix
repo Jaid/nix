@@ -56,6 +56,7 @@
     };
   logDriverConfig = config.virtualisation.docker.logDriver;
   syslogConfig = logDriverConfig.syslog;
+  dockerCli = "${config.virtualisation.docker.package}/bin/docker";
   jsonEnabled = logDriverConfig.json;
   syslogEnabled = syslogConfig.enabled;
   selectedLogDriver =
@@ -111,6 +112,25 @@ in {
         })
       ];
     };
+    systemd.services.docker.postStart = lib.mkAfter (lib.optionalString syslogEnabled ''
+      # Containers using Docker’s syslog log driver can exit with status 128 if
+      # the receiver becomes available a moment after dockerd starts.
+      attempt=0
+      while [ "$attempt" -lt 60 ]; do
+        failedContainerIds="$(${dockerCli} ps -aq --filter exited=128 || true)"
+        if [ -z "$failedContainerIds" ]; then
+          break
+        fi
+        ${dockerCli} start $failedContainerIds >/dev/null 2>&1 || true
+        attempt=$((attempt + 1))
+        sleep 1
+      done
+      remainingFailedContainers="$(${dockerCli} ps -a --format '{{.Names}}' --filter exited=128 || true)"
+      if [ -n "$remainingFailedContainers" ]; then
+        echo "Docker containers still exited with status 128 after the post-start retry loop:" >&2
+        echo "$remainingFailedContainers" >&2
+      fi
+    '');
     users.users.jaid.extraGroups = ["docker"];
   };
 }
