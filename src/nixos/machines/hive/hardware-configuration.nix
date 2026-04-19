@@ -4,6 +4,7 @@
   boot.kernelParams = ["boot.shell_on_fail" "amd_iommu=on"];
   jaidCustomModules = {
   # performance.unhinged = true;
+    lan-dns.enable = true;
     performance.cpuVendor = "amd";
   };
   fileSystems."/" = {
@@ -22,7 +23,7 @@
   };
   fileSystems."/mnt/storage" = {
     fsType = "nfs";
-    device = "10.0.0.22:/mnt/storage";
+    device = "nas.lan:/mnt/storage";
     options = ["defaults" "nofail" "x-mount.mkdir" "x-systemd.automount" "x-systemd.idle-timeout=3600" "rw"];
   };
   swapDevices = [

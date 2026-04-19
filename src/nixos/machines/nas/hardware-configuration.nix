@@ -2,6 +2,7 @@
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usbhid"];
   boot.kernelModules = ["kvm-intel"];
   boot.kernelParams = ["boot.shell_on_fail"];
+  jaidCustomModules.lan-dns.enable = true;
   fileSystems."/" = {
     fsType = "ext4";
     device = "/dev/disk/by-label/root";

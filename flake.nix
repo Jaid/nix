@@ -83,6 +83,7 @@
             ./src/nixos/modules/qemu.nix
             ./src/nixos/modules/gnome-wayland
             ./src/nixos/modules/eza.nix
+            ./src/nixos/modules/lan-dns.nix
             ./src/nixos/modules/performance
             ./src/nixos/machines/${id}/configuration.nix
           ]

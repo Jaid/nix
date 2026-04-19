@@ -4,6 +4,7 @@
   boot.kernelParams = ["boot.shell_on_fail"];
   jaidCustomModules = {
     gnome-wayland.nvidia = true;
+    lan-dns.enable = true;
     performance.unhinged = true;
     performance.cpuVendor = "amd";
   };
@@ -24,12 +25,12 @@
     options = ["defaults" "nofail" "x-mount.mkdir"];
   };
   fileSystems."/mnt/storage" = {
-    device = "//10.0.0.22/storage";
+    device = "//nas.lan/storage";
     fsType = "cifs";
     options = ["x-systemd.automount" "x-mount.mkdir" "credentials=/home/jaid/credentials.txt" "uid=1000" "gid=1000" "vers=3" "file_mode=0755" "dir_mode=0755"];
   };
   fileSystems."/mnt/nas" = {
-    device = "//10.0.0.22/home";
+    device = "//nas.lan/home";
     fsType = "cifs";
     options = ["x-systemd.automount" "x-mount.mkdir" "credentials=/home/jaid/credentials.txt" "uid=1000" "gid=1000" "vers=3" "file_mode=0755" "dir_mode=0755"];
   };
