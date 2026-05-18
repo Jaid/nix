@@ -23,7 +23,7 @@
   };
   fileSystems."/mnt/storage" = {
     fsType = "nfs";
-    device = "nas.lan:/mnt/storage";
+    device = "10.0.0.22:/mnt/storage";
     options = ["defaults" "nofail" "x-mount.mkdir" "x-systemd.automount" "x-systemd.idle-timeout=3600" "rw"];
   };
   swapDevices = [
