@@ -22,6 +22,7 @@
       readonly -a thresholds=(${thresholdValues})
       readonly -a strengths=(${strengthValues})
       readonly hottest_strength_index=${toString hottestStrengthIndex}
+      readonly linger_seconds=${toString cfg.linger}
 
       find_hwmon_by_name() {
         local wanted hwmon
@@ -61,6 +62,61 @@
         fi
 
         return 1
+      }
+
+      get_monotonic_seconds() {
+        local uptime
+        IFS=' ' read -r uptime _ < /proc/uptime
+        printf '%s\n' "''${uptime%%.*}"
+      }
+
+      update_threshold_cooldown_state() {
+        local temp_mc="$1"
+        local now="$2"
+        local is_initializing="$3"
+        local index threshold_mc
+
+        for index in "''${!thresholds[@]}"; do
+          threshold_mc=$((thresholds[index] * 1000))
+          if [ "$temp_mc" -lt "$threshold_mc" ]; then
+            if [ -z "''${below_since[index]:-}" ]; then
+              if [ "$is_initializing" -eq 1 ]; then
+                below_since[index]=$((now - linger_seconds))
+              else
+                below_since[index]="$now"
+              fi
+            fi
+          else
+            below_since[index]=""
+          fi
+        done
+      }
+
+      get_lingering_strength_index() {
+        local temp_mc="$1"
+        local now="$2"
+        local target_strength_index="$hottest_strength_index"
+        local index threshold_mc crossed_below_at
+
+        for ((index=hottest_strength_index - 1; index >= 0; index--)); do
+          threshold_mc=$((thresholds[index] * 1000))
+          if [ "$temp_mc" -ge "$threshold_mc" ]; then
+            break
+          fi
+
+          crossed_below_at="''${below_since[index]:-}"
+          if [ -z "$crossed_below_at" ]; then
+            break
+          fi
+
+          if [ "$linger_seconds" -gt 0 ] && [ $((now - crossed_below_at)) -lt "$linger_seconds" ]; then
+            break
+          fi
+
+          target_strength_index="$index"
+        done
+
+        printf '%s\n' "$target_strength_index"
       }
 
       set_pwm_duty() {
@@ -117,21 +173,19 @@
       : "''${pwm_enable:?failed to locate pwm1_enable on the it87 hwmon device}"
       : "''${fan_input:?failed to locate fan1_input on the it87 hwmon device}"
 
+      # Each threshold keeps its own “fell below” timestamp. A cooler bracket
+      # only becomes eligible after staying below all of its upper thresholds
+      # for linger_seconds, while hotter brackets still engage immediately.
+      declare -a below_since=()
+      is_initialized=0
       last_duty=""
       while true; do
         temp_mc="$(< "$cpu_temp_input")"
-        target_percent=""
+        now="$(get_monotonic_seconds)"
 
-        for index in "''${!thresholds[@]}"; do
-          if [ "$temp_mc" -lt "$((thresholds[index] * 1000))" ]; then
-            target_percent="''${strengths[index]}"
-            break
-          fi
-        done
-
-        if [ -z "$target_percent" ]; then
-          target_percent="''${strengths[hottest_strength_index]}"
-        fi
+        update_threshold_cooldown_state "$temp_mc" "$now" "$((1 - is_initialized))"
+        target_strength_index="$(get_lingering_strength_index "$temp_mc" "$now")"
+        target_percent="''${strengths[target_strength_index]}"
 
         target_label="$target_percent%"
         if [ "$target_percent" -ge 100 ]; then
@@ -146,6 +200,7 @@
           last_duty="$target_duty"
         fi
 
+        is_initialized=1
         sleep ${toString cfg.pollIntervalSeconds}
       done
     '';
@@ -165,6 +220,11 @@ in {
     type = lib.types.listOf lib.types.int;
     default = [0 50 100];
     description = "Fan strengths in percent for the temperature brackets. This must contain exactly one more entry than thresholds.";
+  };
+  options.jaidCustomModules.nas.fans.linger = lib.mkOption {
+    type = lib.types.int;
+    default = 0;
+    description = "How long the controller waits after the temperature falls back below a threshold before allowing the next cooler bracket. A value of 0 reacts immediately.";
   };
   options.jaidCustomModules.nas.fans.pollIntervalSeconds = lib.mkOption {
     type = lib.types.int;
@@ -197,6 +257,10 @@ in {
       {
         assertion = isNondecreasing cfg.strengths;
         message = "jaidCustomModules.nas.fans.strengths must not decrease as temperatures rise.";
+      }
+      {
+        assertion = cfg.linger >= 0;
+        message = "jaidCustomModules.nas.fans.linger must stay at or above 0.";
       }
       {
         assertion = cfg.pollIntervalSeconds > 0;

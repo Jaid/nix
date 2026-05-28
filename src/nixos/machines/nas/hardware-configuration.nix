@@ -12,6 +12,7 @@
       enable = true;
       thresholds = [55 70];
       strengths = [0 50 100];
+      linger = 100;
     };
     it8625e.enable = true;
   };
