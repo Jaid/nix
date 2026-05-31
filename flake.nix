@@ -1,10 +1,10 @@
 {
   description = "Jaid’s NixOS setup";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
     nixpkgs-latest.url = "github:NixOS/nixpkgs?ref=master";
-    home-manager.url = "github:nix-community/home-manager?ref=release-25.11";
+    home-manager.url = "github:nix-community/home-manager?ref=release-26.05";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
   outputs = inputs: let
