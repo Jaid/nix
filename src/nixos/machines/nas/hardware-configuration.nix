@@ -34,7 +34,19 @@
   fileSystems."/mnt/storage" = {
     fsType = "btrfs";
     device = "/dev/disk/by-label/storage";
-    options = ["defaults" "nofail" "x-mount.mkdir" "compress=zstd:6" "nossd" "noatime" "nodiratime" "space_cache=v2" "degraded" "commit=120"];
+    options = [
+      "defaults"
+      "nofail"
+      "x-mount.mkdir"
+      "x-systemd.before=docker.service"
+      "compress=zstd:6"
+      "nossd"
+      "noatime"
+      "nodiratime"
+      "space_cache=v2"
+      "degraded"
+      "commit=120"
+    ];
   };
   hardware.bluetooth.enable = false;
   networking.interfaces.eno1.wakeOnLan.enable = true;
