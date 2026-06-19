@@ -15,7 +15,7 @@
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgsUnstable.linuxPackages_latest;
   boot.kernelParams = [
     "amdgpu.ppfeaturemask=0xffffffff"
     "console=ttyS1,115200n8"
