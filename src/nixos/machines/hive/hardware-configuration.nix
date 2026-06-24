@@ -19,12 +19,30 @@
   fileSystems."/mnt/data" = {
     fsType = "btrfs";
     device = "/dev/disk/by-label/data";
-    options = ["defaults" "nofail" "x-mount.mkdir" "compress=zstd:6" "ssd" "noatime" "nodiratime" "space_cache=v2" "discard=async"];
+    options = ["defaults" "nofail" "x-mount.mkdir" "ssd" "relatime" "space_cache=v2" "discard=async" "nodatacow"];
   };
   fileSystems."/mnt/storage" = {
     fsType = "nfs";
     device = "10.0.0.22:/mnt/storage";
-    options = ["defaults" "nofail" "x-mount.mkdir" "x-systemd.automount" "x-systemd.idle-timeout=3600" "rw"];
+    options = ["defaults" "nofail" "x-mount.mkdir" "x-systemd.automount" "x-systemd.idle-timeout=3600" "rw" "fsc"];
+  };
+  services.cachefilesd = {
+    enable = true;
+    cacheDir = "/mnt/data/fsc";
+    extraConfig = ''
+      tag hive-storage
+      brun 12%
+      bcull 8%
+      bstop 4%
+      frun 12%
+      fcull 8%
+      fstop 4%
+      culltable 15
+    '';
+  };
+  systemd.services.cachefilesd = {
+    requires = ["mnt-data.mount"];
+    after = ["mnt-data.mount"];
   };
   swapDevices = [
     {
