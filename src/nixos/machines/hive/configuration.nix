@@ -17,7 +17,6 @@
   };
   boot.kernelPackages = pkgsUnstable.linuxPackages_latest;
   boot.kernelParams = [
-    "amdgpu.ppfeaturemask=0xffffffff"
     "console=ttyS1,115200n8"
     "iommu=pt"
   ];

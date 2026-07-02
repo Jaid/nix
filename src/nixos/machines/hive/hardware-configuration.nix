@@ -1,4 +1,8 @@
-{
+{...}: {
+  imports = [
+    ./modules/amdgpu-undervolt.nix
+  ];
+
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid"];
   boot.kernelModules = ["kvm-amd"];
   boot.kernelParams = ["boot.shell_on_fail" "amd_iommu=on"];
@@ -6,6 +10,10 @@
     performance.unhinged = true;
     lan-dns.enable = true;
     performance.cpuVendor = "amd";
+    hive.amdgpu-undervolt = {
+      enable = true;
+      vddgfxOffset = -100;
+    };
   };
   fileSystems."/" = {
     fsType = "ext4";
