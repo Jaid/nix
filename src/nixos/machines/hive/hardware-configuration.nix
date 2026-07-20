@@ -1,18 +1,32 @@
 {...}: {
   imports = [
+    ./modules/amdgpu-core-clock-offset.nix
     ./modules/amdgpu-undervolt.nix
+    ./modules/amdgpu-vram-max-clock.nix
+    ./modules/cpu-ppt-limit.nix
   ];
-
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid"];
   boot.kernelModules = ["kvm-amd"];
   boot.kernelParams = ["boot.shell_on_fail" "amd_iommu=on"];
   jaidCustomModules = {
-    performance.unhinged = true;
     lan-dns.enable = true;
+    performance.unhinged = true;
     performance.cpuVendor = "amd";
+    hive.amdgpu-core-clock-offset = {
+      enable = true;
+      offsetMHz = -200;
+    };
     hive.amdgpu-undervolt = {
       enable = true;
-      vddgfxOffset = -100;
+      vddgfxOffset = -75;
+    };
+    hive.amdgpu-vram-max-clock = {
+      enable = true;
+      maxClockMHz = 1350;
+    };
+    hive.cpu-ppt-limit = {
+      enable = true;
+      pptWatts = 140;
     };
   };
   fileSystems."/" = {

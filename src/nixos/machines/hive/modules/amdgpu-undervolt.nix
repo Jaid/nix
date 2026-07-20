@@ -1,16 +1,28 @@
-{lib, pkgs, ...} @ input: let
+{
+  lib,
+  pkgs,
+  ...
+} @ input: let
   cfg = input.config.jaidCustomModules.hive.amdgpu-undervolt;
   amdgpuUndervolt = pkgs.writeShellApplication {
     name = "hive-amdgpu-undervolt";
-    runtimeInputs = [pkgs.coreutils];
+    runtimeInputs = [pkgs.coreutils pkgs.gnugrep];
     text = ''
       set -euo pipefail
       shopt -s nullglob
 
       readonly undervolt_offset=${toString cfg.vddgfxOffset}
-      pp_od_files=(/sys/class/drm/card*/device/pp_od_clk_voltage)
-      if [ "''${#pp_od_files[@]}" -eq 0 ]; then
-        echo "No AMDGPU overdrive controls found."
+      readonly expected_gpu_count=${toString cfg.expectedGpuCount}
+
+      for _ in {1..60}; do
+        pp_od_files=(/sys/class/drm/card*/device/pp_od_clk_voltage)
+        if [ "''${#pp_od_files[@]}" -eq "$expected_gpu_count" ]; then
+          break
+        fi
+        sleep 1
+      done
+      if [ "''${#pp_od_files[@]}" -ne "$expected_gpu_count" ]; then
+        echo "Expected $expected_gpu_count AMDGPU overdrive controls, found ''${#pp_od_files[@]}." >&2
         exit 1
       fi
 
@@ -18,18 +30,21 @@
         device="''${pp_od_file%/pp_od_clk_voltage}"
         card="''${device%/device}"
         card="''${card##*/}"
-        performance_level="$device/power_dpm_force_performance_level"
+        runtime_pm="$(<"$device/power/control")"
+        echo on > "$device/power/control"
 
-        if [ -w "$performance_level" ]; then
-          echo manual > "$performance_level"
+        if ! {
+          echo "vo $undervolt_offset" > "$pp_od_file"
+          echo c > "$pp_od_file"
+
+          applied_offset="$(grep -A 1 '^OD_VDDGFX_OFFSET:$' "$pp_od_file" | tail -n 1)"
+          [ "$applied_offset" = "''${undervolt_offset}mV" ]
+        }; then
+          echo "$runtime_pm" > "$device/power/control"
+          echo "Failed to apply or verify the VDDGFX offset for $card." >&2
+          exit 1
         fi
-
-        echo "vo $undervolt_offset" > "$pp_od_file"
-        echo c > "$pp_od_file"
-
-        if [ -w "$performance_level" ]; then
-          echo auto > "$performance_level"
-        fi
+        echo "$runtime_pm" > "$device/power/control"
 
         echo "Applied VDDGFX $undervolt_offset mV offset to $card."
       done
@@ -42,23 +57,17 @@ in {
     description = "Enable the Hive AMD GPU VDDGFX undervolt service.";
   };
   options.jaidCustomModules.hive.amdgpu-undervolt.vddgfxOffset = lib.mkOption {
-    type = lib.types.int;
+    type = lib.types.ints.between (-200) 0;
     default = -100;
     description = "VDDGFX voltage offset in mV for every AMD GPU with an overdrive sysfs control.";
   };
+  options.jaidCustomModules.hive.amdgpu-undervolt.expectedGpuCount = lib.mkOption {
+    type = lib.types.ints.positive;
+    default = 4;
+    description = "Number of AMD GPU overdrive controls that must appear before applying the offset.";
+  };
 
   config = lib.mkIf cfg.enable {
-    assertions = [
-      {
-        assertion = cfg.vddgfxOffset <= 0;
-        message = "jaidCustomModules.hive.amdgpu-undervolt.vddgfxOffset must be at most 0 mV.";
-      }
-      {
-        assertion = cfg.vddgfxOffset >= -200;
-        message = "jaidCustomModules.hive.amdgpu-undervolt.vddgfxOffset must stay at or above -200 mV.";
-      }
-    ];
-
     boot.kernelParams = ["amdgpu.ppfeaturemask=0xffffffff"];
 
     systemd.services.hive-amdgpu-undervolt = {
