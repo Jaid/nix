@@ -4,6 +4,7 @@
     ./modules/amdgpu-undervolt.nix
     ./modules/amdgpu-vram-max-clock.nix
     ./modules/cpu-ppt-limit.nix
+    ./modules/disabled-peripherals.nix
   ];
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid"];
   boot.kernelModules = ["kvm-amd"];
@@ -71,7 +72,6 @@
       device = "/dev/disk/by-label/swap";
     }
   ];
-  hardware.bluetooth.enable = false;
   networking.interfaces.enp104s0.wakeOnLan.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
