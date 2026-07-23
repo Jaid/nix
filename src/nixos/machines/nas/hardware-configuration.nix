@@ -2,6 +2,7 @@
   imports = [
     ./modules/it8625e.nix
     ./modules/fans.nix
+    ./modules/hdd-spindown.nix
   ];
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usbhid"];
@@ -13,6 +14,15 @@
       thresholds = [55 70];
       strengths = [0 50 100];
       linger = 100;
+    };
+    hddSpindown = {
+      enable = true;
+      devices = [
+        "/dev/disk/by-id/ata-TOSHIBA_MG08ACA16TE_81X0A022FWTG"
+        "/dev/disk/by-id/ata-TOSHIBA_MG08ACA16TE_91K0A17GFWTG"
+        "/dev/disk/by-id/ata-TOSHIBA_MG08ACA16TE_Y250A0WKFVGG"
+      ];
+      idleSeconds = 1800;
     };
     it8625e.enable = true;
   };
