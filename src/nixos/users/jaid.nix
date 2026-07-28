@@ -1,8 +1,7 @@
 {pkgs, ...}: {
+  _module.args.hasJaidUser = true;
   environment.systemPackages = [
     pkgs.powershell
-    pkgs.fish
-    pkgs.oh-my-posh
   ];
   users.users.jaid = {
     isNormalUser = true;
@@ -15,12 +14,8 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID0Up24BhYxyHEWrYc5EJ5PbPn7hVYGpv1fSCwLURvGq jaid@github/73158609"
     ];
-    shell = pkgs.fish;
   };
   users.groups.jaid.gid = 1000;
   nix.settings.trusted-users = ["jaid"];
-  programs.fish = {
-    enable = true;
-  };
   #services.getty.autologinUser = "jaid";
 }

@@ -15,6 +15,7 @@
       cpuArch ? "znver2",
       gpuVendor ? "nvidia",
       isVm ? false,
+      nonInteractiveBash ? false,
       modules ? [],
     }: let
       nixpkgsAttributes = {
@@ -22,6 +23,13 @@
         config = {
           allowUnfree = true;
           nvidia.acceptLicense = true;
+          packageOverrides = pkgs:
+            if nonInteractiveBash
+            then {
+              bash = pkgs.bashNonInteractive;
+              bashInteractive = pkgs.bashNonInteractive;
+            }
+            else {};
         };
       };
       nixpkgsPersonalAttributes = {
@@ -30,12 +38,12 @@
           hostPlatform.gcc.arch = cpuArch;
           allowUnfree = true;
           nvidia.acceptLicense = true;
-          cudaSupport = (gpuVendor == "nvidia");
-          cudnnSupport = (gpuVendor == "nvidia");
+          cudaSupport = gpuVendor == "nvidia";
+          cudnnSupport = gpuVendor == "nvidia";
           cudaForwardCompat = false;
           cudaEnableForwardCompat = false;
           cudaCapabilities = [cudaComputeCapability];
-          rocmSupport = (gpuVendor == "amd");
+          rocmSupport = gpuVendor == "amd";
           packageOverrides = pkgs: {
             shantell-sans = pkgs.callPackage ./src/nix/packages/shantell-sans.nix {};
             geologica = pkgs.callPackage ./src/nix/packages/geologica.nix {};
@@ -65,8 +73,7 @@
               nixpkgs.pkgs = pkgs;
             }
           ]
-          ++
-          modules
+          ++ modules
           ++ [
             {
               networking.hostName = id;
@@ -87,11 +94,14 @@
             ./src/nixos/modules/performance
             ./src/nixos/machines/${id}/configuration.nix
           ]
-          ++ (if isVm then [
-
-          ] else [
-            ./src/nixos/machines/${id}/hardware-configuration.nix
-          ]);
+          ++ (
+            if isVm
+            then [
+            ]
+            else [
+              ./src/nixos/machines/${id}/hardware-configuration.nix
+            ]
+          );
       };
   in {
     nixosConfigurations = {
@@ -104,6 +114,7 @@
       };
       nas = makeMachine {
         id = "nas";
+        nonInteractiveBash = true;
         modules = [
           inputs.vscode-server.nixosModules.default
         ];
@@ -117,6 +128,7 @@
       hive = makeMachine {
         id = "hive";
         cpuArch = "znver2";
+        nonInteractiveBash = true;
         gpuVendor = "amd";
         modules = [
           inputs.vscode-server.nixosModules.default

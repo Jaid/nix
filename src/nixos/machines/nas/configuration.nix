@@ -1,24 +1,19 @@
-{config, lib, pkgs, pkgsUnstable, ...}: let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   hasStorageMount = lib.hasAttrByPath ["/mnt/storage"] config.fileSystems;
 in {
   imports = [
-    ../../software/docker.nix
-    ../../software/vscode-server.nix
+    ../.base/server/configuration.nix
   ];
   environment.systemPackages = [
     pkgs.btrfs-progs
-    pkgs.nixd
-    pkgs.alejandra
   ];
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
   services.getty.autologinUser = "jaid";
-  programs.nix-ld.enable = true;
-  environment.etc."ssh/sshd_conf.d/allow_stream_local_forwarding.conf".text = "AllowStreamLocalForwarding yes";
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  networking.firewall.enable = false;
   virtualisation.docker.logDriver.syslog.port = 1514;
   services.nfs.server = lib.mkIf hasStorageMount {
     enable = true;

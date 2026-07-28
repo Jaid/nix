@@ -1,28 +1,18 @@
-{pkgs, pkgsUnstable, ...}: {
+{pkgsUnstable, ...}: {
   imports = [
-    ../../software/docker.nix
-    ../../software/vscode-server.nix
+    ../.base/server/configuration.nix
   ];
   environment.systemPackages = [
-    pkgs.nixd
-    pkgs.alejandra
     pkgsUnstable.nvtopPackages.amd
     pkgsUnstable.rocmPackages.rocm-smi
     pkgsUnstable.rocmPackages.rocminfo
     pkgsUnstable.amdgpu_top
   ];
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
   boot.kernelPackages = pkgsUnstable.linuxPackages_latest;
   boot.kernelParams = [
     "console=ttyS1,115200n8"
     "iommu=pt"
   ];
-  programs.nix-ld.enable = true;
-  environment.etc."ssh/sshd_conf.d/allow_stream_local_forwarding.conf".text = "AllowStreamLocalForwarding yes";
-  networking.firewall.enable = false;
   hardware.graphics = {
     enable = true;
     extraPackages = [
