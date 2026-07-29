@@ -1,10 +1,9 @@
-{pkgs, pkgsLatest, ...}: {
+{pkgsLatest, ...}: {
   imports = [
     ./software/cli-goodies.nix
   ];
   boot.loader.systemd-boot.configurationLimit = 8;
   environment.systemPackages = [
-    pkgs.bash
     pkgsLatest.git
   ];
   services.openssh = {

@@ -15,7 +15,6 @@
       cpuArch ? "znver2",
       gpuVendor ? "nvidia",
       isVm ? false,
-      nonInteractiveBash ? false,
       modules ? [],
     }: let
       nixpkgsAttributes = {
@@ -23,13 +22,6 @@
         config = {
           allowUnfree = true;
           nvidia.acceptLicense = true;
-          packageOverrides = pkgs:
-            if nonInteractiveBash
-            then {
-              bash = pkgs.bashNonInteractive;
-              bashInteractive = pkgs.bashNonInteractive;
-            }
-            else {};
         };
       };
       nixpkgsPersonalAttributes = {
@@ -114,7 +106,6 @@
       };
       nas = makeMachine {
         id = "nas";
-        nonInteractiveBash = true;
         modules = [
           inputs.vscode-server.nixosModules.default
         ];
@@ -128,7 +119,6 @@
       hive = makeMachine {
         id = "hive";
         cpuArch = "znver2";
-        nonInteractiveBash = true;
         gpuVendor = "amd";
         modules = [
           inputs.vscode-server.nixosModules.default

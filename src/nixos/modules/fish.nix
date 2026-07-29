@@ -1,26 +1,33 @@
 {
   hasJaidUser ? false,
   lib,
+  modulesPath,
   pkgs,
   ...
-}: {
+}: let
+  systemPathWithoutInteractiveBash = {pkgs, ...} @ args:
+    import (modulesPath + "/config/system-path.nix") (
+      args
+      // {
+        pkgs =
+          pkgs
+          // {
+            bashInteractive = pkgs.bashNonInteractive;
+          };
+      }
+    );
+in {
+  disabledModules = [
+    (modulesPath + "/config/system-path.nix")
+  ];
+  imports = [
+    systemPathWithoutInteractiveBash
+  ];
   config = lib.mkMerge [
     {
-      assertions = [
-        {
-          assertion =
-            lib.getName pkgs.bash
-            == "bash"
-            && lib.getName pkgs.bashInteractive == "bash";
-          message = "fish.nix requires bash and bashInteractive to resolve to the non-interactive Bash build";
-        }
-      ];
       programs.bash.enable = false;
-      environment.systemPackages = [
-        pkgs.bash
-      ];
       systemd.tmpfiles.rules = [
-        "L+ /bin/bash - - - - ${pkgs.bash}/bin/bash"
+        "L+ /bin/bash - - - - ${pkgs.bashNonInteractive}/bin/bash"
       ];
     }
     (lib.mkIf hasJaidUser {
