@@ -56,13 +56,19 @@
         inherit pkgsLatestPersonal;
       };
     in
-      builtins.trace "Building ${id} (${system}, ${cpuArch}, ${cudaComputeCapability})" inputs.nixpkgs.lib.nixosSystem {
+      inputs.nixpkgs.lib.nixosSystem {
         inherit specialArgs;
         modules =
           [
             inputs.nixpkgs.nixosModules.readOnlyPkgs
             {
               nixpkgs.pkgs = pkgs;
+            }
+            {
+              system.systemBuilderCommands =
+                builtins.trace
+                  "Building ${id} (${system}, ${cpuArch}, ${cudaComputeCapability})"
+                  "";
             }
           ]
           ++ modules
