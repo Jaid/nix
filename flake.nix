@@ -25,9 +25,12 @@
         };
       };
       nixpkgsPersonalAttributes = {
-        inherit system;
+        localSystem = {
+          inherit system;
+          gcc.arch = cpuArch;
+          gcc.tune = cpuArch;
+        };
         config = {
-          hostPlatform.gcc.arch = cpuArch;
           allowUnfree = true;
           nvidia.acceptLicense = true;
           cudaSupport = gpuVendor == "nvidia";
@@ -112,6 +115,7 @@
       };
       nas = makeMachine {
         id = "nas";
+        cpuArch = "alderlake";
         modules = [
           inputs.vscode-server.nixosModules.default
         ];
