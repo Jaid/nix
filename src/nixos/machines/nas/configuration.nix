@@ -11,6 +11,7 @@ in {
   ];
   environment.systemPackages = [
     pkgs.btrfs-progs
+    pkgs.v4l-utils
   ];
   services.getty.autologinUser = "jaid";
   boot.kernelPackages = pkgs.linuxPackages_latest;
