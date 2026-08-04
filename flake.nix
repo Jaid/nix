@@ -79,6 +79,7 @@
             {
               networking.hostName = id;
               environment.sessionVariables.HOSTNAME = id;
+              nix.settings.system-features = ["gccarch-${cpuArch}"];
             }
             inputs.home-manager.nixosModules.home-manager
             ./src/home-manager/homes/linux/jaid.nix
