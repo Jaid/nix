@@ -60,8 +60,11 @@
     SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:4.1.3:1.0", ATTR{index}=="0", SYMLINK+="duskull"
     SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:4.1.4:1.0", ATTR{index}=="0", SYMLINK+="yamask"
   '';
-  hardware.bluetooth.enable = false;
-  networking.interfaces.eno1.wakeOnLan.enable = true;
+  hardware = {
+    bluetooth.enable = false;
+    enableRedistributableFirmware = true;
+  };
+  networking.interfaces.enp3s0.wakeOnLan.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
   system.stateVersion = "24.11";
 }

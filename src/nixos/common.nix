@@ -9,6 +9,10 @@
   services.openssh = {
     enable = true;
   };
+  systemd.services.home-manager-jaid = {
+    after = ["network-online.target"];
+    wants = ["network-online.target"];
+  };
   security.sudo = {
     wheelNeedsPassword = false;
   };
