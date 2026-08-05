@@ -56,8 +56,8 @@
   };
   services.udev.extraRules = ''
     SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:4.2:1.0", ATTR{index}=="0", SYMLINK+="shuppet"
-    SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:4.1.2:1.0", ATTR{index}=="0", SYMLINK+="houndstone"
-    SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:4.3:1.0", ATTR{index}=="0", SYMLINK+="duskull"
+    SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:4.1.2:1.0", ATTR{index}=="0", SYMLINK+="duskull"
+    SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:4.3:1.0", ATTR{index}=="0", SYMLINK+="houndstone"
     SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:4.4:1.0", ATTR{index}=="0", SYMLINK+="yamask"
   '';
   hardware = {
