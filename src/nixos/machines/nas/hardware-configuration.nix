@@ -12,12 +12,12 @@
     }
     {
       alias = "shuppet";
-      usbPath = "6.3";
+      usbPath = "5.2";
       kind = "uvc"; # ELP UVC IMX678
     }
     {
       alias = "houndstone";
-      usbPath = "6.4";
+      usbPath = "5.1";
       kind = "uvc"; # ELP UVC IMX415 (USU)
     }
   ];
