@@ -40,41 +40,11 @@
           };
         };
       };
-      personalizePackage = package:
-        package.overrideAttrs (old: {
-          env = (old.env or {}) // {
-            NIX_CFLAGS_COMPILE = inputs.nixpkgs.lib.concatStringsSep " " (builtins.filter (flag: flag != "") [
-              (old.env.NIX_CFLAGS_COMPILE or "")
-              "-march=${cpuArch}"
-              "-mtune=${cpuArch}"
-            ]);
-          };
-          requiredSystemFeatures = inputs.nixpkgs.lib.unique ((old.requiredSystemFeatures or []) ++ ["gccarch-${cpuArch}"]);
-        });
-      personalizeNodejs = packageSet:
-        (personalizePackage packageSet.nodejs-slim_latest).overrideAttrs (old: {
-          buildInputs = builtins.filter (package: inputs.nixpkgs.lib.getName package != "lief") old.buildInputs;
-          configureFlags =
-            builtins.filter (flag: !(inputs.nixpkgs.lib.hasPrefix "--shared-lief" flag)) old.configureFlags
-            ++ [
-              "--experimental-enable-pointer-compression"
-              "--without-amaro"
-              "--without-lief"
-            ];
-          postInstall = builtins.replaceStrings
-            [(builtins.unsafeDiscardStringContext "${inputs.nixpkgs.lib.getDev packageSet.lief}/include/* ")]
-            [""]
-            (builtins.unsafeDiscardStringContext old.postInstall);
-        });
-      personalPackageFactories = {
-        nodejs_latest = packageSet:
-          packageSet.nodejs_latest.override {
-            nodejs-slim = personalizeNodejs packageSet;
-          };
-      };
       makePersonalPackageSet = packageSet:
         packageSet
-        // inputs.nixpkgs.lib.mapAttrs (_: factory: factory packageSet) personalPackageFactories;
+        // {
+          nodejs_latest = packageSet.callPackage ./src/nix/packages/nodejs.nix {inherit cpuArch;};
+        };
       pkgs = import inputs.nixpkgs nixpkgsAttributes;
       pkgsUnstable = import inputs.nixpkgs-unstable nixpkgsAttributes;
       pkgsLatest = import inputs.nixpkgs-latest nixpkgsAttributes;
