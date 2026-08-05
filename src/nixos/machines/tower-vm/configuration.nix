@@ -1,5 +1,0 @@
-{
-  imports = [
-    ../tower/configuration.nix
-  ];
-}

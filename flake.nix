@@ -14,7 +14,6 @@
       cudaComputeCapability ? "8.9",
       cpuArch ? "znver2",
       gpuVendor ? "nvidia",
-      isVm ? false,
       modules ? [],
     }: let
       nixpkgsAttributes = {
@@ -126,24 +125,13 @@
             ./src/nixos/modules/lan-dns.nix
             ./src/nixos/modules/performance
             ./src/nixos/machines/${id}/configuration.nix
-          ]
-          ++ (
-            if isVm
-            then [
-            ]
-            else [
-              ./src/nixos/machines/${id}/hardware-configuration.nix
-            ]
-          );
+            ./src/nixos/machines/${id}/hardware-configuration.nix
+          ];
       };
   in {
     nixosConfigurations = {
       tower = makeMachine {
         id = "tower";
-      };
-      tower-vm = makeMachine {
-        id = "tower-vm";
-        isVm = true;
       };
       nas = makeMachine {
         id = "nas";
