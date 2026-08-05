@@ -25,11 +25,7 @@
         };
       };
       nixpkgsPersonalAttributes = {
-        localSystem = {
-          inherit system;
-          gcc.arch = cpuArch;
-          gcc.tune = cpuArch;
-        };
+        inherit system;
         config = {
           allowUnfree = true;
           nvidia.acceptLicense = true;
@@ -45,12 +41,32 @@
           };
         };
       };
+      personalizePackage = package:
+        package.overrideAttrs (old: {
+          env = (old.env or {}) // {
+            NIX_CFLAGS_COMPILE = inputs.nixpkgs.lib.concatStringsSep " " (builtins.filter (flag: flag != "") [
+              (old.env.NIX_CFLAGS_COMPILE or "")
+              "-march=${cpuArch}"
+              "-mtune=${cpuArch}"
+            ]);
+          };
+          requiredSystemFeatures = inputs.nixpkgs.lib.unique ((old.requiredSystemFeatures or []) ++ ["gccarch-${cpuArch}"]);
+        });
+      personalPackageFactories = {
+        nodejs_latest = packageSet:
+          packageSet.nodejs_latest.override {
+            nodejs-slim = personalizePackage packageSet.nodejs-slim_latest;
+          };
+      };
+      makePersonalPackageSet = packageSet:
+        packageSet
+        // inputs.nixpkgs.lib.mapAttrs (_: factory: factory packageSet) personalPackageFactories;
       pkgs = import inputs.nixpkgs nixpkgsAttributes;
       pkgsUnstable = import inputs.nixpkgs-unstable nixpkgsAttributes;
       pkgsLatest = import inputs.nixpkgs-latest nixpkgsAttributes;
-      pkgsPersonal = import inputs.nixpkgs nixpkgsPersonalAttributes;
-      pkgsUnstablePersonal = import inputs.nixpkgs-unstable nixpkgsPersonalAttributes;
-      pkgsLatestPersonal = import inputs.nixpkgs-latest nixpkgsPersonalAttributes;
+      pkgsPersonal = makePersonalPackageSet (import inputs.nixpkgs nixpkgsPersonalAttributes);
+      pkgsUnstablePersonal = makePersonalPackageSet (import inputs.nixpkgs-unstable nixpkgsPersonalAttributes);
+      pkgsLatestPersonal = makePersonalPackageSet pkgsLatest;
       specialArgs = {
         inherit pkgsUnstable;
         inherit pkgsLatest;
