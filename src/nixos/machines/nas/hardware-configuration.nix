@@ -1,10 +1,39 @@
-{...}: {
+{lib, ...}: let
+  cameras = [
+    {
+      alias = "duskull";
+      usbPath = "4.2";
+      kind = "uvc"; # ELP UVC IMX415 (USU)
+    }
+    {
+      alias = "yamask";
+      usbPath = "4.3";
+      kind = "uvc"; # ELP UVC IMX415 (SPCA2688)
+    }
+    {
+      alias = "shuppet";
+      usbPath = "6.3";
+      kind = "uvc"; # ELP UVC IMX678
+    }
+    {
+      alias = "houndstone";
+      usbPath = "6.4";
+      kind = "uvc"; # ELP UVC IMX415 (USU)
+    }
+  ];
+  cameraUdevRule = {
+    alias,
+    usbPath,
+    ...
+  }: ''
+    SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:${usbPath}:1.0", ATTR{index}=="0", SYMLINK+="${alias}"
+  '';
+in {
   imports = [
     ./modules/it8625e.nix
     ./modules/fans.nix
     ./modules/hdd-spindown.nix
   ];
-
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usbhid"];
   boot.kernelModules = ["kvm-intel"];
   boot.kernelParams = ["boot.shell_on_fail"];
@@ -54,12 +83,7 @@
       "commit=120"
     ];
   };
-  services.udev.extraRules = ''
-    SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:4.2:1.0", ATTR{index}=="0", SYMLINK+="shuppet"
-    SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:4.1.2:1.0", ATTR{index}=="0", SYMLINK+="duskull"
-    SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:4.3:1.0", ATTR{index}=="0", SYMLINK+="houndstone"
-    SUBSYSTEM=="video4linux", ENV{ID_PATH}=="pci-0000:00:14.0-usb-0:4.4:1.0", ATTR{index}=="0", SYMLINK+="yamask"
-  '';
+  services.udev.extraRules = lib.concatMapStringsSep "\n" cameraUdevRule (lib.filter (camera: camera.kind == "uvc") cameras);
   hardware = {
     bluetooth.enable = false;
     enableRedistributableFirmware = true;
