@@ -2,7 +2,7 @@
   cameras = [
     {
       alias = "duskull";
-      usbPath = "4.2";
+      usbPath = "5.1";
       kind = "uvc"; # ELP UVC IMX415 (USU)
     }
     {
@@ -12,13 +12,13 @@
     }
     {
       alias = "shuppet";
-      usbPath = "5.2";
-      kind = "uvc"; # ELP UVC IMX678
+      usbPath = "4.2";
+      kind = "uvc"; # ELP UVC IMX415 (USU)
     }
     {
       alias = "houndstone";
-      usbPath = "5.1";
-      kind = "uvc"; # ELP UVC IMX415 (USU)
+      usbPath = "5.2";
+      kind = "uvc"; # ELP UVC IMX678
     }
   ];
   cameraUdevRule = {
