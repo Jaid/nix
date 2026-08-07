@@ -14,6 +14,12 @@
         "--without-amaro"
         "--without-lief"
       ];
+    checkFlags = builtins.map (
+      flag:
+        if lib.hasPrefix "CI_SKIP_TESTS=" flag
+        then "${flag},test-debugger-probe-typescript"
+        else flag
+    ) old.checkFlags;
     env = (old.env or {}) // {
       NIX_CFLAGS_COMPILE = lib.concatStringsSep " " (builtins.filter (flag: flag != "") [
         (old.env.NIX_CFLAGS_COMPILE or "")
