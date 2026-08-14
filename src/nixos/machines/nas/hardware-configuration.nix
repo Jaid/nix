@@ -2,23 +2,28 @@
   cameras = [
     {
       alias = "duskull";
-      usbPath = "5.1";
+      usbPath = "4.1";
       kind = "uvc"; # ELP UVC IMX415 (USU)
     }
     {
       alias = "yamask";
-      usbPath = "4.3";
+      usbPath = "4.2";
       kind = "uvc"; # ELP UVC IMX415 (SPCA2688)
     }
     {
       alias = "shuppet";
-      usbPath = "4.2";
+      usbPath = "6.1.4";
       kind = "uvc"; # ELP UVC IMX415 (USU)
     }
     {
       alias = "houndstone";
-      usbPath = "5.2";
+      usbPath = "4.4";
       kind = "uvc"; # ELP UVC IMX678
+    }
+    {
+      alias = "gholdengo";
+      usbPath = "6.1.3";
+      kind = "uvc"; # Razer Kiyo
     }
   ];
   cameraUdevRule = {
