@@ -93,7 +93,10 @@ in {
     bluetooth.enable = false;
     enableRedistributableFirmware = true;
   };
-  networking.interfaces.enp3s0.wakeOnLan.enable = true;
+  networking = {
+    dhcpcd.allowInterfaces = ["enp3s0"];
+    interfaces.enp3s0.wakeOnLan.enable = true;
+  };
   hardware.cpu.intel.updateMicrocode = true;
   system.stateVersion = "24.11";
 }
