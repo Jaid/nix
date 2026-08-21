@@ -29,7 +29,8 @@
         "KERNEL_BUILD=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
       ];
       postPatch = ''
-            substituteInPlace drv.c --replace-fail '    g_driver.device = dev;' '    if (g_driver.device) {
+        substituteInPlace smu.c --replace-fail '#include <asm/io.h>' '#include <asm/cpuid/api.h>\n#include <asm/io.h>'
+        substituteInPlace drv.c --replace-fail '    g_driver.device = dev;' '    if (g_driver.device) {
             dev_info(&dev->dev, "Skipping additional matching PCI root device");
             return -ENODEV;
         }
