@@ -10,6 +10,7 @@ in {
     ../.base/server/configuration.nix
   ];
   environment.systemPackages = [
+    (pkgs.callPackage ../../../nix/packages/7zip-zstd.nix {})
     pkgs.btrfs-progs
     pkgs.v4l-utils
   ];
