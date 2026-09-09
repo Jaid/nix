@@ -13,6 +13,9 @@
     after = ["network-online.target"];
     wants = ["network-online.target"];
   };
+  security.pki.certificateFiles = [
+    ./certs/jaid-lan-root-ca.pem
+  ];
   security.sudo = {
     wheelNeedsPassword = false;
   };
