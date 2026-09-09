@@ -6,7 +6,10 @@
     imports = [
       ../../modules/gitHome.nix
     ];
-    gitHome.initialRepos = ["Jaid/nix" "Jaid/oh-my-posh-config"];
+    gitHome = {
+      initialRepos = ["Jaid/nix" "Jaid/oh-my-posh-config"];
+      sshIdentityFile = "/home/jaid/.ssh/id_github";
+    };
     home = {
       username = "jaid";
       inherit homeDirectory;
