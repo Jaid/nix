@@ -94,7 +94,10 @@ in {
     enableRedistributableFirmware = true;
   };
   networking = {
-    dhcpcd.allowInterfaces = ["enp3s0"];
+    dhcpcd = {
+      allowInterfaces = ["enp3s0"];
+      wait = "ipv4"; # Docker publishes ports on the DHCP-reserved IPv4 address. IPv6 readiness must not release network-online.target before that address is assigned.
+    };
     interfaces.enp3s0.wakeOnLan.enable = true;
   };
   hardware.cpu.intel.updateMicrocode = true;
