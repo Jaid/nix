@@ -93,6 +93,7 @@
             ./src/nixos/modules/gnome-wayland
             ./src/nixos/modules/eza.nix
             ./src/nixos/modules/lan-dns.nix
+            ./src/nixos/modules/victoria.nix
             ./src/nixos/modules/performance
             ./src/nixos/machines/${id}/configuration.nix
             ./src/nixos/machines/${id}/hardware-configuration.nix

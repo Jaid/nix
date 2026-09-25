@@ -9,6 +9,7 @@ in {
   imports = [
     ../.base/server/configuration.nix
   ];
+  jaidCustomModules.victoria.self = true;
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/7zip-zstd.nix {})
     pkgs.btrfs-progs
