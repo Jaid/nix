@@ -41,7 +41,7 @@ in {
   ];
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usbhid"];
   boot.kernelModules = ["kvm-intel"];
-  boot.kernelParams = ["boot.shell_on_fail"];
+  boot.kernelParams = ["boot.shell_on_fail" "thermal.crt=-1"]; # thermal_zone0 reports bogus temperatures, so its critical trip point must not be able to force a shutdown
   jaidCustomModules.nas = {
     fans = {
       enable = true;
