@@ -12,6 +12,7 @@
   boot.kernelParams = [
     "console=ttyS1,115200n8"
     "iommu=pt"
+    "amdgpu.lockup_timeout=10000" # a cinematic 4320p frame keeps the GPU busy for about 3 s, which the default 2 s watchdog resets as a hang
   ];
   hardware.graphics = {
     enable = true;
