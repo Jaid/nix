@@ -2,6 +2,10 @@
   imports = [
     ../.base/server/configuration.nix
   ];
+  virtualisation.docker.logDriver.syslog = {
+    host = "10.0.0.22";
+    port = 1514;
+  };
   environment.systemPackages = [
     pkgsUnstable.nvtopPackages.amd
     pkgsUnstable.rocmPackages.rocm-smi
