@@ -9,6 +9,7 @@
     pkgs.gh
     pkgs.inotify-tools
     pkgs.jaq
+    pkgs.rclone
     pkgs.sd
     pkgs.tmux
     pkgs.wget
