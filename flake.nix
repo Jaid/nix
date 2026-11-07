@@ -12,7 +12,6 @@
       id,
       system ? "x86_64-linux",
       cudaComputeCapability ? "8.9",
-      cpuArch ? "znver2",
       gpuVendor ? "nvidia",
       modules ? [],
     }: let
@@ -40,17 +39,12 @@
           };
         };
       };
-      makePersonalPackageSet = packageSet:
-        packageSet
-        // inputs.nixpkgs.lib.optionalAttrs (cpuArch != null) {
-          nodejs_latest = packageSet.callPackage ./src/nix/packages/nodejs.nix {inherit cpuArch;};
-        };
       pkgs = import inputs.nixpkgs nixpkgsAttributes;
       pkgsUnstable = import inputs.nixpkgs-unstable nixpkgsAttributes;
       pkgsLatest = import inputs.nixpkgs-latest nixpkgsAttributes;
-      pkgsPersonal = makePersonalPackageSet (import inputs.nixpkgs nixpkgsPersonalAttributes);
-      pkgsUnstablePersonal = makePersonalPackageSet (import inputs.nixpkgs-unstable nixpkgsPersonalAttributes);
-      pkgsLatestPersonal = makePersonalPackageSet pkgsLatest;
+      pkgsPersonal = import inputs.nixpkgs nixpkgsPersonalAttributes;
+      pkgsUnstablePersonal = import inputs.nixpkgs-unstable nixpkgsPersonalAttributes;
+      pkgsLatestPersonal = import inputs.nixpkgs-latest nixpkgsPersonalAttributes;
       specialArgs = {
         inherit pkgsUnstable;
         inherit pkgsLatest;
@@ -70,7 +64,7 @@
             {
               system.systemBuilderCommands =
                 builtins.trace
-                  "Building ${id} (${system}, ${if cpuArch == null then "generic" else cpuArch}, ${cudaComputeCapability})"
+                  "Building ${id} (${system}, ${cudaComputeCapability})"
                   "";
             }
           ]
@@ -79,7 +73,6 @@
             {
               networking.hostName = id;
               environment.sessionVariables.HOSTNAME = id;
-              nix.settings.system-features = inputs.nixpkgs.lib.mkIf (cpuArch != null) ["gccarch-${cpuArch}"];
             }
             inputs.home-manager.nixosModules.home-manager
             ./src/home-manager/homes/linux/jaid.nix
@@ -106,21 +99,18 @@
       };
       nas = makeMachine {
         id = "nas";
-        cpuArch = "alderlake";
         modules = [
           inputs.vscode-server.nixosModules.default
         ];
       };
       cx = makeMachine {
         id = "cx";
-        cpuArch = null; # Hetzner CX Gen3 is scheduled on mixed Intel and AMD hosts
         modules = [
           inputs.vscode-server.nixosModules.default
         ];
       };
       hive = makeMachine {
         id = "hive";
-        cpuArch = "znver2";
         gpuVendor = "amd";
         modules = [
           inputs.vscode-server.nixosModules.default

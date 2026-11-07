@@ -6,7 +6,6 @@
 • 2 vCPU (shared)
 • 4 gb RAM
 • 40 gb local storage
-• CPU: mixed Intel and AMD hosts, so `cpuArch = null` (no `-march` tuned builds)
 • Location: Falkenstein, Germany (fsn1)
 • ISO (manual installation only): NixOS 26.05 minimal (x86_64-linux)
 

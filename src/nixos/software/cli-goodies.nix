@@ -1,4 +1,4 @@
-{pkgs, pkgsLatest, pkgsLatestPersonal, ...}: {
+{pkgs, pkgsLatest, ...}: {
   environment.systemPackages = [
     pkgs.bat
     pkgs.curl
@@ -16,7 +16,7 @@
     pkgsLatest.btop
     pkgsLatest.bun
     pkgsLatest.fastfetch
-    pkgsLatestPersonal.nodejs_latest
+    pkgsLatest.nodejs_latest
     pkgsLatest.uv
   ];
 }
