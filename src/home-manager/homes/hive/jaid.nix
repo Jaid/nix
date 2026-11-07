@@ -7,6 +7,7 @@
       packages = [
         pkgs.bat
         pkgs.btop
+        pkgs.ffmpeg-headless
         pkgs.zstd
       ];
     };
