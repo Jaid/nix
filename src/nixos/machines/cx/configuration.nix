@@ -17,6 +17,5 @@
     PasswordAuthentication = false;
     KbdInteractiveAuthentication = false;
   };
-  networking.firewall.enable = true; # publicly reachable, unlike the LAN servers
   boot.kernelPackages = pkgs.linuxPackages_latest;
 }

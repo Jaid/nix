@@ -1,4 +1,4 @@
-{lib, pkgs, ...}: {
+{pkgs, ...}: {
   imports = [
     ../../../modules/fish.nix
     ../../../software/docker.nix
@@ -10,5 +10,5 @@
   ];
   programs.nix-ld.enable = true;
   environment.etc."ssh/sshd_conf.d/allow_stream_local_forwarding.conf".text = "AllowStreamLocalForwarding yes";
-  networking.firewall.enable = lib.mkDefault false;
+  networking.firewall.enable = false;
 }
