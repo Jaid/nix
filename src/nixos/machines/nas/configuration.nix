@@ -9,6 +9,10 @@ in {
   imports = [
     ../.base/server/configuration.nix
   ];
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
   jaidCustomModules.victoria.self = true;
   environment.systemPackages = [
     (pkgs.callPackage ../../../nix/packages/7zip-zstd.nix {})

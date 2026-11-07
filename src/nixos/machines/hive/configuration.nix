@@ -2,6 +2,10 @@
   imports = [
     ../.base/server/configuration.nix
   ];
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
   virtualisation.docker.logDriver.syslog = {
     host = "10.0.0.22";
     port = 1514;

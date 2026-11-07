@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ../../software/docker.nix
-    ../../software/vscode-server.nix
+    ../.base/server/configuration.nix
   ];
   boot.loader = {
     grub = {
@@ -9,10 +8,6 @@
       device = "/dev/sda";
     };
   };
-  environment.systemPackages = [
-    pkgs.alejandra
-    pkgs.nixd
-  ];
   users.users.jaid = {
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBCPZ0ZiP841mcBLmSEU4c8zHkkYzpkBUlNPe6vJTCJz vps"
@@ -22,7 +17,6 @@
     PasswordAuthentication = false;
     KbdInteractiveAuthentication = false;
   };
-  programs.nix-ld.enable = true;
-  environment.etc."ssh/sshd_conf.d/allow_stream_local_forwarding.conf".text = "AllowStreamLocalForwarding yes";
+  networking.firewall.enable = true; # publicly reachable, unlike the LAN servers
   boot.kernelPackages = pkgs.linuxPackages_latest;
 }
