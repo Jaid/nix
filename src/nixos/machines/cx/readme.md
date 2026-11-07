@@ -9,6 +9,12 @@
 • Location: Falkenstein, Germany (fsn1)
 • ISO (manual installation only): NixOS 26.05 minimal (x86_64-linux)
 
+## Network
+
+• Public IPv4 2.31.222.251 via DHCP
+• Public IPv6 2a01:4f8:c016:949f::1/64, configured statically in `hardware-configuration.nix` because Hetzner doesn’t hand it out dynamically – update it when the server gets recreated
+• Private network “networkMain” 10.10.0.0/16 (cloud subnet 10.10.0.0/24, server 10.10.0.2 via DHCP), deliberately not overlapping with the LAN’s 10.0.0.0/24
+
 ## Installation (manual)
 
 CX boots in legacy BIOS (SeaBIOS) by default, so use an MBR layout and GRUB. If Hetzner switches the VM to UEFI mode, stop here and use a GPT + ESP install instead.
@@ -37,7 +43,7 @@ sudo nixos-install --flake github:Jaid/nix#cx --no-write-lock-file --impure
 
 ## Installation (infect)
 
-Run this after first start to convert the system from Ubuntu 24.04 to NixOS.
+Run this after first start to convert the system from Hetzner’s Ubuntu image (tested with 26.04) to NixOS.
 
 For unattended provisioning in Hetzner, use `src/nixos/machines/cx/cloud-init.yml` as user-data.
 If something fails during automated setup, inspect `/var/log/infect-install.log` and `/var/log/cloud-init-output.log`.

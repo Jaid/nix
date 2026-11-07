@@ -29,7 +29,7 @@ if [[ -d /sys/firmware/efi ]]; then
 fi
 
 if ! command -v apt-get >/dev/null 2>&1; then
-  die "apt-get is required (expected Ubuntu 24.04 default image)"
+  die "apt-get is required (expected Hetzner’s Ubuntu image)"
 fi
 
 log "Installing prerequisites"
