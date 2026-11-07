@@ -107,6 +107,8 @@ mkswap "${SWAPFILE}"
 swapon "${SWAPFILE}"
 
 log "Installing NixOS from ${FLAKE}"
+# nixos-install installs the boot loader in a chroot that inherits PATH, and only /run/current-system/sw/bin resolves to tools inside the target system
+export PATH="${PATH}:/run/current-system/sw/bin"
 nix shell nixpkgs#nixos-install-tools --command \
   nixos-install --root /mnt --flake "${FLAKE}" --no-write-lock-file --no-root-password
 
