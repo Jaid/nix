@@ -41,33 +41,30 @@ sudo nixos-generate-config --root /mnt
 sudo nixos-install --flake github:Jaid/nix#cx --no-write-lock-file --impure
 ```
 
-## Installation (infect)
+## Installation (rescue)
 
-Run this after first start to convert the system from Hetzner’s Ubuntu image (tested with 26.04) to NixOS.
-
-For unattended provisioning in Hetzner, use `src/nixos/machines/cx/cloud-init.yml` as user-data.
-If something fails during automated setup, inspect `/var/log/infect-install.log` and `/var/log/cloud-init-output.log`.
+Installing in-place over Hetzner’s Ubuntu doesn’t work, because NixOS can’t take over Ubuntu’s `/etc/systemd/system` and `/etc/udev/rules.d` directories. Instead, boot into the Hetzner rescue system (Server → Rescue → Enable rescue & power cycle, with the “vps” SSH key) and wipe the disk from there.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Jaid/nix/main/src/nixos/machines/cx/infect-install.bash -o /root/infect-install.bash
-chmod +x /root/infect-install.bash
-SKIP_CONFIRM=1 /root/infect-install.bash
+ssh -i ~/.ssh/id_vps root@2.31.222.251
 ```
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Jaid/nix/main/src/nixos/machines/cx/rescue-install.bash -o /root/rescue-install.bash
+chmod +x /root/rescue-install.bash
+SKIP_CONFIRM=1 /root/rescue-install.bash
+reboot
+```
+
+Rescue mode is only active for the next boot, so the reboot lands in NixOS. The rescue system’s host key differs from NixOS’s, so drop the old known_hosts entry afterwards with `ssh-keygen -R 2.31.222.251`.
 
 Defaults:
 
-• `REPARTITION=0` (default, in-place install on current root partition)
+• `DISK=/dev/sda` (gets wiped: msdos + single ext4 partition labeled “root”)
 • `FLAKE=github:Jaid/nix#cx`
 • BIOS/MBR only (script aborts on UEFI)
 
-Examples:
-
 ```bash
-# destructive reinstall with repartitioning
-REPARTITION=1 DISK=/dev/sda SKIP_CONFIRM=1 /root/infect-install.bash
-```
-
-```bash
-# install from local checkout instead of GitHub
-FLAKE=/root/nix#cx SKIP_CONFIRM=1 /root/infect-install.bash
+# install a specific commit
+FLAKE=github:Jaid/nix/<commit>#cx SKIP_CONFIRM=1 /root/rescue-install.bash
 ```
