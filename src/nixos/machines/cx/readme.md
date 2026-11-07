@@ -8,7 +8,7 @@
 • 40 gb local storage
 • CPU: mixed Intel and AMD hosts, so `cpuArch = null` (no `-march` tuned builds)
 • Location: Falkenstein, Germany (fsn1)
-• ISO: nixos-minimal-25.05.803396.8f1b52b04f2c-x86_64-linux.iso
+• ISO (manual installation only): NixOS 26.05 minimal (x86_64-linux)
 
 ## Installation (manual)
 
