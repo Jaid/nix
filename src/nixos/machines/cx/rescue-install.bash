@@ -43,6 +43,18 @@ log "Installing prerequisites"
 apt-get update
 apt-get install -y curl parted e2fsprogs util-linux xz-utils
 
+loadNix() {
+  if [[ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
+    # shellcheck disable=SC1091
+    source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  fi
+  if [[ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]]; then
+    # shellcheck disable=SC1091
+    source "${HOME}/.nix-profile/etc/profile.d/nix.sh"
+  fi
+}
+
+loadNix
 if ! command -v nix >/dev/null 2>&1; then
   if [[ -d /run/systemd/system ]]; then
     log "Installing Nix (daemon mode)"
@@ -51,15 +63,7 @@ if ! command -v nix >/dev/null 2>&1; then
     log "Installing Nix (single-user mode)"
     sh <(curl -L https://nixos.org/nix/install) --no-daemon --yes
   fi
-fi
-
-if [[ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
-  # shellcheck disable=SC1091
-  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-fi
-if [[ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]]; then
-  # shellcheck disable=SC1091
-  source "${HOME}/.nix-profile/etc/profile.d/nix.sh"
+  loadNix
 fi
 
 command -v nix >/dev/null 2>&1 || die "nix command not found after installation"
