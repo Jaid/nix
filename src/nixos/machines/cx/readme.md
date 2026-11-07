@@ -14,6 +14,7 @@
 • Public IPv4 2.31.222.251 via DHCP
 • Public IPv6 2a01:4f8:c016:949f::1/64, configured statically in `hardware-configuration.nix` because Hetzner doesn’t hand it out dynamically – update it when the server gets recreated
 • Private network “networkMain” 10.10.0.0/16 (cloud subnet 10.10.0.0/24, server 10.10.0.2 via DHCP), deliberately not overlapping with the LAN’s 10.0.0.0/24
+• Hetzner firewall “firewallCloudflare”: SSH from anywhere, TCP 80 and 443 only from Cloudflare’s IP ranges (no OS-level firewall). The ranges are static, so update them when https://api.cloudflare.com/client/v4/ips changes.
 
 ## Installation (manual)
 
