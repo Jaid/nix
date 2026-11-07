@@ -6,6 +6,5 @@
     device = "/dev/disk/by-label/root";
   };
   networking.useDHCP = lib.mkDefault true;
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";
 }

@@ -42,7 +42,7 @@
       };
       makePersonalPackageSet = packageSet:
         packageSet
-        // {
+        // inputs.nixpkgs.lib.optionalAttrs (cpuArch != null) {
           nodejs_latest = packageSet.callPackage ./src/nix/packages/nodejs.nix {inherit cpuArch;};
         };
       pkgs = import inputs.nixpkgs nixpkgsAttributes;
@@ -70,7 +70,7 @@
             {
               system.systemBuilderCommands =
                 builtins.trace
-                  "Building ${id} (${system}, ${cpuArch}, ${cudaComputeCapability})"
+                  "Building ${id} (${system}, ${if cpuArch == null then "generic" else cpuArch}, ${cudaComputeCapability})"
                   "";
             }
           ]
@@ -79,7 +79,7 @@
             {
               networking.hostName = id;
               environment.sessionVariables.HOSTNAME = id;
-              nix.settings.system-features = ["gccarch-${cpuArch}"];
+              nix.settings.system-features = inputs.nixpkgs.lib.mkIf (cpuArch != null) ["gccarch-${cpuArch}"];
             }
             inputs.home-manager.nixosModules.home-manager
             ./src/home-manager/homes/linux/jaid.nix
@@ -113,6 +113,7 @@
       };
       cx = makeMachine {
         id = "cx";
+        cpuArch = null; # Hetzner CX Gen3 is scheduled on mixed Intel and AMD hosts
         modules = [
           inputs.vscode-server.nixosModules.default
         ];

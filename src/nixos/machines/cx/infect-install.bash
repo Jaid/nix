@@ -97,7 +97,13 @@ else
   ROOT_PART="$(findmnt -n -o SOURCE /)"
   [[ -n "${ROOT_PART}" ]] || die "Could not detect active root filesystem"
   [[ -b "${ROOT_PART}" ]] || die "Active root source is not a block device: ${ROOT_PART}"
+  [[ "$(findmnt -n -o FSTYPE /)" == "ext4" ]] || die "Active root filesystem is not ext4"
+  if [[ "$(lsblk -n -d -o PTTYPE "${DISK}")" == "gpt" ]] && ! lsblk -n -o PARTTYPE "${DISK}" | grep -qi "^21686148-6449-6e6f-744e-656564454649$"; then
+    die "${DISK} uses GPT without a BIOS boot partition, so GRUB cannot be installed. Use REPARTITION=1."
+  fi
   log "Using in-place install on active root partition ${ROOT_PART}"
+  # hardware-configuration.nix mounts / by label, which the Ubuntu image does not necessarily carry
+  e2label "${ROOT_PART}" "${ROOT_LABEL}"
 fi
 
 log "Mounting target filesystem"

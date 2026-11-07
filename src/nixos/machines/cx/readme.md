@@ -6,7 +6,8 @@
 • 2 vCPU (shared)
 • 4 gb RAM
 • 40 gb local storage
-• Location: Nuremberg, Germany (nbg1)
+• CPU: mixed Intel and AMD hosts, so `cpuArch = null` (no `-march` tuned builds)
+• Location: Falkenstein, Germany (fsn1)
 • ISO: nixos-minimal-25.05.803396.8f1b52b04f2c-x86_64-linux.iso
 
 ## Installation (manual)
